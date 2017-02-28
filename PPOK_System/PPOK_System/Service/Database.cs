@@ -12,6 +12,7 @@ namespace PPOK_System.Service {
 		private string connection = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 		private string master = ConfigurationManager.ConnectionStrings["MasterConnection"].ConnectionString;
 
+
 		#region Database Creation
 
 		// Initialize the Database
@@ -43,6 +44,30 @@ namespace PPOK_System.Service {
 				db.Execute(Scripts.InsertDummyDataSql);
 			}
 		}
+
+		#endregion
+
+
+		#region Create
+
+
+		#endregion
+
+
+		#region Read
+
+
+		#endregion
+
+
+		#region Update
+
+
+		#endregion
+
+
+		#region Delete
+
 
 		#endregion
 	}

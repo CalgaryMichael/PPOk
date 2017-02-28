@@ -32,7 +32,7 @@ CREATE TABLE [dbo].[contact_preference] (
 
 CREATE TABLE [dbo].[drug] (
 	[drug_id]			int				IDENTITY								NOT NULL,
-	[name]				varchar(100)											NOT NULL,
+	[drug_name]				varchar(100)											NOT NULL,
 	PRIMARY KEY([drug_id])
 );
 
@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[prescription] (
 	[user_id]			int				REFERENCES [dbo].[user]([user_id])				,
 	[drug_id]			int				REFERENCES [dbo].[drug]([drug_id])				,
 	[date_filled]		datetime														,
-	[day_supplied]		int																,
+	[days_supply]		int																,
 	[number_refills]	int																,
 	PRIMARY KEY([rx_id])
 );
