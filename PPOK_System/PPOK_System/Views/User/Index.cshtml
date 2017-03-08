@@ -1,84 +1,70 @@
-﻿<script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.17763" type="text/javascript"></script>
-<link href="https://cdn.jotfor.ms/static/formCss.css?3.3.17763" rel="stylesheet" type="text/css" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/nova.css?3.3.17763" />
-<link type="text/css" media="print" rel="stylesheet" href="https://cdn.jotfor.ms/css/printForm.css?3.3.17763" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/566a91c2977cdfcd478b4567.css?" />
-
+﻿
 @*This is the header*@
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/buttons/form-submit-button-wood_3d.css?3.3.17763" />
-<form class="jotform-form" action="/User/CatchAll" method="post" name="HeaderPreferences" id="70658251388161" accept-charset="utf-8" onsubmit="return checkForm(this)">
-    <input type="hidden" name="formID" value="70658251388161"/>
-     <div class="form-all"> <ul class="form-section page-section"> 
-         <li id="HeaderID" class="form-input-wide" data-type="control_head"> 
-         <div class="form-header-group "> 
-             <div class="header-text"> 
-             <h2 id="header1" class="form-header" data-component="header"> Contact Preferences </h2> 
-             </div> 
-             </div> 
-         </li> 
+<form class="form" action="/User/CatchAll" method="post" onsubmit="return checkForm(this)">
 
         @* This is the first set of Checkboxes  *@
-         <li class="form-line form-line-column form-col-1" data-type="control_checkbox" id="id_4"> 
-         <label class="form-label form-label-top" id="label_4" for="input_4"> Prescription Refills 
-             <span class="form-required"> * </span> 
-             </label> 
-         <div id="PrescriptionRefills" class="form-input-wide"> 
-             <div class="form-single-column" data-component="checkbox"> 
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span> 
-                 <input type="checkbox" class="form-checkbox validate" id="input_4_0" name="phonecallrefill1" value="Phone Call"/> 
-                 <label id="label_input_4_0" for="input_4_0"> Phone Call </label> 
-             </span> 
-
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span> 
-                 <input type="checkbox" class="form-checkbox validate" id="input_4_1" name="phonecallrefill2"  value="Text Message"/> 
-                 <label id="label_input_4_1" for="input_4_1"> Text Message </label> 
-                 </span> 
-
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span> 
-                 <input type="checkbox" class="form-checkbox validate" id="input_4_2" name="phonecallrefill3" value="Email"/> 
-                 <label id="label_input_4_2" for="input_4_2"> Email </label> 
-                 </span> 
-
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span>
-                 <input type="checkbox" class="form-checkbox validate" id="input_4_3" name="phonecallrefill4" value="Don&#x27;t Contact Me" /> 
-                 <label id="label_input_4_3" for="input_4_3"> Don't Contact Me </label> 
-                 </span> 
-             </div> 
-             </div> 
-         </li> 
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="RefillCheckboxes">Prescription Refills</label>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label for="RefillCheckboxes-0">
+                    <input type="checkbox" class="form-checkbox" name="phonecallrefill1" id="refill1" value="1">
+                    Phone Call
+                </label>
+            </div>
+            <div class="checkbox">
+                <label for="RefillCheckboxes-1">
+                    <input type="checkbox" class="form-checkbox" name="phonecallrefill2" id="refill2" value="2">
+                    Text Message
+                </label>
+            </div>
+            <div class="checkbox">
+                <label for="RefillCheckboxes-2">
+                    <input type="checkbox" class="form-checkbox" name="phonecallrefill3" id="refill3" value="3">
+                    Email
+                </label>
+            </div>
+            <div class="checkbox">
+                <label for="RefillCheckboxes-3">
+                    <input type="checkbox" class="form-checkbox" name="phonecallrefill4" id="refill4" value="4">
+                    Don't Contact Me
+                </label>
+            </div>
+        </div>
+    </div>
 
          @* This is the second set of Checkboxes  *@
-         <li class="form-line form-line-column form-col-2 jf-required" data-type="control_checkbox" id="id_5"> 
-         <label class="form-label form-label-top" id="label_5" for="input_5"> Prescription Recall 
-             <span class="form-required"> * </span> 
-             </label> 
-         <div id="CheckBoxesRecall" class="form-input-wide jf-required">
-             <div class="form-single-column" data-component="checkbox"> 
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span> 
-                 <input type="checkbox" class="form-checkbox validate[required]" id="input_5_0" name="prescriptionRecall1" value="Phone Call" /> 
-                 <label id="label_input_5_0" for="input_5_0"> Phone Call </label> 
-                 </span> 
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span> 
-                 <input type="checkbox" class="form-checkbox validate[required]" id="input_5_1" name="prescriptionRecall2" value="Text Message" /> 
-                 <label id="label_input_5_1" for="input_5_1"> Text Message </label> 
-                 </span> 
-             <span class="form-checkbox-item" style="clear:left;"> 
-                 <span class="dragger-item"> </span> 
-                 <input type="checkbox" class="form-checkbox validate[required]" id="input_5_2" name="prescriptionRecall3" value="Email" /> 
-                 <label id="label_input_5_2" for="input_5_2"> Email </label> 
-                 </span> 
-             </div> 
-             </div> 
-         </li> 
-
-         @*Submit Btn*@
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="RefillCheckboxes">Prescription Refills</label>
+        <div class="col-md-4">
+            <div class="checkbox">
+                <label for="RefillCheckboxes-0">
+                    <input type="checkbox" class="form-checkbox" name="prescriptionRecall1" id="refill1" value="1">
+                    Phone Call
+                </label>
+            </div>
+            <div class="checkbox">
+                <label for="RefillCheckboxes-1">
+                    <input type="checkbox" class="form-checkbox" name="prescriptionRecall2" id="refill2" value="2">
+                    Text Message
+                </label>
+            </div>
+            <div class="checkbox">
+                <label for="RefillCheckboxes-2">
+                    <input type="checkbox" class="form-checkbox" name="prescriptionRecall3" id="refill3" value="3">
+                    Email
+                </label>
+            </div>
+        </div>
+    </div>
+    <!-- Button -->
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="Submit"></label>
+        <div class="col-md-4">
+            <button id="Submit" name="Submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+         @*Submit Btn
          <li class="form-line" data-type="control_button" id="id_2"> 
          <div id="SubBtn" class="form-input-wide"> 
              <div style="margin-left:156px;" class="form-buttons-wrapper">
@@ -92,9 +78,7 @@
                Should be Empty: <input type="text" name="website" value="" />
           </li>
           </ul>
-     </div>
-     <input type="hidden" id="simple_spc" name="simple_spc" value="70658251388161" />
-    <script type="text/javascript"> document.getElementById("si" + "mple" + "_spc").value = "70658251388161-70658251388161"; </script>
+     </div>*@
 </form>
 
 @*This function checks to make sure at least one checkbox has been selected*@
