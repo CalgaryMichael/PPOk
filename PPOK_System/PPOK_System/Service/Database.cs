@@ -25,7 +25,7 @@ namespace PPOK_System.Service {
 		// Drop & Create Database
 		private void CreateDatabase() {
 			using (IDbConnection db = new SqlConnection(master)) {
-				db.Execute(Scripts.CreateDatabaseSql);
+                db.Execute(Scripts.CreateDatabaseSql);
 			}
 		}
 
