@@ -8,6 +8,6 @@ namespace PPOK_System.Models {
 		public string state { get; set; }
 		public string zip { get; set; }
 
-		public List<User> pharmacists;
+		public List<Person> pharmacists;
 	}
 }

@@ -134,6 +134,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Service\SQL\CreateDatabase.sql" />
     <Content Include="Service\SQL\CreateTables.sql" />
+    <Content Include="Service\SQL\InsertDummyData.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -142,11 +143,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ContactPreference.cs" />
     <Compile Include="Models\Drug.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\Store.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Database.cs" />
     <Compile Include="Service\SQL\Scripts.cs" />
@@ -164,6 +166,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Database\TestDrug.cshtml" />
+    <Content Include="Views\Database\TestPrescription.cshtml" />
+    <Content Include="Views\Database\TestPerson.cshtml" />
+    <Content Include="Views\Database\TestStore.cshtml" />
+    <Content Include="Views\Database\TestMessage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
