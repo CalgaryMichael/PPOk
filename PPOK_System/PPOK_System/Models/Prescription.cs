@@ -9,7 +9,7 @@ namespace PPOK_System.Models {
 		public int days_supply { get; set; }
 		public int num_refills { get; set; }
 
-		public User customer;
+		public Person customer;
 		public Drug drug;
 	}
 }

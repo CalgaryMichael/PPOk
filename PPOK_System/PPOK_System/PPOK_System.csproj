@@ -179,7 +179,7 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Prescription.cs" />
     <Compile Include="Models\Store.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Database.cs" />
     <Compile Include="Service\SQL\Scripts.cs" />
