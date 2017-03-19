@@ -33,5 +33,10 @@ namespace PPOK_System.Controllers
         {
             return View();
         }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
     }
 }
