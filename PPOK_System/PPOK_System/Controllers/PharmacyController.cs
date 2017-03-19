@@ -23,5 +23,15 @@ namespace PPOK_System.Controllers
         {
             return View();
         }
+
+        public ActionResult History()
+        {
+            return View();
+        }
+
+        public ActionResult manageCustomer()
+        {
+            return View();
+        }
     }
 }

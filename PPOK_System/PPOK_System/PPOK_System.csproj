@@ -203,6 +203,8 @@
     <Content Include="Views\Pharmacy\Index.cshtml" />
     <Content Include="Views\Pharmacy\EditCustomer.cshtml" />
     <Content Include="Views\Pharmacy\Recall.cshtml" />
+    <Content Include="Views\Pharmacy\History.cshtml" />
+    <Content Include="Views\Pharmacy\manageCustomer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
