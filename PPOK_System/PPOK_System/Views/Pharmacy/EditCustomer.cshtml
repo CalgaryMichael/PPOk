@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "EditCustomer";
+}
+
+<h2>EditCustomer</h2>
+
+<form class="form-horizontal">
+    <fieldset>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="firstName">First name</label>
+            <div class="col-md-4">
+                <input id="firstName" name="firstName" type="text" placeholder="Name From Database here" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="lastName">Last Name</label>
+            <div class="col-md-4">
+                <input id="lastName" name="lastName" type="text" placeholder="Name from Database Here" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="emailInput">Email</label>
+            <div class="col-md-4">
+                <input id="emailInput" name="emailInput" type="text" placeholder="Email from Database Here" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="dateOfBirth">Date of Birth</label>
+            <div class="col-md-4">
+                <input id="dateOfBirth" name="dateOfBirth" type="text" placeholder="DOB from database here" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="phoneNumber">Phone Number</label>
+            <div class="col-md-4">
+                <input id="phoneNumber" name="phoneNumber" type="text" placeholder="Number from database here" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Select Multiple -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="rxPref">Prescription Preferences</label>
+            <div class="col-md-4">
+                <select id="rxPref" name="rxPref" class="form-control" multiple="multiple">
+                    <option value="1">Call</option>
+                    <option value="2">Text</option>
+                    <option value="3">Email</option>
+                    <option value="4">Don't Contact</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Select Multiple -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="recallPref">Recall Preference</label>
+            <div class="col-md-4">
+                <select id="recallPref" name="recallPref" class="form-control" multiple="multiple">
+                    <option value="1">Call</option>
+                    <option value="2">Text</option>
+                    <option value="3">Email</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="cancelBtn"></label>
+            <div class="col-md-8">
+                <button id="cancelBtn" name="cancelBtn" class="btn btn-primary">Cancel</button>
+                <button id="submitBtn" name="submitBtn" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
