@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "History";
+}
+
+<style>
+    body {
+        margin-top: 2%;
+    }
+
+    center {
+        margin: auto;
+    }
+</style>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+<div class="form-group">
+    <label class="col-md-3 control-label" for="searchInput"></label>
+    <div class="col-md-3">
+        <span><input id="searchInput" name="searchInput" type="search" placeholder="Search...." class="form-control input-md"></span>
+        <span><input id="filebtn" name="filebtn" class="input-file" type="file"></span>
+
+    </div>
+</div>
+<div></div>
+<div class="container" style='margin-top:75px'>
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <h4>Pending Refills</h4>
+            <div class="table-responsive">
+
+                <table id="mytable" class="table table-bordred table-striped">
+
+                    <thead>
+
+                    <th>Name</th>
+                    <th>Prescription</th>
+                    <th>Date</th>
+                    <th>Response</th>
+
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Colby Dial</td>
+                            <td>Tylenol</td>
+                            <td>03/11/17</td>
+                            <td>Yes</td>
+                        </tr>
+
+                        <tr>
+                            <td>Lane Wheeler</td>
+                            <td>Bunion Pads</td>
+                            <td>03/19/17</td>
+                            <td>Yes</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Rob Thompson</td>
+                            <td>Allergy Pills</td>
+                            <td>03/19/17</td>
+                            <td>No</td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>Calgary Michael</td>
+                            <td>Dr. Pepper</td>
+                            <td>03/19/17</td>
+                            <td>Yes</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Weston Vidaurri</td>
+                            <td>Q-Tips</td>
+                            <td>03/19/17</td>
+                            <td>Yes</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@*<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input class="form-control " type="text" placeholder="Pharmacy Name Here">
+                    </div>
+                    <div class="form-group">
+
+                        <input class="form-control " type="text" placeholder="Location Here">
+                    </div>
+                </div>
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>*@
+
+<script>
+    $(document).ready(function () {
+        $("#mytable #checkall").click(function () {
+            if ($("#mytable #checkall").is(':checked')) {
+                $("#mytable input[type=checkbox]").each(function () {
+                    $(this).prop("checked", true);
+                });
+
+            } else {
+                $("#mytable input[type=checkbox]").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+
+        $("[data-toggle=tooltip]").tooltip();
+    });
+
+
+</script>
