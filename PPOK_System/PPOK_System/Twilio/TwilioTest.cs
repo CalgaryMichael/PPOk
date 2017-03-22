@@ -28,7 +28,7 @@ namespace PPOK_System.Twilio
                     from: new PhoneNumber("405-400-0298"),
                     to: new PhoneNumber(person.Key),
                                                      
-                    body: $"Hey {person.Value} Monkey Party at 6PM. Bring Bananas!");
+                    body: $"Hey {person.Value}"+msg);
 
             }
         }
