@@ -12,6 +12,7 @@ namespace PPOK_System.Controllers {
 
 		public ActionResult Index()
         {
+			Twilio.TwilioTest.sendmsg("Your meds are ready to pick up.");
 
 
 			return View();

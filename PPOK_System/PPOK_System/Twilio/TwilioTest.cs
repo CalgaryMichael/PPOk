@@ -19,8 +19,8 @@ namespace PPOK_System.Twilio
             TwilioClient.Init(accountSid, authToken);
 
             var people = new Dictionary<string, string>() {
-                {"+14059191824", "Weston Vidaurri"}
-            };
+				{"+14059191824", "Weston Vidaurri"}
+			};
 
             foreach (var person in people)
             {
@@ -28,7 +28,7 @@ namespace PPOK_System.Twilio
                     from: new PhoneNumber("405-400-0298"),
                     to: new PhoneNumber(person.Key),
                                                      
-                    body: $"Hey {person.Value}"+msg);
+                    body: $"Hey {person.Value} "+msg);
 
             }
         }
