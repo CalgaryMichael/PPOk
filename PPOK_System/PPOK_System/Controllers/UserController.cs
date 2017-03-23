@@ -12,15 +12,11 @@ namespace PPOK_System.Controllers {
 
 		public ActionResult Index()
         {
-
-
 			return View();
 		}
 
         public ActionResult CatchAll()
         {
-
-
             return View();
         }
     }
