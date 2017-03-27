@@ -8,38 +8,38 @@ CREATE TABLE [dbo].[store] (
 );
 
 
-CREATE TABLE [dbo].[user] (
-	[user_id]			int				IDENTITY								NOT NULL,
+CREATE TABLE [dbo].[person] (
+	[person_id]			int				IDENTITY								NOT NULL,
 	[store_id]			int				REFERENCES [dbo].[store]([store_id])			,
 	[first_name]		varchar(15)														,
 	[last_name]			varchar(20)														,
 	[email]				varchar(30)														,
 	[phone]				varchar(10)												NOT NULL,
 	[date_of_birth]		date															,
-	[user_type]			varchar(10)												NOT NUll,
-	PRIMARY KEY([user_id])
+	[person_type]		varchar(10)												NOT NUll,
+	PRIMARY KEY([person_id])
 );
 
 
 CREATE TABLE [dbo].[contact_preference] (
 	[preference_id]		int				IDENTITY								NOT NULL,
-	[user_id]			int				REFERENCES [dbo].[user]([user_id])				,
+	[person_id]			int				REFERENCES [dbo].[person]([person_id])			,
 	[contact_type]		varchar(20)												NOT NULL,
-	[preference]		varchar(10)												NOT NULL,
+	[preference]		varchar(20)												NOT NULL,
 	PRIMARY KEY([preference_id])
 );
 
 
 CREATE TABLE [dbo].[drug] (
 	[drug_id]			int				IDENTITY								NOT NULL,
-	[drug_name]				varchar(100)											NOT NULL,
+	[drug_name]			varchar(100)											NOT NULL,
 	PRIMARY KEY([drug_id])
 );
 
 
 CREATE TABLE [dbo].[prescription] (
 	[rx_id]				int				IDENTITY								NOT NULL,
-	[user_id]			int				REFERENCES [dbo].[user]([user_id])				,
+	[person_id]			int				REFERENCES [dbo].[person]([person_id])			,
 	[drug_id]			int				REFERENCES [dbo].[drug]([drug_id])				,
 	[date_filled]		datetime														,
 	[days_supply]		int																,

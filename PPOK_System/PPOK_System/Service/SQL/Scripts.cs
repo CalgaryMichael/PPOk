@@ -20,7 +20,7 @@ namespace PPOK_System.Service.SQL {
 			ScriptDictionary = Directory.GetFiles(SqlRoot, "*.sql").ToDictionary(Path.GetFileNameWithoutExtension, File.ReadAllText, StringComparer.OrdinalIgnoreCase);
 			CreateDatabaseSql = ScriptDictionary["CreateDatabase"];
 			CreateTablesSql = ScriptDictionary["CreateTables"];
-			//InsertDummyDataSql = ScriptDictionary["InsertDummyData"];
+			InsertDummyDataSql = ScriptDictionary["InsertDummyData"];
 		}
 
 	}

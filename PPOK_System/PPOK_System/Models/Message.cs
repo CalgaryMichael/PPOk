@@ -7,5 +7,7 @@ namespace PPOK_System.Models {
 		public string response { get; set; }
 		public DateTime fill_date { get; set; }
 		public DateTime pick_up_time { get; set; }
+
+		public Prescription prescription { get; set; }
 	}
 }
