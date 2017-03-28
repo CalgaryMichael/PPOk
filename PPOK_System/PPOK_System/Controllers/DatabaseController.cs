@@ -1,17 +1,14 @@
-﻿using PPOK_System.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using PPOK_System.Models;
+using PPOK_System.Service;
 using System.Web.Mvc;
 
 namespace PPOK_System.Controllers {
 	public class DatabaseController : Controller {
 		Database db = new Database();
+		
 
 		// GET: Database
 		public ActionResult Index() {
-            Twilio.TwilioTest.sendmsg("Your meds are ready to pick up.");
             db.initDatabase();
 			return View();
 		}
@@ -36,7 +33,7 @@ namespace PPOK_System.Controllers {
 		// GET: Database/TestDrug
 		public ActionResult TestDrug() {
 			//var drugs = db.ReadAllDrugs();
-			var drugs = db.ReadSingleDrug(1);
+			var drugs = db.ReadSingleDrugById(1);
 			return View(drugs);
 		}
 

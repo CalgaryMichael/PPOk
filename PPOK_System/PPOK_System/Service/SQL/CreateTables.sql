@@ -13,8 +13,9 @@ CREATE TABLE [dbo].[person] (
 	[store_id]			int				REFERENCES [dbo].[store]([store_id])			,
 	[first_name]		varchar(15)														,
 	[last_name]			varchar(20)														,
-	[email]				varchar(30)														,
+	[zip]				varchar(5)														,
 	[phone]				varchar(10)												NOT NULL,
+	[email]				varchar(30)														,
 	[date_of_birth]		date															,
 	[person_type]		varchar(10)												NOT NUll,
 	PRIMARY KEY([person_id])
@@ -32,6 +33,7 @@ CREATE TABLE [dbo].[contact_preference] (
 
 CREATE TABLE [dbo].[drug] (
 	[drug_id]			int				IDENTITY								NOT NULL,
+	[NDCUPCHRI]			varchar(15)														,
 	[drug_name]			varchar(100)											NOT NULL,
 	PRIMARY KEY([drug_id])
 );

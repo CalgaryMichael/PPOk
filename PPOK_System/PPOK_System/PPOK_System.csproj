@@ -190,6 +190,7 @@
     <Content Include="css\bootstrap-reboot.min.css.map" />
     <Content Include="css\bootstrap.css.map" />
     <Content Include="css\bootstrap.min.css.map" />
+    <Content Include="data\scrubbed_data.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -208,7 +209,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Service\import\Import.cs" />
+    <Compile Include="Service\Import\Import.cs" />
     <Compile Include="Models\ContactPreference.cs" />
     <Compile Include="Models\Drug.cs" />
     <Compile Include="Models\Message.cs" />

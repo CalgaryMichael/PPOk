@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using PPOK_System.Models;
 using PPOK_System.Service.SQL;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -50,6 +51,15 @@ namespace PPOK_System.Service {
 
 		#region Create
 
+		// Generate ID Number
+		public int GenerateId<T>() {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string name = typeof(T).Name.ToLower();
+				return db.Query<int>($"SELECT Max([{name}_id]) FROM [{name}]").First() + 1;
+			}
+		}
+
+
 		// Create new row in "store" table
 		public void Create(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
@@ -62,7 +72,7 @@ namespace PPOK_System.Service {
 		// Create new row in "person" table
 		public void Create(Person u) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@store_id, @first_name, @last_name, @email, @phone, @date_of_birth, @person_type)";
+				string sqlQuery = "INSERT INTO store VALUES(@store_id, @first_name, @last_name, @zip, @phone, @email, @date_of_birth, @person_type)";
 				db.Execute(sqlQuery, u);
 			}
 		}
@@ -80,7 +90,7 @@ namespace PPOK_System.Service {
 		// Create new row in "drug" table
 		public void Create(Drug d) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@drug_name)";
+				string sqlQuery = "INSERT INTO store VALUES(@NDCUPCHRI, @drug_name)";
 				db.Execute(sqlQuery, d);
 			}
 		}
@@ -119,9 +129,9 @@ namespace PPOK_System.Service {
 				var result = db.Query<Store, Person, Store>(sql,
 					(s, p) => {
 						Store store;
-						if (!lookup.TryGetValue(s.store_id, out store)) { 
+						if (!lookup.TryGetValue(s.store_id.Value, out store)) { 
 							store = s;
-							lookup.Add(s.store_id, store);
+							lookup.Add(s.store_id.Value, store);
 						}
 
 						if (store.pharmacists == null)
@@ -174,9 +184,17 @@ namespace PPOK_System.Service {
 
 
 		// Populate single Drug with row in the Db
-		public Drug ReadSingleDrug(int id) {
+		public Drug ReadSingleDrugById(int id) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				return db.Query<Drug>("SELECT * FROM drug WHERE drug_id = @drug_id", new { drug_id = id }).FirstOrDefault();
+			}
+		}
+
+
+		// Populate single Drug with row in the Db
+		public Drug ReadSingleDrugByNDCUPCHRI(int id) {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				return db.Query<Drug>("SELECT * FROM drug WHERE NDCUPCHRI = @NDCUPCHRI", new { drug_id = id }).FirstOrDefault();
 			}
 		}
 
@@ -305,8 +323,8 @@ namespace PPOK_System.Service {
 				var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
 					(p, s, c) => { 
 						Person person;
-						if (!lookup.TryGetValue(p.person_id, out person))
-							lookup.Add(p.person_id, person = p);
+						if (!lookup.TryGetValue(p.person_id.Value, out person))
+							lookup.Add(p.person_id.Value, person = p);
 
 						if (person.store == null)
 							person.store = s;
@@ -375,7 +393,7 @@ namespace PPOK_System.Service {
 		public void Update(Person p) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE person
-									SET store_id = @store_id, first_name = @first_name, last_name = @last_name,
+									SET store_id = @store_id, first_name = @first_name, last_name = @last_name, zip = @zip,
 										email = @email, phone = @phone, date_of_birth = @date_of_birth, person_type = @person_type
 									WHERE person_id = @person_id";
 				db.Execute(sqlQuery, p);
@@ -399,7 +417,8 @@ namespace PPOK_System.Service {
 		public void Update(Drug d) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE drug
-									SET drug_name = @drug_name
+									SET drug_name = @drug_name,
+										NDCUPCHRI = @NDCUPCHRI
 									WHERE drug_id = @drug_id";
 				db.Execute(sqlQuery, d);
 			}
