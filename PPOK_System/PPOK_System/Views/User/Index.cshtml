@@ -1,4 +1,16 @@
-﻿
+﻿@model PPOK_System.Models.Person
+
+@{ 
+    //Make stuff
+    PPOK_System.Service.Database db = new PPOK_System.Service.Database();
+    PPOK_System.Models.Person person = new PPOK_System.Models.Person();
+    List<PPOK_System.Models.ContactPreference> conPref = new List<PPOK_System.Models.ContactPreference>();
+
+    //Do things - lori
+    person = db.ReadSinglePerson(Model.person_id);
+    //get the contact preferences to display them
+    //conPref = person.contact_preference;
+}
 @*This is the header*@
 <form class="form" action="/User/CatchAll" method="post" onsubmit="return checkForm(this)">
 
@@ -64,21 +76,6 @@
             <button id="Submit" name="Submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
-         @*Submit Btn
-         <li class="form-line" data-type="control_button" id="id_2"> 
-         <div id="SubBtn" class="form-input-wide"> 
-             <div style="margin-left:156px;" class="form-buttons-wrapper">
-              <button id="input_2" type="submit" class="form-submit-button form-submit-button-img form-submit-button-wood_3d" data-component="button"> 
-                 <img src="http://68.media.tumblr.com/avatar_e2ed53ccec34_64.png" alt="Submit" />
-                  </button>
-              </div>
-              </div>
-          </li>
-          <li style="display:none">
-               Should be Empty: <input type="text" name="website" value="" />
-          </li>
-          </ul>
-     </div>*@
 </form>
 
 @*This function checks to make sure at least one checkbox has been selected*@
@@ -90,6 +87,7 @@
     {
         if (form.prescriptionRecall1.checked || form.prescriptionRecall2.checked || form.prescriptionRecall3.checked)
         {
+            
             return true;
         }
         else 
