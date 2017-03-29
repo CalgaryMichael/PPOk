@@ -8,7 +8,7 @@ namespace PPOK_System_Tests.tests {
 		public void testCsv() {
 			// test file
 			string fileName = "../../../../PPOK_System/PPOK_System/data/scrubbed_data.csv";
-			var result = Import.csv(fileName);
+			var result = Import.Csv(fileName);
 
 			// check size of result
 			Assert.AreEqual(result.Count, 984);

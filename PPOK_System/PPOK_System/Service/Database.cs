@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using PPOK_System.Models;
 using PPOK_System.Service.SQL;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -51,15 +50,7 @@ namespace PPOK_System.Service {
 
 		#region Create
 
-		// Generate ID Number
-		public int GenerateId<T>() {
-			using (IDbConnection db = new SqlConnection(connection)) {
-				string name = typeof(T).Name.ToLower();
-				return db.Query<int>($"SELECT Max([{name}_id]) FROM [{name}]").First() + 1;
-			}
-		}
-
-
+		// TODO: turn this into a Scripts dictionary to pull sql from
 		// Create new row in "store" table
 		public void Create(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
@@ -71,8 +62,10 @@ namespace PPOK_System.Service {
 
 		// Create new row in "person" table
 		public void Create(Person u) {
+			if (!u.person_id.HasValue)
+				u.person_id = GenerateId<Person>();
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@store_id, @first_name, @last_name, @zip, @phone, @email, @date_of_birth, @person_type)";
+				string sqlQuery = "INSERT INTO person VALUES(@person_id, @store_id, @first_name, @last_name, @zip, @phone, @email, @date_of_birth, @person_type)";
 				db.Execute(sqlQuery, u);
 			}
 		}
@@ -81,7 +74,7 @@ namespace PPOK_System.Service {
 		// Create new row in "prescription" table
 		public void Create(Prescription p) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@person_id, @drug_id, @date_filled, @days_supply, @num_refills)";
+				string sqlQuery = "INSERT INTO prescription VALUES(@person_id, @drug_id, @date_filled, @days_supply, @number_refills)";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -90,7 +83,7 @@ namespace PPOK_System.Service {
 		// Create new row in "drug" table
 		public void Create(Drug d) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@NDCUPCHRI, @drug_name)";
+				string sqlQuery = "INSERT INTO drug VALUES(@drug_id, @drug_name)";
 				db.Execute(sqlQuery, d);
 			}
 		}
@@ -99,7 +92,7 @@ namespace PPOK_System.Service {
 		// Create new row in "message_history" table
 		public void Create(Message m) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@rx_id, @response, @fill_date, @pick_up_date)";
+				string sqlQuery = "INSERT INTO message VALUES(@prescription_id, @response, @fill_date, @pick_up_date)";
 				db.Execute(sqlQuery, m);
 			}
 		}
@@ -184,17 +177,9 @@ namespace PPOK_System.Service {
 
 
 		// Populate single Drug with row in the Db
-		public Drug ReadSingleDrugById(int id) {
+		public Drug ReadSingleDrug(string id) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				return db.Query<Drug>("SELECT * FROM drug WHERE drug_id = @drug_id", new { drug_id = id }).FirstOrDefault();
-			}
-		}
-
-
-		// Populate single Drug with row in the Db
-		public Drug ReadSingleDrugByNDCUPCHRI(int id) {
-			using (IDbConnection db = new SqlConnection(connection)) {
-				return db.Query<Drug>("SELECT * FROM drug WHERE NDCUPCHRI = @NDCUPCHRI", new { drug_id = id }).FirstOrDefault();
 			}
 		}
 
@@ -213,7 +198,7 @@ namespace PPOK_System.Service {
 
 						return p1;
 					},
-					splitOn: "rx_id,person_id,drug_id").AsList();
+					splitOn: "prescription_id,person_id,drug_id").AsList();
 
 				return result;
 			}
@@ -235,7 +220,7 @@ namespace PPOK_System.Service {
 
 						return p1;
 					}, new { person_id = id },
-					splitOn: "rx_id,person_id,drug_id").AsList();
+					splitOn: "prescription_id,person_id,drug_id").AsList();
 
 				return result;
 			}
@@ -249,7 +234,7 @@ namespace PPOK_System.Service {
 								FROM prescription AS p1, person AS p2, drug AS d
 								WHERE p1.person_id = p2.person_id
 									AND p1.drug_id = d.drug_id
-									AND p1.rx_id = @rx_id";
+									AND p1.prescription_id = @rx_id";
 				var result = db.Query<Prescription, Person, Drug, Prescription>(sql,
 					(p1, p2, d) => {
 						p1.customer = p2;
@@ -257,7 +242,30 @@ namespace PPOK_System.Service {
 
 						return p1;
 					}, new { rx_id = id },
-					splitOn: "rx_id,person_id,drug_id").FirstOrDefault();
+					splitOn: "prescription_id,person_id,drug_id").FirstOrDefault();
+
+				return result;
+			}
+		}
+
+
+		// Populate single Prescriptions with row in the Db
+		public Prescription ReadSinglePrescription(int? person_id, string drug_id) {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string sql = @"SELECT p1.*, p2.*, d.*
+								FROM prescription AS p1, person AS p2, drug AS d
+								WHERE p1.person_id = p2.person_id
+									AND p2.person_id = @id
+									AND p1.drug_id = d.drug_id
+									AND d.drug_id = @code";
+				var result = db.Query<Prescription, Person, Drug, Prescription>(sql,
+					(p1, p2, d) => {
+						p1.customer = p2;
+						p1.drug = d;
+
+						return p1;
+					}, new { id = person_id, code = drug_id },
+					splitOn: "prescription_id,person_id,drug_id").FirstOrDefault();
 
 				return result;
 			}
@@ -269,7 +277,7 @@ namespace PPOK_System.Service {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sql = @"SELECT m.*, p1.*, p2.*, d.*
 								FROM message_history AS m, prescription AS p1, person AS p2, drug AS d
-								WHERE m.rx_id = p1.rx_id
+								WHERE m.prescription_id = p1.prescription_id
 									AND p1.person_id = p2.person_id
 									AND p1.drug_id = d.drug_id";
 				var result = db.Query<Message, Prescription, Person, Drug, Message>(sql,
@@ -280,7 +288,7 @@ namespace PPOK_System.Service {
 
 						return m;
 					},
-					splitOn: "message_id,rx_id,person_id,drug_id").AsList();
+					splitOn: "message_id,prescription_id,person_id,drug_id").AsList();
 
 				return result;
 			}
@@ -292,7 +300,7 @@ namespace PPOK_System.Service {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sql = @"SELECT m.*, p1.*, p2.*, d.*
 								FROM message_history AS m, prescription AS p1, person AS p2, drug AS d
-								WHERE m.rx_id = p1.rx_id
+								WHERE m.prescription_id = p1.prescription_id
 									AND p1.person_id = p2.person_id
 									AND p1.drug_id = d.drug_id
 									AND m.message_id = @message_id";
@@ -304,7 +312,7 @@ namespace PPOK_System.Service {
 
 						return m;
 					}, new { message_id = id },
-					splitOn: "message_id,rx_id,person_id,drug_id").FirstOrDefault();
+					splitOn: "message_id,prescription_id,person_id,drug_id").FirstOrDefault();
 
 				return result;
 			}
@@ -407,7 +415,7 @@ namespace PPOK_System.Service {
 				string sqlQuery = @"UPDATE prescription
 									SET person_id = @person_id, drug_id = @drug_id, date_filled = @date_filled,
 										days_supply = @days_supply, num_refills = @num_refills
-									WHERE rx_id = @rx_id";
+									WHERE prescription_id = @prescription_id";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -417,8 +425,7 @@ namespace PPOK_System.Service {
 		public void Update(Drug d) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE drug
-									SET drug_name = @drug_name,
-										NDCUPCHRI = @NDCUPCHRI
+									SET drug_name = @drug_name
 									WHERE drug_id = @drug_id";
 				db.Execute(sqlQuery, d);
 			}
@@ -429,7 +436,7 @@ namespace PPOK_System.Service {
 		public void Update(Message m) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE message_hisory
-									SET rx_id = @rx_id, response = @response, fill_date = @fill_date, pick_up_date = @pick_up_date
+									SET prescription_id = @prescription_id, response = @response, fill_date = @fill_date, pick_up_date = @pick_up_date
 									WHERE message_id = @message_id";
 				db.Execute(sqlQuery, m);
 			}
@@ -472,7 +479,7 @@ namespace PPOK_System.Service {
 		// Delete row in "prescription" table
 		public void Delete(Prescription s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "DELETE FROM prescription WHERE rx_id = @rx_id";
+				string sqlQuery = "DELETE FROM prescription WHERE prescription_id = @prescription_id";
 				db.Execute(sqlQuery, s);
 			}
 		}
@@ -501,6 +508,37 @@ namespace PPOK_System.Service {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = "DELETE FROM contact_preference WHERE preference_id = @preference_id";
 				db.Execute(sqlQuery, c);
+			}
+		}
+
+		#endregion
+
+
+		#region Misc
+
+		// Generate ID Number
+		public int GenerateId<T>() {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string name = typeof(T).Name.ToLower();
+				return db.Query<int>($"SELECT Max([{name}_id]) FROM [{name}]").First() + 1;
+			}
+		}
+
+
+		// See if T exsists in Database by int id
+		public bool Exists<T>(int? id) {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string name = typeof(T).Name.ToLower();
+				return db.ExecuteScalar<bool>($"SELECT COUNT(1) FROM {name} WHERE {name}_id=@id", new { id });
+			}
+		}
+
+
+		// See if T exsists in Database by string id
+		public bool Exists<T>(string id) {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string name = typeof(T).Name.ToLower();
+				return db.ExecuteScalar<bool>($"SELECT COUNT(1) FROM {name} WHERE {name}_id=@id", new { id });
 			}
 		}
 

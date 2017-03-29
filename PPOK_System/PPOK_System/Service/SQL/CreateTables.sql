@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[store] (
 
 
 CREATE TABLE [dbo].[person] (
-	[person_id]			int				IDENTITY								NOT NULL,
+	[person_id]			int														NOT NULL,
 	[store_id]			int				REFERENCES [dbo].[store]([store_id])			,
 	[first_name]		varchar(15)														,
 	[last_name]			varchar(20)														,
@@ -32,38 +32,37 @@ CREATE TABLE [dbo].[contact_preference] (
 
 
 CREATE TABLE [dbo].[drug] (
-	[drug_id]			int				IDENTITY								NOT NULL,
-	[NDCUPCHRI]			varchar(15)														,
+	[drug_id]			varchar(15)												NOT NULL,
 	[drug_name]			varchar(100)											NOT NULL,
 	PRIMARY KEY([drug_id])
 );
 
 
 CREATE TABLE [dbo].[prescription] (
-	[rx_id]				int				IDENTITY								NOT NULL,
+	[prescription_id]	int				IDENTITY								NOT NULL,
 	[person_id]			int				REFERENCES [dbo].[person]([person_id])			,
-	[drug_id]			int				REFERENCES [dbo].[drug]([drug_id])				,
+	[drug_id]			varchar(15)		REFERENCES [dbo].[drug]([drug_id])				,
 	[date_filled]		datetime														,
 	[days_supply]		int																,
 	[number_refills]	int																,
-	PRIMARY KEY([rx_id])
+	PRIMARY KEY([prescription_id])
 );
 
 
 CREATE TABLE [dbo].[message_history] (
-	[message_id]		int				IDENTITY								NOT NULL,
-	[rx_id]				int				REFERENCES [dbo].[prescription]([rx_id])		,
-	[response]			varchar(100)													,
-	[fill_time]			datetime														,
-	[pick_up_time]		datetime														,
+	[message_id]		int				IDENTITY										NOT NULL,
+	[prescription_id]	int				REFERENCES [dbo].[prescription]([prescription_id])		,
+	[response]			varchar(100)															,
+	[fill_time]			datetime																,
+	[pick_up_time]		datetime																,
 	PRIMARY KEY([message_id])
 );
 
 
 CREATE TABLE [dbo].[scheduler] (
-	[task_id]			int				IDENTITY								NOT NULL,
-	[rx_id]				int				REFERENCES [dbo].[prescription]([rx_id])		,
-	[response]			varchar(100)													,
-	[day_to_send]		datetime														,
+	[task_id]			int				IDENTITY										NOT NULL,
+	[prescription_id]	int				REFERENCES [dbo].[prescription]([prescription_id])		,
+	[response]			varchar(100)															,
+	[day_to_send]		datetime																,
 	PRIMARY KEY([task_id])
 );

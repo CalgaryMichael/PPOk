@@ -1,5 +1,7 @@
-﻿using PPOK_System.Models;
+﻿using PPOK_System.import;
+using PPOK_System.Models;
 using PPOK_System.Service;
+using System.Web;
 using System.Web.Mvc;
 
 namespace PPOK_System.Controllers {
@@ -33,7 +35,7 @@ namespace PPOK_System.Controllers {
 		// GET: Database/TestDrug
 		public ActionResult TestDrug() {
 			//var drugs = db.ReadAllDrugs();
-			var drugs = db.ReadSingleDrugById(1);
+			var drugs = db.ReadSingleDrug("60505006501");
 			return View(drugs);
 		}
 
