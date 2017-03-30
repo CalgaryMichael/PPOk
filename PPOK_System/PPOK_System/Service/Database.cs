@@ -61,18 +61,20 @@ namespace PPOK_System.Service {
 
 
 		// Create new row in "person" table
-		public void Create(Person u) {
-			if (!u.person_id.HasValue)
-				u.person_id = GenerateId<Person>();
+		public void Create(Person p) {
+			if (!p.person_id.HasValue)
+				p.person_id = GenerateId<Person>();
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = "INSERT INTO person VALUES(@person_id, @store_id, @first_name, @last_name, @zip, @phone, @email, @date_of_birth, @person_type)";
-				db.Execute(sqlQuery, u);
+				db.Execute(sqlQuery, p);
 			}
 		}
 
 
 		// Create new row in "prescription" table
 		public void Create(Prescription p) {
+			if (!p.prescription_id.HasValue)
+				p.prescription_id = GenerateId<Prescription>();
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = "INSERT INTO prescription VALUES(@prescription_id, @person_id, @drug_id, @date_filled, @days_supply, @number_refills)";
 				db.Execute(sqlQuery, p);
