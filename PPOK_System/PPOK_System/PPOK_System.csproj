@@ -202,6 +202,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\PharmacyController.cs" />
     <Compile Include="Controllers\TwilioController.cs" />
@@ -251,6 +252,7 @@
     <Content Include="Views\Pharmacy\manageCustomer.cshtml" />
     <Content Include="Views\Pharmacy\ResetPassword.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -260,7 +262,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Test\" />
     <Folder Include="Views\Twilio\" />
   </ItemGroup>

@@ -107,6 +107,7 @@ namespace PPOK_System.Service {
 				db.Execute(sqlQuery, c);
 			}
 		}
+		
 
 		#endregion
 
@@ -353,7 +354,7 @@ namespace PPOK_System.Service {
 		}
 
 
-		// Populate Single Core with all Competencies tied to it
+		// Populate Single Person with all Store and ContactPreferences tied to it
 		public Person ReadSinglePerson(int id) {
 			Person person = null;
 
@@ -383,6 +384,38 @@ namespace PPOK_System.Service {
 			}
 		}
 
+
+		// Populate Single Person with all Store and ContactPreferences tied to it
+		public Person ReadSinglePerson(string email) {
+			Person person = null;
+
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string sql = @"SELECT p.*, s.*, c.*
+								FROM person AS p, store AS s, contact_preference AS c
+								WHERE p.person_id = c.person_id
+									AND s.store_id = p.store_id
+									AND p.email = @email";
+				var result = db.Query<Person, Store, ContactPreference, Person>(sql,
+					(p, s, c) => {
+						if (person == null) {
+							person = p;
+							person.store = s;
+						}
+						c.person = person;
+
+						if (person.contact_preference == null)
+							person.contact_preference = new List<ContactPreference>();
+						person.contact_preference.Add(c);
+
+						return p;
+					}, new { email = email },
+					splitOn: "person_id,store_id,preference_id").FirstOrDefault();
+
+				return person;
+			}
+		}
+
+		
 		#endregion
 
 
@@ -454,7 +487,7 @@ namespace PPOK_System.Service {
 				db.Execute(sqlQuery, c);
 			}
 		}
-
+		
 		#endregion
 
 
