@@ -74,7 +74,7 @@ namespace PPOK_System.Service {
 		// Create new row in "prescription" table
 		public void Create(Prescription p) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO prescription VALUES(@person_id, @drug_id, @date_filled, @days_supply, @number_refills)";
+				string sqlQuery = "INSERT INTO prescription VALUES(@prescription_id, @person_id, @drug_id, @date_filled, @days_supply, @number_refills)";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -206,7 +206,7 @@ namespace PPOK_System.Service {
 
 
 		// Populate single Prescriptions with row in the Db
-		public List<Prescription> ReadAllPrescriptionsForPerson(int id) {
+		public List<Prescription> ReadAllPrescriptionsForPerson(int? id) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sql = @"SELECT p1.*, p2.*, d.*
 								FROM prescription AS p1, person AS p2, drug AS d
@@ -228,7 +228,7 @@ namespace PPOK_System.Service {
 
 
 		// Populate single Prescriptions with row in the Db
-		public Prescription ReadSinglePrescription(int id) {
+		public Prescription ReadSinglePrescription(int? id) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sql = @"SELECT p1.*, p2.*, d.*
 								FROM prescription AS p1, person AS p2, drug AS d
@@ -414,7 +414,7 @@ namespace PPOK_System.Service {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE prescription
 									SET person_id = @person_id, drug_id = @drug_id, date_filled = @date_filled,
-										days_supply = @days_supply, num_refills = @num_refills
+										days_supply = @days_supply, number_refills = @number_refills
 									WHERE prescription_id = @prescription_id";
 				db.Execute(sqlQuery, p);
 			}

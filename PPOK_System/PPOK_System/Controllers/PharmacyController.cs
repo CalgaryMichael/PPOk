@@ -40,19 +40,5 @@ namespace PPOK_System.Controllers
         {
             return View();
         }
-
-
-		// POST: Pharmacy/Upload/
-		[HttpPost]
-		public ActionResult Upload(HttpPostedFileBase file) {
-			if (file.ContentLength > 0) {
-				//var fileName = Path.GetFileName(file.FileName);
-				//var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), fileName);
-				//file.SaveAs(path);
-				Import.HandleImport(file);
-			}
-
-			return RedirectToAction("Index");
-		}
 	}
 }

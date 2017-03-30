@@ -39,7 +39,7 @@ CREATE TABLE [dbo].[drug] (
 
 
 CREATE TABLE [dbo].[prescription] (
-	[prescription_id]	int				IDENTITY								NOT NULL,
+	[prescription_id]	int														NOT NULL,
 	[person_id]			int				REFERENCES [dbo].[person]([person_id])			,
 	[drug_id]			varchar(15)		REFERENCES [dbo].[drug]([drug_id])				,
 	[date_filled]		datetime														,

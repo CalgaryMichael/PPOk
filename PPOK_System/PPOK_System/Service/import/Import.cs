@@ -2,32 +2,26 @@
 using PPOK_System.Service;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Web;
 
 namespace PPOK_System.import {
-	public class Content {
-		public Person person { get; set; }
-		public Prescription rx { get; set; }
-		public Drug drug { get; set; }
-	}
-
-
 	public class Import {
-		public static void HandleImport(HttpPostedFileBase file) {
+		public static List<Prescription> HandleImport(HttpPostedFileBase file) {
 			StreamReader reader = new StreamReader(file.InputStream);
 			var results = Csv(reader);
-			DetermineContent(results);
+			return DetermineContent(results);
 		}
 
 
-		public static List<Content> Csv(StreamReader reader) {
-			List<Content> fileContents = new List<Content>();
+		public static List<Prescription> Csv(StreamReader reader) {
+			List<Prescription> fileContents = new List<Prescription>();
 			reader.ReadLine();			// initialize first row
 
 			// read until file is ended
 			while (!reader.EndOfStream) {
-				Content lineContent = new Content();
+				Prescription lineContent = new Prescription();
 
 				int num = 0;
 				DateTime dt = DateTime.Now;
@@ -53,7 +47,7 @@ namespace PPOK_System.import {
 				p.phone = values[5];
 				p.email = values[6];
 				p.person_type = "customer";
-				lineContent.person = p;
+				lineContent.customer = p;
 
 				// import Drug info
 				Drug d = new Drug();
@@ -62,22 +56,20 @@ namespace PPOK_System.import {
 				lineContent.drug = d;
 
 				// import Prescription info
-				Prescription rx = new Prescription();
-				rx.person_id = p.person_id;
-				rx.drug_id = d.drug_id;
+				lineContent.person_id = p.person_id;
+				lineContent.drug_id = d.drug_id;
 				if (DateTime.TryParseExact(values[7], pattern, null, System.Globalization.DateTimeStyles.None, out dt))
-					rx.date_filled = dt;
+					lineContent.date_filled = dt;
 				else
-					rx.date_filled = DateTime.Now;
+					lineContent.date_filled = DateTime.Now;
 				if (Int32.TryParse(values[8], out num))
-					rx.prescription_id = num;
+					lineContent.prescription_id = num;
 
 				if (Int32.TryParse(values[9], out num))
-					rx.days_supply = num;
+					lineContent.days_supply = num;
 
 				if (Int32.TryParse(values[10], out num))
-					rx.number_refills = num;
-				lineContent.rx = rx;
+					lineContent.number_refills = num;
 
 				fileContents.Add(lineContent);
 			}
@@ -86,29 +78,42 @@ namespace PPOK_System.import {
 		}
 
 
-		public static void DetermineContent(List<Content> contents) {
+		public static List<Prescription> DetermineContent(List<Prescription> contents) {
 			Database db = new Database();
+			List<Prescription> updateList = new List<Prescription>();
 
-			foreach (Content c in contents) {
-				if (!db.Exists<Person>(c.person.person_id))
-					db.Create(c.person);
+			foreach (Prescription c in contents) {
+				if (!db.Exists<Person>(c.customer.person_id))
+					db.Create(c.customer);
 
 				if (!db.Exists<Drug>(c.drug.drug_id))
 					db.Create(c.drug);
 
-				if (!db.Exists<Prescription>(c.rx.prescription_id))
-					db.Create(c.rx);
+				if (!db.Exists<Prescription>(c.prescription_id))
+					db.Create(c);
 
 				try {
-					var rel = db.ReadSinglePrescription(c.person.person_id, c.drug.drug_id);
-					if (c.rx.date_filled > rel.date_filled) {
-						db.Update(c.person);
-						db.Update(c.drug);
-						db.Update(c.rx);
+					var rel = db.ReadSinglePrescription(c.customer.person_id, c.drug.drug_id);
+					if (c.date_filled > rel.date_filled) {
+						c.prescription_id = rel.prescription_id;
+						updateList.Add(c);
 					}
 				} catch (Exception e) {
-					Console.WriteLine(e.StackTrace);
+					Debug.WriteLine(c.prescription_id + ": " + e.StackTrace);
 				}
+			}
+
+			return updateList;
+		}
+
+
+		public static void UpdateContent(List<Prescription> contents) {
+			Database db = new Database();
+
+			foreach (Prescription rx in contents) {
+				db.Update(rx.customer);
+				db.Update(rx.drug);
+				db.Update(rx);
 			}
 		}
 	}
