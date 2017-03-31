@@ -50,7 +50,8 @@ namespace PPOK_System.TwilioManager
         {
             Database db = new Database();
             List<Schedule> schedules = db.GetSchedules();
-            SendNotifications(schedules);
+            if (schedules.Count > 0)
+                SendNotifications(schedules);
         }
     }
 }
