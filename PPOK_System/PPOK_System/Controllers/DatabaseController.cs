@@ -12,9 +12,9 @@ namespace PPOK_System.Controllers {
 
 		// GET: Database
 		public ActionResult Index() {
+            db.initDatabase();
             TwManager tw = new TwManager();
             tw.ScheduleSend();
-            db.initDatabase();
 			return View();
 		}
 
