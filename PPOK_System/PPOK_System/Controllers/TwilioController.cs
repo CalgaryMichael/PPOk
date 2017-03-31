@@ -10,7 +10,8 @@ namespace PPOK_System.Controllers
     {
         public void Send(string msg)
         {
-            Twilio.TwilioTest.sendmsg(msg);
+            TwilioManager.TwManager TW = new TwilioManager.TwManager();
+            TW.sendmsg(msg);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PPOK_System.TwilioManager;
 
 namespace PPOK_System.Controllers {
 	public class DatabaseController : Controller {
@@ -11,7 +12,6 @@ namespace PPOK_System.Controllers {
 
 		// GET: Database
 		public ActionResult Index() {
-            //Twilio.TwilioTest.sendmsg("Your meds are ready to pick up.");
             db.initDatabase();
 			return View();
 		}
