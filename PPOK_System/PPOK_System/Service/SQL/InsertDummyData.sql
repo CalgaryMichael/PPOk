@@ -3,7 +3,7 @@ INSERT INTO [dbo].[store] VALUES(
 );
 INSERT INTO [dbo].[person] VALUES 
 	(1, 'Calgary','Michael','calmik@bleh.com','1234567890','01/01/1900','admin'),
-	(1, 'Rob', 'Thompson', 'robthom@bleh.com', '2364819238', '09/08/1986', 'customer'),
+	(1, 'Rob', 'Thompson', 'robthom@bleh.com', '4059191824', '09/08/1986', 'customer'),
 	(1, 'Lane', 'Wheeler', 'lanwhe@bleh.com', '6283948263', '03/05/1994', 'pharm'),
 	(1, 'Weston', 'Vidaurri', 'wesvin@bleh.com', '2385702834', '04/05/1996', 'admin'),
 	(1, 'Weston', 'Buck', 'wesbuck@bleh.com', '7839231673', '02/23/1995', 'customer'),
@@ -39,3 +39,10 @@ INSERT INTO [dbo].[message_history] VALUES
 	(1, 'yes', '20170308', '20170309'),
 	(2, 'no', '20170308', null),
 	(3, 'yes', '20170308', '20170309');
+
+
+
+
+INSERT INTO [dbo].[scheduler] VALUES
+	(1, '', '3/31/2017'),
+	(2, '', '3/31/2017');
