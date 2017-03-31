@@ -191,6 +191,7 @@
     <Content Include="css\bootstrap-reboot.min.css.map" />
     <Content Include="css\bootstrap.css.map" />
     <Content Include="css\bootstrap.min.css.map" />
+    <Content Include="data\scrubbed_data.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -202,6 +203,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\PharmacyController.cs" />
     <Compile Include="Controllers\TwilioController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -209,6 +211,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Service\Import\Import.cs" />
     <Compile Include="Models\ContactPreference.cs" />
     <Compile Include="Models\Drug.cs" />
     <Compile Include="Models\Message.cs" />
@@ -249,6 +252,7 @@
     <Content Include="Views\Pharmacy\History.cshtml" />
     <Content Include="Views\Pharmacy\manageCustomer.cshtml" />
     <Content Include="Views\Pharmacy\ResetPassword.cshtml" />
+    <Content Include="Views\Import\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
