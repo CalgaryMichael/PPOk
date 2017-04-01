@@ -64,8 +64,11 @@ namespace PPOK_System.Service {
 		public void Create(Person p) {
 			if (!p.person_id.HasValue)
 				p.person_id = GenerateId<Person>();
+			p.password = SHA1.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO person VALUES(@person_id, @store_id, @first_name, @last_name, @zip, @phone, @email, @date_of_birth, @person_type)";
+				string sqlQuery = @"INSERT INTO person VALUES(@person_id, @store_id, @first_name,
+																@last_name, @zip, @phone, @email,
+																@password, @date_of_birth, @person_type)";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -76,7 +79,8 @@ namespace PPOK_System.Service {
 			if (!p.prescription_id.HasValue)
 				p.prescription_id = GenerateId<Prescription>();
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO prescription VALUES(@prescription_id, @person_id, @drug_id, @date_filled, @days_supply, @number_refills)";
+				string sqlQuery = @"INSERT INTO prescription VALUES(@prescription_id, @person_id, @drug_id,
+																	@date_filled, @days_supply, @number_refills)";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -434,10 +438,12 @@ namespace PPOK_System.Service {
 
 		// Update row in "person" table
 		public void Update(Person p) {
+			p.password = SHA1.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE person
-									SET store_id = @store_id, first_name = @first_name, last_name = @last_name, zip = @zip,
-										email = @email, phone = @phone, date_of_birth = @date_of_birth, person_type = @person_type
+									SET store_id = @store_id, first_name = @first_name, last_name = @last_name,
+										zip = @zip, email = @email, password = @password, phone = @phone,
+										date_of_birth = @date_of_birth, person_type = @person_type
 									WHERE person_id = @person_id";
 				db.Execute(sqlQuery, p);
 			}
@@ -471,7 +477,8 @@ namespace PPOK_System.Service {
 		public void Update(Message m) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE message_hisory
-									SET prescription_id = @prescription_id, response = @response, fill_date = @fill_date, pick_up_date = @pick_up_date
+									SET prescription_id = @prescription_id, response = @response,
+										fill_date = @fill_date, pick_up_date = @pick_up_date
 									WHERE message_id = @message_id";
 				db.Execute(sqlQuery, m);
 			}

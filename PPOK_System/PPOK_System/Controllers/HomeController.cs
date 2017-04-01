@@ -1,5 +1,6 @@
 ﻿using PPOK_System.Models;
 using PPOK_System.Service;
+using PPOK_System.Service.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace PPOK_System.Controllers {
 		public ActionResult Login(Person loginAttempt) {
 			var person = db.ReadSinglePerson(loginAttempt.email);
 
-			if (person.password == loginAttempt.password) {
+			if (Password.Authenticate(loginAttempt.password, person.password)) {
 				FormsAuthentication.SetAuthCookie(person.email, true);
 
 				if (person.person_type == "admin") {
