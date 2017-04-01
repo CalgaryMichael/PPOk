@@ -180,7 +180,6 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Twilio\TwillioXML\PickUp.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -203,6 +202,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\PharmacyController.cs" />
     <Compile Include="Controllers\TwilioController.cs" />
@@ -211,17 +211,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Service\Authentication\Password.cs" />
     <Compile Include="Service\Import\Import.cs" />
     <Compile Include="Models\ContactPreference.cs" />
     <Compile Include="Models\Drug.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Prescription.cs" />
-    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Database.cs" />
-    <Compile Include="Twilio\TwilioManager.cs" />
+    <Compile Include="Service\Authentication\SHA1.cs" />
+    <Compile Include="Twilio\TwilioTest.cs" />
     <Compile Include="Service\SQL\Scripts.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +254,7 @@
     <Content Include="Views\Pharmacy\manageCustomer.cshtml" />
     <Content Include="Views\Pharmacy\ResetPassword.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -262,12 +264,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Home\" />
     <Folder Include="Views\Test\" />
     <Folder Include="Views\Twilio\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
