@@ -49,7 +49,7 @@ namespace PPOK_System.Controllers {
 					return RedirectToAction("Index", "User");
 				}
 			} else {
-				// throw IsValid error
+				ModelState.AddModelError("", "Login data is incorrect!");
 			}
 
 			return View(loginAttempt);

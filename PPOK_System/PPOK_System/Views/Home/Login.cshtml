@@ -6,7 +6,7 @@
 <h2>Login</h2>
 
 @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { id = "create-form" })) {
-    @Html.ValidationSummary(true, "Login failed. Check your login details.");
+    @Html.ValidationSummary();
     <div>
         <fieldset>
             <div class="editor-label">
