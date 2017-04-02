@@ -419,7 +419,26 @@ namespace PPOK_System.Service {
 			}
 		}
 
-		
+
+		// Read and get items from scheduler for todays date
+		public List<Schedule> GetSchedules() {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string sql = @"SELECT s.*, p.person_id, pers.*
+								FROM scheduler AS s, prescription AS p, person AS pers
+								WHERE Convert(date, s.day_to_send) = Convert(date, GETDATE())
+									AND s.rx_id = p.rx_id
+									AND p.person_id = pers.person_id";
+				var result = db.Query<Schedule, Prescription, Person, Schedule>(sql,
+					(s, p, pers) => {
+						s.person = pers;
+						return s;
+					},
+					splitOn: "rx_id,person_id").AsList();
+				return result;
+			}
+		}
+
+
 		#endregion
 
 

@@ -180,6 +180,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Twilio\TwillioXML\PickUp.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -211,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Schedule.cs" />
     <Compile Include="Service\Authentication\Password.cs" />
     <Compile Include="Service\Import\Import.cs" />
     <Compile Include="Models\ContactPreference.cs" />
@@ -222,7 +224,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Database.cs" />
     <Compile Include="Service\Authentication\SHA1.cs" />
-    <Compile Include="Twilio\TwilioTest.cs" />
+    <Compile Include="Twilio\TwilioManager.cs" />
     <Compile Include="Service\SQL\Scripts.cs" />
   </ItemGroup>
   <ItemGroup>

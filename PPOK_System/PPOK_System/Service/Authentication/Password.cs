@@ -2,9 +2,10 @@
 	public class Password {
 		public static bool Authenticate(string attempt, string actual) {
 			var encoded = SHA1.Encode(attempt);
-			if (encoded == actual)
-				return true;
-			return false;
+			return encoded == actual ? true : false;
+			//if (encoded == actual)
+			//	return true;
+			//return false;
 		}
 	}
 }
