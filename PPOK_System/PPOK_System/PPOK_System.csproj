@@ -171,7 +171,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Modules\ImportModule.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Vendor\jquery\jquery-2.2.4.min.js" />
     <Content Include="css\bootstrap-grid.css" />
     <Content Include="css\bootstrap-grid.min.css" />
     <Content Include="css\bootstrap-reboot.css" />

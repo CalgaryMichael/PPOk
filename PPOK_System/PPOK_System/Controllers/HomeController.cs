@@ -10,24 +10,26 @@ namespace PPOK_System.Controllers {
 
         // GET: Home
         public ActionResult Index() {
-            return RedirectToAction("Login");
+			FormsAuthentication.SignOut();
+			return RedirectToAction("Login");
         }
 
 
 		// GET: Home/Login
 		[HttpGet]
 		public ActionResult Login() {
-			if (User.Identity.IsAuthenticated) {
-				var person = db.ReadSinglePerson(User.Identity.Name);
+			//if (User.Identity.IsAuthenticated) {
+			//	var email = User.Identity.Name.Split(',')[0];
+			//	var person = db.ReadSinglePerson(email);
 
-				if (person.person_type == "admin") {
-					return RedirectToAction("Index", "Admin");
-				} else if (person.person_type == "pharm") {
-					return RedirectToAction("Index", "Pharmacy");
-				} else if (person.person_type == "customer") {
-					return RedirectToAction("Index", "User");
-				}
-			}
+			//	if (person.person_type == "admin") {
+			//		return RedirectToAction("Index", "Admin");
+			//	} else if (person.person_type == "pharm") {
+			//		return RedirectToAction("Index", "Pharmacy");
+			//	} else if (person.person_type == "customer") {
+			//		return RedirectToAction("Index", "User");
+			//	}
+			//}
 
 			return View();
 		}
@@ -39,7 +41,8 @@ namespace PPOK_System.Controllers {
 			var person = db.ReadSinglePerson(loginAttempt.email);
 
 			if (Password.Authenticate(loginAttempt.password, person.password)) {
-				FormsAuthentication.SetAuthCookie(person.email, false);
+				string cookie = person.email + "," + person.person_type;
+				FormsAuthentication.SetAuthCookie(cookie, false);
 
 				if (person.person_type == "admin") {
 					return RedirectToAction("Index", "Admin");
