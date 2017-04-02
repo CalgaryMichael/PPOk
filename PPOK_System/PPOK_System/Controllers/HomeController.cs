@@ -1,10 +1,6 @@
 ﻿using PPOK_System.Models;
 using PPOK_System.Service;
 using PPOK_System.Service.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -21,6 +17,18 @@ namespace PPOK_System.Controllers {
 		// GET: Home/Login
 		[HttpGet]
 		public ActionResult Login() {
+			if (User.Identity.IsAuthenticated) {
+				var person = db.ReadSinglePerson(User.Identity.Name);
+
+				if (person.person_type == "admin") {
+					return RedirectToAction("Index", "Admin");
+				} else if (person.person_type == "pharm") {
+					return RedirectToAction("Index", "Pharmacy");
+				} else if (person.person_type == "customer") {
+					return RedirectToAction("Index", "User");
+				}
+			}
+
 			return View();
 		}
 
@@ -31,7 +39,7 @@ namespace PPOK_System.Controllers {
 			var person = db.ReadSinglePerson(loginAttempt.email);
 
 			if (Password.Authenticate(loginAttempt.password, person.password)) {
-				FormsAuthentication.SetAuthCookie(person.email, true);
+				FormsAuthentication.SetAuthCookie(person.email, false);
 
 				if (person.person_type == "admin") {
 					return RedirectToAction("Index", "Admin");
@@ -51,7 +59,7 @@ namespace PPOK_System.Controllers {
 		// GET: Home/Logout
 		public ActionResult Logout() {
 			FormsAuthentication.SignOut();
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction("Login", "Home");
 		}
 	}
 }

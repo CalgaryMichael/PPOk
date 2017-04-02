@@ -9,20 +9,19 @@
     @Html.ValidationSummary(true, "Login failed. Check your login details.");
     <div>
         <fieldset>
-            <legend>Login</legend>
             <div class="editor-label">
-                @Html.LabelFor(u => u.email)
+                @Html.LabelFor(p => p.email)
             </div>
             <div class="editor-field">
-                @Html.TextBoxFor(u => u.email)
-                @Html.ValidationMessageFor(u => u.email)
+                @Html.TextBoxFor(p => p.email)
+                @Html.ValidationMessageFor(p => p.email)
             </div>
             <div class="editor-label">
-                @Html.LabelFor(u => u.password)
+                @Html.LabelFor(p => p.password)
             </div>
             <div class="editor-field">
-                @Html.PasswordFor(u => u.password)
-                @Html.ValidationMessageFor(u => u.password)
+                @Html.PasswordFor(p => p.password)
+                @Html.ValidationMessageFor(p => p.password)
             </div>
             <input type="submit" value="Log In" />
         </fieldset>
