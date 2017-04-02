@@ -1,8 +1,6 @@
-﻿using PPOK_System.import;
-using PPOK_System.Models;
-using PPOK_System.Service;
-using System.Web;
+﻿using PPOK_System.Service;
 using System.Web.Mvc;
+using PPOK_System.TwilioManager;
 
 namespace PPOK_System.Controllers {
 	public class DatabaseController : Controller {
@@ -12,6 +10,8 @@ namespace PPOK_System.Controllers {
 		// GET: Database
 		public ActionResult Index() {
             db.initDatabase();
+            TwManager tw = new TwManager();
+            tw.ScheduleSend();
 			return View();
 		}
 

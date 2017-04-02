@@ -2,12 +2,12 @@ INSERT INTO [dbo].[store] VALUES
 	('123 street','Edmond','OK','73013');
 
 INSERT INTO [dbo].[person] VALUES 
-	(1,1,'Calgary','Michael','73013','1234567890','calmik@bleh.com','01/01/1900','admin'),
-	(2,1,'Rob','Thompson','73013','2364819238','robthom@bleh.com','09/08/1986','customer'),
-	(3,1,'Lane','Wheeler','73013','6283948263','lanwhe@bleh.com','03/05/1994','pharm'),
-	(4,1,'Weston','Vidaurri','73013','2385702834','wesvin@bleh.com','04/05/1996','admin'),
-	(5,1,'Weston','Buck','73013','7839231673','wesbuck@bleh.com','02/23/1995','customer'),
-	(6,1,'Colby','Dial','73013','3628429834','coldia@bleh.com','06/13/1997','pharm');
+	(1,1,'Calgary','Michael','73013','1234567890','seth.michael@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','01/01/1900','admin'),
+	(2,1,'Rob','Thompson','73013','2364819238','r.thompson@eagles.oc.edu','cf2e875d70c402e4aaf32ceb64b1fa6f7396af59','09/08/1986','customer'),
+	(3,1,'Lane','Wheeler','73013','6283948263','lane.wheeler@eagles.oc.edu','aafdc23870ecbcd3d557b6423a8982134e17927e','03/05/1994','pharm'),
+	(4,1,'Weston','Vidaurri','73013','2385702834','wesvin@bleh.com','test123','04/05/1996','admin'),
+	(5,1,'Weston','Buck','73013','7839231673','wesbuck@bleh.com','test123','02/23/1995','customer'),
+	(6,1,'Colby','Dial','73013','3628429834','coldia@bleh.com','test123','06/13/1997','pharm');
 
 INSERT INTO [dbo].[contact_preference] VALUES
 	(1,'email','yes'),
@@ -27,7 +27,7 @@ INSERT INTO [dbo].[drug] VALUES
 	('310075190','Rosuvastatin Calcium Tab 10 MG');
 
 INSERT INTO [dbo].[prescription] VALUES
-	(1,2,'60505006501','03/06/2017',30,1),
+	(1,1,'60505006501','03/06/2016',30,1),
 	(2,2,'591569550','03/08/2017',15,3),
 	(3,2,'65027225','03/02/2017',30,5),
 	(4,5,'68382012205','03/02/2017',30,5);
