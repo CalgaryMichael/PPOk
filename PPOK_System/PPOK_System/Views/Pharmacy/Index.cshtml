@@ -21,9 +21,13 @@
 <div class="form-group">
     <label class="col-md-3 control-label" for="searchInput"></label>
     <div class="col-md-3">
-        <span><input id="searchInput" name="searchInput" type="search" placeholder="Search...." class="form-control input-md"></span>
-        <span><input id="filebtn" name="filebtn" class="input-file" type="file"></span>
-        
+        <form action="/Import" method="post" enctype="multipart/form-data">
+
+            <label for="file">Import:</label>
+            <input type="file" name="file" id="file" />
+
+            <input type="submit" />
+        </form>
     </div>
 </div>
 <div></div>
