@@ -2,6 +2,13 @@
 
 @{
     ViewBag.Title = "manageCustomer";
+    List<PPOK_System.Models.Prescription> prescription = new List<PPOK_System.Models.Prescription>();
+    List<PPOK_System.Models.Person> person = new List<PPOK_System.Models.Person>();
+    PPOK_System.Service.Database db = new PPOK_System.Service.Database();
+    DateTime today = DateTime.UtcNow.Date;
+    String mmddyy = today.ToString("MM/dd/yy");
+
+    person = db.ReadAllPersons();
 }
 
 <style>
@@ -45,46 +52,21 @@
 
                     </thead>
                     <tbody>
+                        @{
+                            foreach (PPOK_System.Models.Person p in person)
+                            {
+                             
+                                    <tr>
+                                        <td>@p.first_name </td>
+                                        <td>@p.last_name</td>
+                                        <td>@p.email</td>
+                                        <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                                    </tr>
+                                
 
-                        <tr>
-                            <td>Colby</td>
-                            <td>Dial</td>
-                            <td>colby@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-                        <tr>
-                            <td>Lane</td>
-                            <td>Wheeler</td>
-                            <td>lane@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Rob</td>
-                            <td>Thompson</td>
-                            <td>Ronb@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>Calgary</td>
-                            <td>Michael</td>
-                            <td>calgary@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Weston</td>
-                            <td>Vidaurri</td>
-                            <td>emailfrom@database.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
+                            }
+                        }
+                       
                     </tbody>
 
                 </table>
@@ -94,17 +76,17 @@
     </div>
 </div>
 
-
+@*Modal Dialog for editing a Customer's Info*@
 @*<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+                    <h4 class="modal-title custom_align" id="Heading">Edit A Customer</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input class="form-control " type="text" placeholder="Name from Database">
+                        <input class="form-control " type="text" placeholder="">
                     </div>
                     <div class="form-group">
 

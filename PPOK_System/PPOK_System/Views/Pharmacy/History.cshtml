@@ -2,6 +2,17 @@
 
 @{
     ViewBag.Title = "History";
+    List<PPOK_System.Models.Prescription> prescription = new List<PPOK_System.Models.Prescription>();
+    List<PPOK_System.Models.Person> person = new List<PPOK_System.Models.Person>();
+    PPOK_System.Service.Database db = new PPOK_System.Service.Database();
+    PPOK_System.Models.Message message = new PPOK_System.Models.Message();
+
+    DateTime today = DateTime.UtcNow.Date;
+    String mmddyy = today.ToString("MM/dd/yy");
+
+    person = db.ReadAllPersons();
+    
+}
 }
 
 <style>
@@ -46,8 +57,25 @@
 
                     </thead>
                     <tbody>
+                        @{
+                            foreach (PPOK_System.Models.Person p in person)
+                            {
+                                prescription = db.ReadAllPrescriptionsForPerson(p.person_id);
+                                //message = db.ReadSingleMessage(p.person_id);                  //Needs fixed to get actuial message.
+                                foreach (PPOK_System.Models.Prescription pr in prescription)
+                                {
+                                    // @message = db.ReadSingleMessage(pr.person_id);
+                                    <tr>
+                                        <td>@p.first_name @p.last_name</td>
+                                        <td>@pr.drug.drug_name</td>
+                                        <td>@message.fill_date.ToString("MM/dd/yy")</td>
+                                        <td>@message</td>
+                                    </tr>
+                                }
 
-                        <tr>
+                            }
+                        }
+                        @*<tr>
                             <td>Colby Dial</td>
                             <td>Tylenol</td>
                             <td>03/11/17</td>
@@ -84,7 +112,7 @@
                             <td>Q-Tips</td>
                             <td>03/19/17</td>
                             <td>Yes</td>
-                        </tr>
+                        </tr>*@
 
                     </tbody>
 
