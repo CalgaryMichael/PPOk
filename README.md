@@ -1,6 +1,15 @@
 # PPOk
 Website for PPOk
 
+## Team
+### Old Man and the C:\
+* Calgary Michael
+* Lane Wheeler
+* Weston Vidaurri
+* Rob Thompson
+* Weston Buck
+* Colby Dial
+
 ## Running Web Application
 ### Initializing
 The database will be initialized by launching the website.
