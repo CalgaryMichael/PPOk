@@ -10,7 +10,7 @@ namespace PPOK_System.Controllers {
 
         // GET: Home
         public ActionResult Index() {
-			FormsAuthentication.SignOut();
+			//FormsAuthentication.SignOut();
 			return RedirectToAction("Login");
         }
 
@@ -18,18 +18,18 @@ namespace PPOK_System.Controllers {
 		// GET: Home/Login
 		[HttpGet]
 		public ActionResult Login() {
-			//if (User.Identity.IsAuthenticated) {
-			//	var email = User.Identity.Name.Split(',')[0];
-			//	var person = db.ReadSinglePerson(email);
+			if (User.Identity.IsAuthenticated) {
+				var email = User.Identity.Name.Split(',')[0];
+				var person = db.ReadSinglePerson(email);
 
-			//	if (person.person_type == "admin") {
-			//		return RedirectToAction("Index", "Admin");
-			//	} else if (person.person_type == "pharm") {
-			//		return RedirectToAction("Index", "Pharmacy");
-			//	} else if (person.person_type == "customer") {
-			//		return RedirectToAction("Index", "User");
-			//	}
-			//}
+				if (person.person_type == "admin") {
+					return RedirectToAction("Index", "Admin");
+				} else if (person.person_type == "pharm") {
+					return RedirectToAction("Index", "Pharmacy");
+				} else if (person.person_type == "customer") {
+					return RedirectToAction("Index", "User");
+				}
+			}
 
 			return View();
 		}

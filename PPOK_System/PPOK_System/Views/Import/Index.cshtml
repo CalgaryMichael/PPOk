@@ -1,47 +1,58 @@
 ﻿@model List<PPOK_System.Models.Prescription>
 
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Import</h4>
-        </div>
-        <div class="modal-body">
-            @using (Html.BeginForm("Upload", "Import", FormMethod.Post, new { id = "create-form" })) {
-                if (Model.Count > 0) {
-                    @Html.AntiForgeryToken()
-                    for (int i = 0; i < Model.Count; i++) {
-                        @* Prescription Info *@
-                        @Html.HiddenFor(m => m[i].prescription_id)
-                        @Html.HiddenFor(m => m[i].person_id)
-                        @Html.HiddenFor(m => m[i].drug_id)
-                        @Html.HiddenFor(m => m[i].date_filled)
-                        @Html.HiddenFor(m => m[i].days_supply)
-                        @Html.HiddenFor(m => m[i].number_refills)
+@using (Html.BeginForm("Upload", "Import", FormMethod.Post, new { id = "create-form" })) {
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Import</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                        @if (Model.Count > 0) {
+                            <div class="row">
+                                <strong>People to Be Updated:</strong>
+                            </div>
+                            <div class="row">
+                                @Html.AntiForgeryToken()
+                                @for (int i = 0; i < Model.Count; i++) {
+                                    @* Prescription Info *@
+                                    @Html.HiddenFor(m => m[i].prescription_id)
+                                    @Html.HiddenFor(m => m[i].person_id)
+                                    @Html.HiddenFor(m => m[i].drug_id)
+                                    @Html.HiddenFor(m => m[i].date_filled)
+                                    @Html.HiddenFor(m => m[i].days_supply)
+                                    @Html.HiddenFor(m => m[i].number_refills)
 
-                        @* Person Info *@
-                        @Html.HiddenFor(m => m[i].customer.person_id)
-                        @Html.HiddenFor(m => m[i].customer.store_id)
-                        @Html.HiddenFor(m => m[i].customer.first_name)
-                        @Html.HiddenFor(m => m[i].customer.last_name)
-                        @Html.HiddenFor(m => m[i].customer.zip)
-                        @Html.HiddenFor(m => m[i].customer.phone)
-                        @Html.HiddenFor(m => m[i].customer.email)
-                        @Html.HiddenFor(m => m[i].customer.password)
-                        @Html.HiddenFor(m => m[i].customer.date_of_birth)
-                        @Html.HiddenFor(m => m[i].customer.person_type)
+                                    @* Person Info *@
+                                    @Html.HiddenFor(m => m[i].customer.person_id)
+                                    @Html.HiddenFor(m => m[i].customer.store_id)
+                                    @Html.HiddenFor(m => m[i].customer.first_name)
+                                    @Html.HiddenFor(m => m[i].customer.last_name)
+                                    @Html.HiddenFor(m => m[i].customer.zip)
+                                    @Html.HiddenFor(m => m[i].customer.phone)
+                                    @Html.HiddenFor(m => m[i].customer.email)
+                                    @Html.HiddenFor(m => m[i].customer.password)
+                                    @Html.HiddenFor(m => m[i].customer.date_of_birth)
+                                    @Html.HiddenFor(m => m[i].customer.person_type)
 
-                        @* Drug Info *@
-                        @Html.HiddenFor(m => m[i].drug.drug_id)
-                        @Html.HiddenFor(m => m[i].drug.drug_name)
-                        <p>@Model[i].customer.first_name @Model[i].customer.last_name</p>
-                    }
-                    <input type="submit" value="Submit" />
-                } else {
-                    <p>All content uploaded!</p>
-                    <input type="submit" onclick="window.location.href = '/Pharmacy'; return false;" value="Done" />
-                }
-            }
+                                    @* Drug Info *@
+                                    @Html.HiddenFor(m => m[i].drug.drug_id)
+                                    @Html.HiddenFor(m => m[i].drug.drug_name)
+
+                                    <p>@Model[i].customer.first_name @Model[i].customer.last_name</p>
+                                }
+                            </div>
+                        } else {
+                            <div class="row">
+                                All content uploaded!
+                            </div>
+                        }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Submit" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
+}
