@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 0px;
+    background: transparent;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -19,6 +20,7 @@ textarea {
 html{
     background: linear-gradient(to bottom right, white, lightgray) no-repeat center center fixed; 
     background-size: cover;
+    position:center;
 }
 
 #checkBoxes {
@@ -28,4 +30,21 @@ html{
     border: 5px solid #c7d7dc;
     border-radius: 15px;
     background-color: #DEEFF5;
+}
+
+#logout{
+    margin-top: 13px;
+    color: white;
+}
+#login{
+    text-align: center;
+    padding: 25px 0px 25px 0px;
+    margin-top: 50px;
+    /*margin-bottom: 300px;*/
+    border: 5px solid #c7d7dc;
+    border-radius: 15px;
+    background-color: #DEEFF5;
+}
+#brand.navbar-brand{
+    color: white;
 }
