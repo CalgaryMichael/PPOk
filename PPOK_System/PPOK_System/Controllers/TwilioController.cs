@@ -8,9 +8,15 @@ namespace PPOK_System.Controllers
 {
     public class TwilioController : Controller
     {
-        public void Send(string msg)
+        public void ScheduleNotification()
         {
-            Twilio.TwilioTest.sendmsg(msg);
+            TwilioManager.TwManager TW = new TwilioManager.TwManager();
+            TW.ScheduleSend();
         }
+        //public void SchedulerStart()
+        //{
+        //    TwilioManager.TwManager TW = new TwilioManager.TwManager();
+        //    TW.StartHangfire();
+        //}
     }
 }

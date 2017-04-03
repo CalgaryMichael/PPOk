@@ -12,7 +12,10 @@ namespace PPOK_System.Service.SQL {
 		public static string InsertDummyDataSql { get; }
 
 		public static Dictionary<string, string> ScriptDictionary { get; }
-
+		// TODO: implement these read/writes into scripts
+		public static Dictionary<string, string> Create { get; }
+		public static Dictionary<string, string> Update { get; }
+		public static Dictionary<string, string> Delete { get; }
 
 		static Scripts() {
 			SqlRoot = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.FullName + "/PPOK_System/Service/SQL";
