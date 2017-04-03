@@ -1,7 +1,16 @@
-﻿body {
+﻿html{
+    background: linear-gradient(to bottom right, white, lightgray) no-repeat center center fixed; 
+    background-size: cover;
+    position:center;
+    overflow-y: hidden;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 0px;
     background: transparent;
+    margin-top: 2%;
+    overflow-y: hidden;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -15,20 +24,16 @@ input,
 select,
 textarea {
     max-width: 280px;
+    padding: 0px 5px 0px 5px;
 }
 
-html{
-    background: linear-gradient(to bottom right, white, lightgray) no-repeat center center fixed; 
-    background-size: cover;
-    position:center;
-}
 
 #checkBoxes {
     padding: 50px 0px 10px 100px;
     margin-top: 50px;
     /*margin-bottom: 300px;*/
-    border: 5px solid #c7d7dc;
-    border-radius: 15px;
+    border: 2px solid #c7d7dc;
+    border-radius: 5px;
     background-color: #DEEFF5;
 }
 
@@ -41,10 +46,19 @@ html{
     padding: 25px 0px 25px 0px;
     margin-top: 50px;
     /*margin-bottom: 300px;*/
-    border: 5px solid #c7d7dc;
-    border-radius: 15px;
+    border: 2px solid #c7d7dc;
+    border-radius: 5px;
     background-color: #DEEFF5;
 }
 #brand.navbar-brand{
     color: white;
+}
+
+#importSelect{
+    text-align: center;
+    padding: 20px 0px 0px 0px;
+    margin: 10px 0px 25px 0px;
+    border: 2px solid #c7d7dc;
+    border-radius: 5px;
+    background-color: #DEEFF5;
 }
