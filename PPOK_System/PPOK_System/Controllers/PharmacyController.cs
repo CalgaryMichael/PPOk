@@ -13,6 +13,7 @@ namespace PPOK_System.Controllers
         // GET: Pharmacy
         public ActionResult Index()
         {
+
             return View();
         }
 

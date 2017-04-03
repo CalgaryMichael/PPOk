@@ -2,6 +2,14 @@
 
 @{
     ViewBag.Title = "Index";
+    List<PPOK_System.Models.Prescription> prescription = new List<PPOK_System.Models.Prescription>();
+    List<PPOK_System.Models.Person> person = new List<PPOK_System.Models.Person>();
+    PPOK_System.Service.Database db = new PPOK_System.Service.Database();
+    DateTime today = DateTime.UtcNow.Date;
+    String mmddyy = today.ToString("MM/dd/yy");
+
+    person = db.ReadAllPersons();
+
 }
 
 @section additionalCSS {
@@ -20,14 +28,24 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 
-<div class="form-group">
-    <label class="col-md-3 control-label" for="searchInput"></label>
-    <div class="col-md-3">
-        <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
-            <label for="file">Import:</label>
-            <input type="file" name="file" id="file" accept=".csv" />
-            <input id="import-submit" type="submit" />
-        </form>
+<div class="row">
+    <div class="form-group">
+        <label class="col-md-3 control-label" for="searchInput"></label>
+        <div>
+            <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
+                <div class="form-group col-xs-6">
+                    <label for="file">Import Patient Data:</label>
+                </div>
+                <div class="form-group col-xs-6">
+                    <div class="form-group col-xs-6" align="center">
+                        <input type="file" name="file" id="file" accept=".csv" />
+                    </div>
+                    <div class="form-group col-xs-6" align="left">
+                        <input id="import-submit" type="submit" />
+                    </div>
+                </div> 
+</form>
+        </div>
     </div>
 </div>
 <div id="import-container" class="modal fade hidden-print" role="dialog"></div>
@@ -46,50 +64,26 @@
 
                         <th>Name</th>
                         <th>Prescription</th>
-                        <th>Date</th>
                         <th> </th>
 
                     </thead>
                     <tbody>
 
-                        <tr>
-                            <td>Colby Dial</td>
-                            <td>Tylenol</td>
-                            <td>03/11/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
+                        @{
+                            foreach (PPOK_System.Models.Person p in person)
+                            {
+                                prescription = db.ReadAllPrescriptionsForPerson(p.person_id);
+                                foreach (PPOK_System.Models.Prescription pr in prescription)
+                                {
+                                    <tr>
+                                        <td>@p.first_name @p.last_name</td>
+                                        <td>@pr.drug.drug_name</td>
+                                        <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                                    </tr>
+                                }
 
-                        <tr>
-                            <td>Lane Wheeler</td>
-                            <td>Anti-repressents</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Rob Thompson</td>
-                            <td>Allergy Pills</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>Calgary Michael</td>
-                            <td>Dr. Pepper</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Weston Vidaurri</td>
-                            <td>Q-Tips</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
+                            }
+                        }
 
                     </tbody>
 
@@ -101,30 +95,6 @@
 </div>
 
 
-@*<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Pharmacy Name Here">
-                </div>
-                <div class="form-group">
-
-                    <input class="form-control " type="text" placeholder="Location Here">
-                </div>
-            </div>
-            <div class="modal-footer ">
-                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>*@
 
 @section inlineScript {
     <script type="text/javascript">
