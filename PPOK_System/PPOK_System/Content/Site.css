@@ -2,7 +2,7 @@
     background: linear-gradient(to bottom right, white, lightgray) no-repeat center center fixed; 
     background-size: cover;
     position:center;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
 }
 
 body {
@@ -45,7 +45,7 @@ textarea {
     text-align: center;
     padding: 25px 0px 25px 0px;
     margin-top: 50px;
-    /*margin-bottom: 300px;*/
+    margin-bottom: 50px;
     border: 2px solid #c7d7dc;
     border-radius: 5px;
     background-color: #DEEFF5;
@@ -61,4 +61,22 @@ textarea {
     border: 2px solid #c7d7dc;
     border-radius: 5px;
     background-color: #DEEFF5;
+}
+
+
+.spinner-wrapper {
+    height: 50px;
+}
+
+#spinner{
+    width: 100%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+}
+
+#spinner .fa-spinner{
+    margin: 10px 10px;
+    color: #63717f;
 }

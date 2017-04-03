@@ -1,37 +1,22 @@
 ﻿@model PPOK_System.Models.Person
-
 @{
     ViewBag.Title = "Index";
 }
-<style>
-    body {
-        margin-top: 2%;
-    }
 
-    center {
-        margin: auto;
-    }
-</style>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <div class="container">
     <div class="row">
-
-
         <div class="col-md-12">
             <h4>Manage Pharmacies</h4>
             <div class="table-responsive">
 
-                <table id="mytable" class="table table-bordred table-striped">
+                <table id="mytable" class="table table-bordered table-striped">
 
                     <thead>
-
-                    <th>Pharmacy</th>
-                    <th>Location</th>
-                    <th>Options</th>
-
+                        <tr>
+                            <th>Pharmacy</th>
+                            <th>Location</th>
+                            <th colspan="2">Options</th>
+                        </tr>
                     </thead>
                     <tbody>
 
@@ -131,24 +116,24 @@
     <!-- /.modal-dialog -->
 </div>
 
-<script>
-    //pops a modal
-    $(document).ready(function () {
-        $("#mytable #checkall").click(function () {
-            if ($("#mytable #checkall").is(':checked')) {
-                $("#mytable input[type=checkbox]").each(function () {
-                    $(this).prop("checked", true);
-                });
+@section inlineScript {
+    <script type="text/javascript">
+        //pops a modal
+        $(document).ready(function () {
+            $("#mytable #checkall").click(function () {
+                if ($("#mytable #checkall").is(':checked')) {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", true);
+                    });
 
-            } else {
-                $("#mytable input[type=checkbox]").each(function () {
-                    $(this).prop("checked", false);
-                });
-            }
+                } else {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", false);
+                    });
+                }
+            });
+
+            $("[data-toggle=tooltip]").tooltip();
         });
-
-        $("[data-toggle=tooltip]").tooltip();
-    });
-
-
-</script>
+    </script>
+}

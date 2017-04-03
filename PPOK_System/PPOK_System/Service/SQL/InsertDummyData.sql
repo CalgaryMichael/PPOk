@@ -3,11 +3,14 @@ INSERT INTO [dbo].[store] VALUES
 
 INSERT INTO [dbo].[person] VALUES 
 	(1,1,'Calgary','Michael','73013','1234567890','seth.michael@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','01/01/1900','admin'),
-	(2,1,'Rob','Thompson','73013','2364819238','r.thompson@eagles.oc.edu','cf2e875d70c402e4aaf32ceb64b1fa6f7396af59','09/08/1986','customer'),
-	(3,1,'Lane','Wheeler','73013','6283948263','lane.wheeler@eagles.oc.edu','aafdc23870ecbcd3d557b6423a8982134e17927e','03/05/1994','pharm'),
-	(4,1,'Weston','Vidaurri','73013','2385702834','wesvin@bleh.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','04/05/1996','admin'),
-	(5,1,'Weston','Buck','73013','7839231673','wesbuck@bleh.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','02/23/1995','customer'),
-	(6,1,'Colby','Dial','73013','3628429834','coldia@bleh.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','pharm');
+	(2,1,'Rob','Thompson','73013','2364819238','r.thompson@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','09/08/1986','customer'),
+	(3,1,'Lane','Wheeler','73013','6283948263','lane.wheeler@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','03/05/1994','pharm'),
+	(4,1,'Weston','Vidaurri','73013','2385702834','weston.vidaurri@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','04/05/1996','admin'),
+	(5,1,'Weston','Buck','73013','7839231673','weston.buck@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','02/23/1995','customer'),
+	(6,1,'Colby','Dial','73013','3628429834','colby.dial@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','pharm'),
+	(7,1,'Test','Customer','73013','5554445555','customer@test.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','customer'),
+	(8,1,'Test','Pharmacist','73013','5554445555','pharmacist@test.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','pharm'),
+	(9,1,'Test','Admin','73013','5554445555','admin@test.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','admin');
 
 INSERT INTO [dbo].[contact_preference] VALUES
 	(1,'email','yes'),
@@ -16,7 +19,10 @@ INSERT INTO [dbo].[contact_preference] VALUES
 	(3,'email','no'),
 	(4,'email','yes'),
 	(5,'text','no'),
-	(6,'text','yes');
+	(6,'text','yes'),
+	(7,'text','yes'),
+	(8,'text','yes'),
+	(9,'text','yes');
 
 INSERT INTO [dbo].[drug] VALUES
     ('60505006501','Omeprazole Cap Delayed Release 20 MG'),

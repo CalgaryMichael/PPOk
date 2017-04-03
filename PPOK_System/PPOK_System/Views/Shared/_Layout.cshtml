@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title PPOk app</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/Vendor/datatables/css/datatables.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <script src="https://use.fontawesome.com/1eb20c6982.js"></script>
+    <link href="~/Content/Vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Vendor/datatables/css/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />     
+    <script src="~/Content/Vendor/modernizr/modernizr-2.6.2.js"></script>
     @RenderSection("additionalCSS", false)
 </head>
 <body>
@@ -17,9 +17,8 @@
             <span class="nav navbar-brand" id="brand">
                 <i class="fa fa-medkit fa-5" aria-hidden="true"></i>
             </span>
-            @if (Request.IsAuthenticated) {
-                {
-                    string[] value = User.Identity.Name.Split(',');
+            @if (Request.IsAuthenticated) { 
+            string[] value = User.Identity.Name.Split(',');
                     string person_name = value[0];
                     string person_type = value[1];
                     if (person_type == "admin") {
@@ -42,13 +41,12 @@
                     }
 
                     <div class="navbar-right" id="logout">
-                                @Html.Encode(person_name) &nbsp;&nbsp;&nbsp;&nbsp;
-                                @Html.ActionLink("Log Out", "Logout", "Home")
+                        @Html.Encode(person_name) &nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.ActionLink("Log Out", "Logout", "Home")
                     </div>
-                }
-            } else {
+                } else {
                    <p class="nav navbar-brand" id="brand">Hello! Please log in to continue! </p>
-            }
+                }
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
@@ -57,9 +55,10 @@
     </div>
 
     @RenderBody()
+
     <script src="~/Content/Vendor/jquery/jquery-2.2.4.min.js"></script>
-    <script src="~/Content/Vendor/datatables/js/datatables.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Content/Vendor/datatables/js/datatables.min.js"></script>
+    <script src="~/Content/Vendor/bootstrap/js/bootstrap.min.js"></script>
 
     @RenderSection("scriptsIncludes", false)
     @RenderSection("inlineScript", false)
