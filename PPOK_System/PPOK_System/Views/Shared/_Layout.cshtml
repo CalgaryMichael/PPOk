@@ -6,6 +6,7 @@
     <title>@ViewBag.Title PPOk app</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Vendor/datatables/css/datatables.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="https://use.fontawesome.com/1eb20c6982.js"></script>
     @RenderSection("additionalCSS", false)
@@ -57,7 +58,7 @@
 
     @RenderBody()
     <script src="~/Content/Vendor/jquery/jquery-2.2.4.min.js"></script>
-    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Content/Vendor/datatables/js/datatables.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     @RenderSection("scriptsIncludes", false)

@@ -1,15 +1,7 @@
-﻿@model PPOK_System.Models.Person
+﻿@model List<PPOK_System.Models.Message>
 
 @{
     ViewBag.Title = "Index";
-    List<PPOK_System.Models.Prescription> prescription = new List<PPOK_System.Models.Prescription>();
-    List<PPOK_System.Models.Person> person = new List<PPOK_System.Models.Person>();
-    PPOK_System.Service.Database db = new PPOK_System.Service.Database();
-    DateTime today = DateTime.UtcNow.Date;
-    String mmddyy = today.ToString("MM/dd/yy");
-
-    person = db.ReadAllPersons();
-
 }
 
 @section additionalCSS {
@@ -49,8 +41,76 @@
     </div>
 </div>
 <div id="import-container" class="modal fade hidden-print" role="dialog"></div>
-<div></div>
+
 <div class="container" style='margin-top:75px'>
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <h4>Pending Refills</h4>
+            <div class="table-responsive">
+
+                <table id="mytable" class="table table-bordred table-striped">
+
+                    <thead>
+
+                    <th>Name</th>
+                    <th>Prescription</th>
+                    <th>Date</th>
+                    <th> </th>
+
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Colby Dial</td>
+                            <td>Tylenol</td>
+                            <td>03/11/17</td>
+                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                        </tr>
+
+                        <tr>
+                            <td>Lane Wheeler</td>
+                            <td>Bunion Pads</td>
+                            <td>03/19/17</td>
+                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Rob Thompson</td>
+                            <td>Allergy Pills</td>
+                            <td>03/19/17</td>
+                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>Calgary Michael</td>
+                            <td>Dr. Pepper</td>
+                            <td>03/19/17</td>
+                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Weston Vidaurri</td>
+                            <td>Q-Tips</td>
+                            <td>03/19/17</td>
+                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<div class="container" style='margin-top:75px'>
     <div class="row">
 
 
@@ -69,21 +129,13 @@
                     </thead>
                     <tbody>
 
-                        @{
-                            foreach (PPOK_System.Models.Person p in person)
-                            {
-                                prescription = db.ReadAllPrescriptionsForPerson(p.person_id);
-                                foreach (PPOK_System.Models.Prescription pr in prescription)
-                                {
+                            @foreach (var p in Model) {
                                     <tr>
                                         <td>@p.first_name @p.last_name</td>
                                         <td>@pr.drug.drug_name</td>
                                         <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
                                     </tr>
-                                }
-
                             }
-                        }
 
                     </tbody>
 
@@ -92,7 +144,7 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 
 

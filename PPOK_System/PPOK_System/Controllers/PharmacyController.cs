@@ -1,4 +1,5 @@
 ﻿using PPOK_System.import;
+using PPOK_System.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,32 +11,38 @@ namespace PPOK_System.Controllers
 {
     public class PharmacyController : Controller
     {
-        // GET: Pharmacy
-        public ActionResult Index()
-        {
+		Database db = new Database();
 
-            return View();
+        // GET: Pharmacy
+        public ActionResult Index() {
+			var p = db.ReadAllMessages();
+            return View(p);
         }
+
 
         public ActionResult EditCustomer()
         {
             return View();
         }
 
+
         public ActionResult Recall()
         {
             return View();
         }
+
 
         public ActionResult History()
         {
             return View();
         }
 
-        public ActionResult manageCustomer()
-        {
-            return View();
+
+        public ActionResult manageCustomer() {
+			var p = db.ReadAllPersons();
+            return View(p);
         }
+
 
         public ActionResult ResetPassword()
         {

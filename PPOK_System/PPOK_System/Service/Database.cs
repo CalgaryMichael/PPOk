@@ -327,33 +327,41 @@ namespace PPOK_System.Service {
 
 
 		// Populate List<Person> with row in the Db
+		//public List<Person> ReadAllPersons() {
+		//	var lookup = new Dictionary<int, Person>();
+
+		//	using (IDbConnection db = new SqlConnection(connection)) {
+		//		string sql = @"SELECT p.*, s.*, c.*
+		//						FROM person AS p, store AS s, contact_preference AS c
+		//						WHERE p.person_id = c.person_id
+		//							AND s.store_id = p.store_id";
+		//		var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
+		//			(p, s, c) => { 
+		//				Person person;
+		//				if (!lookup.TryGetValue(p.person_id.Value, out person))
+		//					lookup.Add(p.person_id.Value, person = p);
+
+		//				if (person.store == null)
+		//					person.store = s;
+
+		//				if (person.contact_preference == null)
+		//					person.contact_preference = new List<ContactPreference>();
+		//				c.person = p;
+		//				person.contact_preference.Add(c);
+
+		//				return c;
+		//			},
+		//			splitOn: "person_id,store_id,preference_id").AsList();
+
+		//		return lookup.Values.ToList();
+		//	}
+		//}
+
+
+		// Populate List<Drug> with rows in the Db
 		public List<Person> ReadAllPersons() {
-			var lookup = new Dictionary<int, Person>();
-
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sql = @"SELECT p.*, s.*, c.*
-								FROM person AS p, store AS s, contact_preference AS c
-								WHERE p.person_id = c.person_id
-									AND s.store_id = p.store_id";
-				var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
-					(p, s, c) => { 
-						Person person;
-						if (!lookup.TryGetValue(p.person_id.Value, out person))
-							lookup.Add(p.person_id.Value, person = p);
-
-						if (person.store == null)
-							person.store = s;
-
-						if (person.contact_preference == null)
-							person.contact_preference = new List<ContactPreference>();
-						c.person = p;
-						person.contact_preference.Add(c);
-
-						return c;
-					},
-					splitOn: "person_id,store_id,preference_id").AsList();
-
-				return lookup.Values.ToList();
+				return db.Query<Person>("SELECT * FROM person").ToList();
 			}
 		}
 
