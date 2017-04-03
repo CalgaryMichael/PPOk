@@ -14,14 +14,15 @@ namespace PPOK_System.Controllers {
 			if (file.ContentLength > 0)
 				updateList = Import.HandleImport(file);
 
-			return View(updateList);
+			return PartialView(updateList);
 		}
 
 
 		// POST: Import/Upload
 		[HttpPost]
 		public ActionResult Upload(List<Prescription> updateList) {
-			Import.UpdateContent(updateList);
+			if (updateList != null)
+				Import.UpdateContent(updateList);
 			return Redirect("/Pharmacy");
 		}
 	}
