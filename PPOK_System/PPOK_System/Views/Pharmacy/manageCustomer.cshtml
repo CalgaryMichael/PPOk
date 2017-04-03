@@ -13,80 +13,33 @@
     }
 </style>
 
-<div class="form-group">
-    <label class="col-md-3 control-label" for="searchInput"></label>
-    <div class="col-md-3">
-        <span><input id="searchInput" name="searchInput" type="search" placeholder="Search...." class="form-control input-md"></span>
-        <span><input id="filebtn" name="filebtn" class="input-file" type="file"></span>
-
-    </div>
-</div>
-<div></div>
-<div class="container" style='margin-top:75px'>
+<div class="container">
     <div class="row">
 
 
         <div class="col-md-12">
             <h4>Manage Customer</h4>
-            <div class="table-responsive">
-
-                <table id="mytable" class="table table-bordred table-striped">
-
-                    <thead>
-
+        </div>
+        <table id="customer-table" class="table table-bordered table-striped">
+            <thead>
+                <tr>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email Address</th>
-                    <th> </th>
-
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>Colby</td>
-                            <td>Dial</td>
-                            <td>colby@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-                        <tr>
-                            <td>Lane</td>
-                            <td>Wheeler</td>
-                            <td>lane@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Rob</td>
-                            <td>Thompson</td>
-                            <td>Ronb@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>Calgary</td>
-                            <td>Michael</td>
-                            <td>calgary@gmail.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Weston</td>
-                            <td>Vidaurri</td>
-                            <td>emailfrom@database.com</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-            </div>
-
-        </div>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model) {
+                    <tr>
+                        <td>@p.first_name</td>
+                        <td>@p.last_name</td>
+                        <td>@p.email</td>
+                        <td>@p.phone</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
 
@@ -116,23 +69,27 @@
         <!-- /.modal-dialog -->
     </div>*@
 
-<script>
-    $(document).ready(function () {
-        $("#mytable #checkall").click(function () {
-            if ($("#mytable #checkall").is(':checked')) {
-                $("#mytable input[type=checkbox]").each(function () {
-                    $(this).prop("checked", true);
-                });
+@section inlineScript {
+    <script>
+        $(document).ready(function () {
+            $("#customer-table #checkall").click(function () {
+                if ($("#mytable #checkall").is(':checked')) {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", true);
+                    });
 
-            } else {
-                $("#mytable input[type=checkbox]").each(function () {
-                    $(this).prop("checked", false);
-                });
-            }
+                } else {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", false);
+                    });
+                }
+            });
+
+            $("[data-toggle=tooltip]").tooltip();
         });
+    </script>
+}
 
-        $("[data-toggle=tooltip]").tooltip();
-    });
-
-
-</script>
+@section scriptsIncludes {
+    <script type="text/javascript" src="~/Content/Modules/ManageCustomersModule.js?Build=@Guid.NewGuid().ToString()"></script>
+}

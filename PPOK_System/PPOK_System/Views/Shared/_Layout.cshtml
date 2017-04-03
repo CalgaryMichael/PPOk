@@ -4,8 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title PPOk app</title>
-    <link href="~/Content/Site.css?Build=@Guid.NewGuid().ToString()" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Vendor/datatables/css/datatables.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script src="https://use.fontawesome.com/1eb20c6982.js"></script>
     @RenderSection("additionalCSS", false)
@@ -13,30 +14,40 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            
+            <span class="nav navbar-brand" id="brand">
+                <i class="fa fa-medkit fa-5" aria-hidden="true"></i>
+            </span>
             @if (Request.IsAuthenticated) {
                 {
                     string[] value = User.Identity.Name.Split(',');
                     string person_name = value[0];
                     string person_type = value[1];
                     if (person_type == "admin") {
-                        <strong>TEST</strong>
+                        <ul class="nav navbar-nav">
+                            <li><a href="/admin/index">Manage Pharmacist</a></li>
+                            <li><a href="/admin/index">Manage Pharmacy</a></li>
+                        </ul>
+                    }
+                    else if (person_type == "pharm")
+                    {
+                        <ul class="nav navbar-nav">
+                            <li><a href="/pharmacy/index">Manage Refills</a></li>
+                            <li><a href="/pharmacy/managecustomer">Manage Customer</a></li>
+                            <li><a href="/pharmacy/history">Response History</a></li>
+                        </ul>
+                    }
+                    else if (person_type == "customer")
+                    {
+                        
                     }
 
-                    <div class="navbar-header">
-                        <strong>@Html.Encode(person_name)</strong>
-                        @Html.ActionLink("Log Out", "Logout", "Home")
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
+                    <div class="navbar-right" id="logout">
+                                @Html.Encode(person_name) &nbsp;&nbsp;&nbsp;&nbsp;
+                                @Html.ActionLink("Log Out", "Logout", "Home")
                     </div>
                 }
             } else {
-                <div class="navbar-header">
-                    <strong>@Html.ActionLink("Log in", "Login", "Home")</strong>
-                </div>
+                   <p class="nav navbar-brand" id="brand">Hello! Please log in to continue! </p>
             }
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -47,6 +58,7 @@
 
     @RenderBody()
     <script src="~/Content/Vendor/jquery/jquery-2.2.4.min.js"></script>
+    <script src="~/Content/Vendor/datatables/js/datatables.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 
     @RenderSection("scriptsIncludes", false)

@@ -327,33 +327,41 @@ namespace PPOK_System.Service {
 
 
 		// Populate List<Person> with row in the Db
+		//public List<Person> ReadAllPersons() {
+		//	var lookup = new Dictionary<int, Person>();
+
+		//	using (IDbConnection db = new SqlConnection(connection)) {
+		//		string sql = @"SELECT p.*, s.*, c.*
+		//						FROM person AS p, store AS s, contact_preference AS c
+		//						WHERE p.person_id = c.person_id
+		//							AND s.store_id = p.store_id";
+		//		var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
+		//			(p, s, c) => { 
+		//				Person person;
+		//				if (!lookup.TryGetValue(p.person_id.Value, out person))
+		//					lookup.Add(p.person_id.Value, person = p);
+
+		//				if (person.store == null)
+		//					person.store = s;
+
+		//				if (person.contact_preference == null)
+		//					person.contact_preference = new List<ContactPreference>();
+		//				c.person = p;
+		//				person.contact_preference.Add(c);
+
+		//				return c;
+		//			},
+		//			splitOn: "person_id,store_id,preference_id").AsList();
+
+		//		return lookup.Values.ToList();
+		//	}
+		//}
+
+
+		// Populate List<Drug> with rows in the Db
 		public List<Person> ReadAllPersons() {
-			var lookup = new Dictionary<int, Person>();
-
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sql = @"SELECT p.*, s.*, c.*
-								FROM person AS p, store AS s, contact_preference AS c
-								WHERE p.person_id = c.person_id
-									AND s.store_id = p.store_id";
-				var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
-					(p, s, c) => { 
-						Person person;
-						if (!lookup.TryGetValue(p.person_id.Value, out person))
-							lookup.Add(p.person_id.Value, person = p);
-
-						if (person.store == null)
-							person.store = s;
-
-						if (person.contact_preference == null)
-							person.contact_preference = new List<ContactPreference>();
-						c.person = p;
-						person.contact_preference.Add(c);
-
-						return c;
-					},
-					splitOn: "person_id,store_id,preference_id").AsList();
-
-				return lookup.Values.ToList();
+				return db.Query<Person>("SELECT * FROM person").ToList();
 			}
 		}
 
@@ -426,14 +434,14 @@ namespace PPOK_System.Service {
 				string sql = @"SELECT s.*, p.person_id, pers.*
 								FROM scheduler AS s, prescription AS p, person AS pers
 								WHERE Convert(date, s.day_to_send) = Convert(date, GETDATE())
-									AND s.rx_id = p.rx_id
+									AND s.prescription_id = p.prescription_id
 									AND p.person_id = pers.person_id";
 				var result = db.Query<Schedule, Prescription, Person, Schedule>(sql,
 					(s, p, pers) => {
 						s.person = pers;
 						return s;
 					},
-					splitOn: "rx_id,person_id").AsList();
+					splitOn: "prescription_id,person_id").AsList();
 				return result;
 			}
 		}

@@ -1,4 +1,5 @@
-﻿
+﻿@model PPOK_System.Models.Person
+
 @{
     ViewBag.Title = "Index";
 }
@@ -131,6 +132,7 @@
 </div>
 
 <script>
+    //pops a modal
     $(document).ready(function () {
         $("#mytable #checkall").click(function () {
             if ($("#mytable #checkall").is(':checked')) {
