@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 
+// Represents a Pharmacy in the database, that has a list of pharmacists attached to it
 namespace PPOK_System.Models {
 	public class Store {
 		public int? store_id { get; set; }

@@ -188,7 +188,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Vendor\bootstrap\js\bootstrap.min.js" />
-    <Content Include="data\scrubbed_data.csv" />
+    <Content Include="Data\scrubbed_data.csv" />
     <Content Include="Content\Vendor\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\Vendor\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -255,6 +255,7 @@
     <Content Include="Views\Home\ResetPassword.cshtml" />
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Data\scrubbed_data_alt.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

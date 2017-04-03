@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// Represents a user in the database (person_type determines admin, pharmacist, customer)
 namespace PPOK_System.Models {
 	public class Person {
 		public int? person_id { get; set; }

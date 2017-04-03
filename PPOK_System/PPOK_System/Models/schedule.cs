@@ -1,5 +1,6 @@
 ﻿using System;
 
+// Represents a task that HangFire will call in order to send the message to a given person
 namespace PPOK_System.Models {
     public class Schedule {
         public int task_id { get; set; }

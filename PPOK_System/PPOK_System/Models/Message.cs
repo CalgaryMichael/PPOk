@@ -1,5 +1,6 @@
 ﻿using System;
 
+// Represents a message sent to a customer and their response
 namespace PPOK_System.Models {
 	public class Message {
 		public int? message_id { get; set; }
