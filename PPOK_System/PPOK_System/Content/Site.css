@@ -13,6 +13,10 @@ body {
     /*overflow-y: hidden;*/
 }
 
+table {
+    width: 100%;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -67,19 +71,6 @@ textarea {
 .spinner-wrapper {
     height: 50px;
 }
-
-/*#spinner{
-    width: 100%;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    display: none;
-}
-
-#spinner .fa-spinner{
-    margin: 10px 10px;
-    color: #63717f;
-}*/
 
 #spinner {
     display: none;

@@ -182,7 +182,7 @@
     <Content Include="Content\Vendor\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\Vendor\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Vendor\jquery\jquery-2.2.4.min.js" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Service\Twilio\TwillioXML\PickUp.xml" />
     <Content Include="Web.config">
@@ -237,9 +237,9 @@
     </Content>
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Database\Index.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\Vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\Vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Views\Database\TestDrug.cshtml" />
     <Content Include="Views\Database\TestPrescription.cshtml" />
     <Content Include="Views\Database\TestPerson.cshtml" />

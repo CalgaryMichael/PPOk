@@ -5,10 +5,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h4>Manage Customer</h4>
-        </div>
-        <table id="customer-table" class="table table-bordered table-striped">
+        <h4>Manage Customer</h4>
+    </div>
+    <div class="table-responsive">
+        <table id="customer-table" class="table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -29,12 +29,12 @@
                         <td>@p.phone</td>
                         <td>
                             <span title="Edit" data-toggle="tooltip">
-                                <button class="btn btn-primary btn-sm" data-title="Edit" data-toggle="modal" data-target="#edit">
+                                <button class="btn btn-primary btn-sm" onclick="loadModule(EDIT_CUSTOMER_URL, @p.person_id)">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 </button>
                             </span>
                             <span title="Message History" data-toggle="tooltip">
-                                <button class="btn btn-primary btn-sm" onclick="loadModule(MESSAGE_HISTORY_URL, @p.person_id)">
+                                <button class="btn btn-primary btn-sm" onclick="loadModule(MESSAGE_HISTORY_URL, @p.person_id, 'POST')">
                                     <i class="fa fa-history" aria-hidden="true"></i>
                                 </button>
                             </span>

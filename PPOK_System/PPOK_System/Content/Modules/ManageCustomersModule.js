@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
-    var customerTable = $('#customer-table').DataTable({
+    var customerTable = $('#customer-table').dataTable({
+        responsive: true,
         "info": false,
         "bLengthChange": false,
-        "responsive": true,
         "pagingType": "simple",
         "pageLength": 10,
         "sDom": '<pf<t>i>',
@@ -32,11 +32,16 @@
 
 
 var MESSAGE_HISTORY_URL = "/Pharmacy/PersonHistory/";
+var EDIT_CUSTOMER_URL = "/Pharmacy/EditCustomer/";
 
-var loadModule = function (url, sendData) {
+var loadModule = function (url, sendData, type) {
+    // default param
+    type = type || "GET";
+
+    // call PartialView into Modal
     $.ajax({
         url: url,
-        type: 'POST',
+        type: type,
         data: { id: sendData },
         dataType: 'html',
         beforeSend: function () {
