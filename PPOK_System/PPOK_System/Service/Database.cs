@@ -326,6 +326,30 @@ namespace PPOK_System.Service {
 		}
 
 
+		// Populate List<Message> with rows in the Db
+		public List<Message> ReadAllMessagesForPerson(int id) {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string sql = @"SELECT m.*, p1.*, p2.*, d.*
+								FROM message_history AS m, prescription AS p1, person AS p2, drug AS d
+								WHERE m.prescription_id = p1.prescription_id
+									AND p1.person_id = p2.person_id
+									AND p2.person_id = @person_id
+									AND p1.drug_id = d.drug_id";
+				var result = db.Query<Message, Prescription, Person, Drug, Message>(sql,
+					(m, p1, p2, d) => {
+						p1.customer = p2;
+						p1.drug = d;
+						m.prescription = p1;
+
+						return m;
+					}, new { person_id = id },
+					splitOn: "message_id,prescription_id,person_id,drug_id").AsList();
+
+				return result;
+			}
+		}
+
+
 		// Populate List<Person> with row in the Db
 		//public List<Person> ReadAllPersons() {
 		//	var lookup = new Dictionary<int, Person>();

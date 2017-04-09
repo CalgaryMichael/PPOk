@@ -10,7 +10,7 @@ body {
     padding-bottom: 0px;
     background: transparent;
     margin-top: 2%;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -68,7 +68,7 @@ textarea {
     height: 50px;
 }
 
-#spinner{
+/*#spinner{
     width: 100%;
     text-align: center;
     margin-left: auto;
@@ -79,4 +79,18 @@ textarea {
 #spinner .fa-spinner{
     margin: 10px 10px;
     color: #63717f;
+}*/
+
+#spinner {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
 }

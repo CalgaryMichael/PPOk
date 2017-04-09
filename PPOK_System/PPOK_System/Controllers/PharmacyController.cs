@@ -1,5 +1,4 @@
-﻿using PPOK_System.import;
-using PPOK_System.Service;
+﻿using PPOK_System.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,11 +41,13 @@ namespace PPOK_System.Controllers
 			var p = db.ReadAllPersons();
             return View(p);
         }
+		
 
-
-        public ActionResult ResetPassword()
-        {
-            return View();
-        }
+		// POST: /Pharmacy/PersonHistory/{id}
+		[HttpPost]
+		public ActionResult PersonHistory(int id) {
+			var msg = db.ReadAllMessagesForPerson(id);
+			return PartialView(msg);
+		}
 	}
 }

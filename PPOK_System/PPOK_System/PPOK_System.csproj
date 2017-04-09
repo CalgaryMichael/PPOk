@@ -169,6 +169,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Modules\MessageHistoryModule.js" />
     <Content Include="Content\Vendor\bootstrap\css\bootstrap.css" />
     <Content Include="Content\Vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\Modules\ImportModule.js" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Import\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Data\scrubbed_data_alt.csv" />
+    <Content Include="Views\Pharmacy\PersonHistory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
