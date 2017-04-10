@@ -64,8 +64,11 @@ namespace PPOK_System.Service {
 		public void Create(Person p) {
 			if (!p.person_id.HasValue)
 				p.person_id = GenerateId<Person>();
+			p.password = SHA1.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO person VALUES(@person_id, @store_id, @first_name, @last_name, @zip, @phone, @email, @date_of_birth, @person_type)";
+				string sqlQuery = @"INSERT INTO person VALUES(@person_id, @store_id, @first_name,
+																@last_name, @zip, @phone, @email,
+																@password, @date_of_birth, @person_type)";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -76,7 +79,8 @@ namespace PPOK_System.Service {
 			if (!p.prescription_id.HasValue)
 				p.prescription_id = GenerateId<Prescription>();
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO prescription VALUES(@prescription_id, @person_id, @drug_id, @date_filled, @days_supply, @number_refills)";
+				string sqlQuery = @"INSERT INTO prescription VALUES(@prescription_id, @person_id, @drug_id,
+																	@date_filled, @days_supply, @number_refills)";
 				db.Execute(sqlQuery, p);
 			}
 		}
@@ -107,6 +111,7 @@ namespace PPOK_System.Service {
 				db.Execute(sqlQuery, c);
 			}
 		}
+		
 
 		#endregion
 
@@ -322,38 +327,46 @@ namespace PPOK_System.Service {
 
 
 		// Populate List<Person> with row in the Db
+		//public List<Person> ReadAllPersons() {
+		//	var lookup = new Dictionary<int, Person>();
+
+		//	using (IDbConnection db = new SqlConnection(connection)) {
+		//		string sql = @"SELECT p.*, s.*, c.*
+		//						FROM person AS p, store AS s, contact_preference AS c
+		//						WHERE p.person_id = c.person_id
+		//							AND s.store_id = p.store_id";
+		//		var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
+		//			(p, s, c) => { 
+		//				Person person;
+		//				if (!lookup.TryGetValue(p.person_id.Value, out person))
+		//					lookup.Add(p.person_id.Value, person = p);
+
+		//				if (person.store == null)
+		//					person.store = s;
+
+		//				if (person.contact_preference == null)
+		//					person.contact_preference = new List<ContactPreference>();
+		//				c.person = p;
+		//				person.contact_preference.Add(c);
+
+		//				return c;
+		//			},
+		//			splitOn: "person_id,store_id,preference_id").AsList();
+
+		//		return lookup.Values.ToList();
+		//	}
+		//}
+
+
+		// Populate List<Drug> with rows in the Db
 		public List<Person> ReadAllPersons() {
-			var lookup = new Dictionary<int, Person>();
-
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sql = @"SELECT p.*, s.*, c.*
-								FROM person AS p, store AS s, contact_preference AS c
-								WHERE p.person_id = c.person_id
-									AND s.store_id = p.store_id";
-				var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
-					(p, s, c) => { 
-						Person person;
-						if (!lookup.TryGetValue(p.person_id.Value, out person))
-							lookup.Add(p.person_id.Value, person = p);
-
-						if (person.store == null)
-							person.store = s;
-
-						if (person.contact_preference == null)
-							person.contact_preference = new List<ContactPreference>();
-						c.person = p;
-						person.contact_preference.Add(c);
-
-						return c;
-					},
-					splitOn: "person_id,store_id,preference_id").AsList();
-
-				return lookup.Values.ToList();
+				return db.Query<Person>("SELECT * FROM person").ToList();
 			}
 		}
 
 
-		// Populate Single Core with all Competencies tied to it
+		// Populate Single Person with all Store and ContactPreferences tied to it
 		public Person ReadSinglePerson(int id) {
 			Person person = null;
 
@@ -384,29 +397,63 @@ namespace PPOK_System.Service {
 		}
 
 
-        // Read and get items from scheduler for todays date
-        public List<Schedule> GetSchedules()
-        {
-            using (IDbConnection db = new SqlConnection(connection))
-            {
-                string sql = "SELECT s.*, p.person_id, pers.* FROM scheduler AS s, prescription AS p, person AS pers where Convert(date, s.day_to_send) = Convert(date, GETDATE()) AND s.rx_id = p.rx_id AND p.person_id = pers.person_id";
-                var result = db.Query<Schedule, Prescription, Person, Schedule>(sql,
-                    (s, p, pers) => {
-                        s.person = pers;
-                        return s;
-                    },
-                    splitOn: "rx_id,person_id").AsList();
-                return result;
-            }
-        }
+		// Populate Single Person with all Store and ContactPreferences tied to it
+		public Person ReadSinglePerson(string email) {
+			Person person = null;
 
-        #endregion
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string sql = @"SELECT p.*, s.*, c.*
+								FROM person AS p, store AS s, contact_preference AS c
+								WHERE p.person_id = c.person_id
+									AND s.store_id = p.store_id
+									AND p.email = @email";
+				var result = db.Query<Person, Store, ContactPreference, Person>(sql,
+					(p, s, c) => {
+						if (person == null) {
+							person = p;
+							person.store = s;
+						}
+						c.person = person;
+
+						if (person.contact_preference == null)
+							person.contact_preference = new List<ContactPreference>();
+						person.contact_preference.Add(c);
+
+						return p;
+					}, new { email = email },
+					splitOn: "person_id,store_id,preference_id").FirstOrDefault();
+
+				return person;
+			}
+		}
 
 
-        #region Update
+		// Read and get items from scheduler for todays date
+		public List<Schedule> GetSchedules() {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				string sql = @"SELECT s.*, p.person_id, pers.*
+								FROM scheduler AS s, prescription AS p, person AS pers
+								WHERE Convert(date, s.day_to_send) = Convert(date, GETDATE())
+									AND s.prescription_id = p.prescription_id
+									AND p.person_id = pers.person_id";
+				var result = db.Query<Schedule, Prescription, Person, Schedule>(sql,
+					(s, p, pers) => {
+						s.person = pers;
+						return s;
+					},
+					splitOn: "prescription_id,person_id").AsList();
+				return result;
+			}
+		}
 
-        // Update row in "store" table
-        public void Update(Store s) {
+
+		#endregion
+
+
+		#region Update
+
+		// Update row in "store" table
+		public void Update(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE store
 									SET address = @address, city = @city, state = @state, zip = @zip
@@ -418,10 +465,12 @@ namespace PPOK_System.Service {
 
 		// Update row in "person" table
 		public void Update(Person p) {
+			p.password = SHA1.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE person
-									SET store_id = @store_id, first_name = @first_name, last_name = @last_name, zip = @zip,
-										email = @email, phone = @phone, date_of_birth = @date_of_birth, person_type = @person_type
+									SET store_id = @store_id, first_name = @first_name, last_name = @last_name,
+										zip = @zip, email = @email, password = @password, phone = @phone,
+										date_of_birth = @date_of_birth, person_type = @person_type
 									WHERE person_id = @person_id";
 				db.Execute(sqlQuery, p);
 			}
@@ -455,7 +504,8 @@ namespace PPOK_System.Service {
 		public void Update(Message m) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE message_hisory
-									SET prescription_id = @prescription_id, response = @response, fill_date = @fill_date, pick_up_date = @pick_up_date
+									SET prescription_id = @prescription_id, response = @response,
+										fill_date = @fill_date, pick_up_date = @pick_up_date
 									WHERE message_id = @message_id";
 				db.Execute(sqlQuery, m);
 			}
@@ -471,7 +521,7 @@ namespace PPOK_System.Service {
 				db.Execute(sqlQuery, c);
 			}
 		}
-
+		
 		#endregion
 
 

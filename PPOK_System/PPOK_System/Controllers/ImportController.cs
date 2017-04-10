@@ -1,8 +1,6 @@
 ﻿using PPOK_System.import;
 using PPOK_System.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -16,14 +14,15 @@ namespace PPOK_System.Controllers {
 			if (file.ContentLength > 0)
 				updateList = Import.HandleImport(file);
 
-			return View(updateList);
+			return PartialView(updateList);
 		}
 
 
 		// POST: Import/Upload
 		[HttpPost]
 		public ActionResult Upload(List<Prescription> updateList) {
-			Import.UpdateContent(updateList);
+			if (updateList != null)
+				Import.UpdateContent(updateList);
 			return Redirect("/Pharmacy");
 		}
 	}

@@ -1,150 +1,177 @@
-﻿
+﻿@model List<PPOK_System.Models.Message>
 @{
     ViewBag.Title = "Index";
 }
 
-<style>
-    body {
-        margin-top: 2%;
-    }
-
-    center {
-        margin: auto;
-    }
-</style>
-
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
-
-<div class="form-group">
-    <label class="col-md-3 control-label" for="searchInput"></label>
-    <div class="col-md-3">
-        @*<form enctype="multipart/form-data" action="/Pharmacy/Upload" method="POST">
-            <span><input id="searchInput" name="searchInput" type="search" placeholder="Search...." class="form-control input-md"></span>
-            <span><input id="filebtn" name="filebtn" class="input-file" type="file" /></span>
-        </form>*@
-        <form action="/Import" method="post" enctype="multipart/form-data">
-
-            <label for="file">Filename:</label>
-            <input type="file" name="file" id="file" />
-
-            <input type="submit" />
-        </form>
-    </div>
-</div>
-<div></div>
-<div class="container" style='margin-top:75px'>
+<div class="container">
+    @*<div class="col-md-4" id="importSelect">
+        <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="col-form-label" for="file">Import Patient Data:</label>
+                <label class="btn btn-primary" for="file" id="fakeButton">Select File</label>
+                <input style="visibility: hidden; display: none;" class="" type="file" name="file" id="file" accept=".csv" onchange="filepathChange()" />
+                <input class="btn btn-primary" id="import-submit" type="submit" />
+            </div>
+            </form>
+            </div>
+    </div>*@
     <div class="row">
-
-
-        <div class="col-md-12">
-            <h4>Pending Refills</h4>
-            <div class="table-responsive">
-
-                <table id="mytable" class="table table-bordred table-striped">
-
-                    <thead>
-
-                    <th>Name</th>
-                    <th>Prescription</th>
-                    <th>Date</th>
-                    <th> </th>
-
-                    </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>Colby Dial</td>
-                            <td>Tylenol</td>
-                            <td>03/11/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-                        <tr>
-                            <td>Lane Wheeler</td>
-                            <td>Bunion Pads</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Rob Thompson</td>
-                            <td>Allergy Pills</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-
-
-                        <tr>
-                            <td>Calgary Michael</td>
-                            <td>Dr. Pepper</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-
-                        <tr>
-                            <td>Weston Vidaurri</td>
-                            <td>Q-Tips</td>
-                            <td>03/19/17</td>
-                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="searchInput"></label>
+            <div class="col-md-3">
+                <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
+                    <label for="file">Import:</label>
+                    <input type="file" name="file" id="file" accept=".csv" />
+                    <input id="import-submit" type="submit" />
+                </form>
             </div>
+        </div>
+    </div>
+    <div class="spinner-wrapper">
+        <div id="spinner">
+            <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
 
+
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <h4>Pending Refills</h4>
+                <div class="table-responsive">
+
+                    <table id="mytable" class="table table-bordred table-striped">
+
+                        <thead>
+
+                        <th>Name</th>
+                        <th>Prescription</th>
+                        <th>Date</th>
+                        <th> </th>
+
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Colby Dial</td>
+                                <td>Tylenol</td>
+                                <td>03/11/17</td>
+                                <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                            </tr>
+
+                            <tr>
+                                <td>Lane Wheeler</td>
+                                <td>Bunion Pads</td>
+                                <td>03/19/17</td>
+                                <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Rob Thompson</td>
+                                <td>Allergy Pills</td>
+                                <td>03/19/17</td>
+                                <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td>Calgary Michael</td>
+                                <td>Dr. Pepper</td>
+                                <td>03/19/17</td>
+                                <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Weston Vidaurri</td>
+                                <td>Q-Tips</td>
+                                <td>03/19/17</td>
+                                <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
 
+@*<div class="container" style='margin-top:75px'>
+        <div class="row">
 
-@*<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <input class="form-control " type="text" placeholder="Pharmacy Name Here">
-                </div>
-                <div class="form-group">
 
-                    <input class="form-control " type="text" placeholder="Location Here">
+            <div class="col-md-12">
+                <h4>Pending Refills</h4>
+                <div class="table-responsive">
+
+                    <table id="mytable" class="table table-bordred table-striped">
+
+                        <thead>
+
+                            <th>Name</th>
+                            <th>Prescription</th>
+                            <th> </th>
+
+                        </thead>
+                        <tbody>
+
+                                @foreach (var p in Model) {
+                                        <tr>
+                                            <td>@p.first_name @p.last_name</td>
+                                            <td>@pr.drug.drug_name</td>
+                                            <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                                        </tr>
+                                }
+
+                        </tbody>
+
+                    </table>
                 </div>
-            </div>
-            <div class="modal-footer ">
-                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+
             </div>
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>*@
+    </div>*@
 
-<script>
-    $(document).ready(function () {
-        $("#mytable #checkall").click(function () {
-            if ($("#mytable #checkall").is(':checked')) {
-                $("#mytable input[type=checkbox]").each(function () {
-                    $(this).prop("checked", true);
-                });
+<div id="import-container" class="modal fade hidden-print" role="dialog" data-backdrop="false"></div>
 
-            } else {
-                $("#mytable input[type=checkbox]").each(function () {
-                    $(this).prop("checked", false);
-                });
-            }
+@section inlineScript {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#mytable #checkall").click(function () {
+                if ($("#mytable #checkall").is(':checked')) {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", true);
+                    });
+
+                } else {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", false);
+                    });
+                }
+            });
+
+            $("[data-toggle=tooltip]").tooltip();
         });
 
-        $("[data-toggle=tooltip]").tooltip();
-    });
+        function filepathChange() {
+            var fileSelected = document.getElementById('file').value;
+            if (fileSelected != '')
+                document.getElementById('fakeButton').innerHTML = fileSelected;
+            else
+                document.getElementById('fakeButton').innerHTML = 'Select File';
+        }
+    </script>
+}
 
 
-</script>
+@section scriptsIncludes {
+    <script type="text/javascript" src="~/Content/Modules/ImportModule.js"></script>
+}

@@ -93,9 +93,11 @@ namespace PPOK_System.import {
 					db.Create(c);
 
 				try {
-					var rel = db.ReadSinglePrescription(c.customer.person_id, c.drug.drug_id);
-					if (c.date_filled > rel.date_filled) {
-						c.prescription_id = rel.prescription_id;
+					var dbContent = db.ReadSinglePrescription(c.customer.person_id, c.drug.drug_id);
+					if (c.date_filled > dbContent.date_filled) {
+						c.customer.store_id = dbContent.customer.store_id;
+						c.customer.password = dbContent.customer.password;
+						c.prescription_id = dbContent.prescription_id;
 						updateList.Add(c);
 					}
 				} catch (Exception e) {

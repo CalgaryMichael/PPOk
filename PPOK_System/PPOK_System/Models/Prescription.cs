@@ -1,5 +1,6 @@
 ﻿using System;
 
+// Represents a single prescription that a given user has
 namespace PPOK_System.Models {
 	public class Prescription {
 		public int? prescription_id { get; set; }
