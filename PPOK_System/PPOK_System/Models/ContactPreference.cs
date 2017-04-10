@@ -7,7 +7,6 @@ namespace PPOK_System.Models {
 		public string refillPreference { get; set; }
         public string recallPreference { get; set; }
 
-
-        public Person person { get; set; }
+        //public Person person { get; set; }
 	}
 }

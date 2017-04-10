@@ -405,8 +405,7 @@ namespace PPOK_System.Service {
 						if (person == null) {
 							person = p;
 							person.store = s;
-						} 
-						c.person = person;
+						}
 
 						if (person.contact_preference == null)
 							person.contact_preference = new List<ContactPreference>();

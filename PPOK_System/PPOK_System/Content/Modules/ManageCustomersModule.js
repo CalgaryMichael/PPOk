@@ -31,6 +31,7 @@
 });
 
 
+// consts
 var MESSAGE_HISTORY_URL = "/Pharmacy/PersonHistory/";
 var EDIT_CUSTOMER_URL = "/Pharmacy/EditCustomer/";
 
