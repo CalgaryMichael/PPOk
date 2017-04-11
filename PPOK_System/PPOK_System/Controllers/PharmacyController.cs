@@ -1,12 +1,11 @@
 ﻿using PPOK_System.Models;
-using PPOK_System.Service;
+using PPOK_System.Domain.Models;
+using PPOK_System.Domain.Service;
 using System.Web.Mvc;
 
-namespace PPOK_System.Controllers
-{
-    public class PharmacyController : Controller
-    {
-		Database db = new Database();
+namespace PPOK_System.Controllers {
+    public class PharmacyController : Controller {
+		Database db = new Database(SystemContext.DefaultConnectionString);
 
         // GET: Pharmacy
         public ActionResult Index() {

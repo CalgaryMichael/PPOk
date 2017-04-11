@@ -1,5 +1,6 @@
-﻿using PPOK_System.Models;
-using PPOK_System.Service;
+﻿using PPOK_System.Domain.Models;
+using PPOK_System.Domain.Service;
+using PPOK_System.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +9,11 @@ using System.Web;
 
 namespace PPOK_System.import {
 	public class Import {
-		public static List<Prescription> HandleImport(HttpPostedFileBase file) {
+		private static Database db = new Database(SystemContext.DefaultConnectionString);
+		private static Person user;
+
+		public static List<Prescription> HandleImport(HttpPostedFileBase file, string email) {
+			user = db.ReadSinglePerson(email);
 			StreamReader reader = new StreamReader(file.InputStream);
 			var results = Csv(reader);
 			return DetermineContent(results);
@@ -79,12 +84,15 @@ namespace PPOK_System.import {
 
 
 		public static List<Prescription> DetermineContent(List<Prescription> contents) {
-			Database db = new Database();
 			List<Prescription> updateList = new List<Prescription>();
+			var store_id = user.store_id;
 
 			foreach (Prescription c in contents) {
-				if (!db.Exists<Person>(c.customer.person_id))
+				c.customer.store_id = store_id;
+				if (!db.Exists<Person>(c.customer.person_id)) {
 					db.Create(c.customer);
+					generateContact(c.customer);
+				}
 
 				if (!db.Exists<Drug>(c.drug.drug_id))
 					db.Create(c.drug);
@@ -110,13 +118,20 @@ namespace PPOK_System.import {
 
 
 		public static void UpdateContent(List<Prescription> contents) {
-			Database db = new Database();
-
 			foreach (Prescription rx in contents) {
 				db.Update(rx.customer);
 				db.Update(rx.drug);
 				db.Update(rx);
 			}
+		}
+
+
+		private static void generateContact(Person p) {
+			var contact = new ContactPreference();
+			contact.person_id = p.person_id;
+			contact.contact_type = "phone";
+			contact.preference = "yes";
+			db.Create(contact);
 		}
 	}
 }

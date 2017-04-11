@@ -1,12 +1,13 @@
 ﻿using PPOK_System.Models;
-using PPOK_System.Service;
+using PPOK_System.Domain.Models;
+using PPOK_System.Domain.Service;
 using PPOK_System.Service.Authentication;
 using System.Web.Mvc;
 using System.Web.Security;
 
 namespace PPOK_System.Controllers {
     public class HomeController : Controller {
-		Database db = new Database();
+		Database db = new Database(SystemContext.DefaultConnectionString);
 
         // GET: Home
         public ActionResult Index() {
@@ -41,7 +42,7 @@ namespace PPOK_System.Controllers {
 			var person = db.ReadSinglePerson(loginAttempt.email);
 
 			if (Password.Authenticate(loginAttempt.password, person.password)) {
-				string cookie = person.email + "," + person.person_type;
+				string cookie = person.email + "," + person.person_type + ",";
 				FormsAuthentication.SetAuthCookie(cookie, false);
 
 				if (person.person_type == "admin") {
