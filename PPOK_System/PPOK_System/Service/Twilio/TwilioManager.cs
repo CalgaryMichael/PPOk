@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
-using System.Linq;
-using System.Web;
 using Twilio.Clients;
-using Hangfire;
-using PPOK_System.Service;
+using PPOK_System.Domain.Service;
+using PPOK_System.Domain.Models;
 using PPOK_System.Models;
 
 namespace PPOK_System.TwilioManager
@@ -48,7 +46,7 @@ namespace PPOK_System.TwilioManager
         }
         public void ScheduleSend()
         {
-            Database db = new Database();
+            Database db = new Database(SystemContext.DefaultConnectionString);
             List<Schedule> schedules = db.GetSchedules();
             if (schedules.Count > 0)
                 SendNotifications(schedules);

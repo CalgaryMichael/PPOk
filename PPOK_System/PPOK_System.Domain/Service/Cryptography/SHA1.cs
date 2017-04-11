@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PPOK_System.Service {
+namespace PPOK_System.Domain.Service {
 	public class SHA1 {
 		public static string Encode(string value) {
 			var hash = System.Security.Cryptography.SHA1.Create();
