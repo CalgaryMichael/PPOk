@@ -200,6 +200,7 @@
     <Content Include="Service\SQL\InsertDummyData.sql" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\OwinStartUp.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

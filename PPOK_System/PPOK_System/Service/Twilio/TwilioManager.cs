@@ -14,10 +14,10 @@ namespace PPOK_System.TwilioManager
 {
     public class TwManager
     {
-        //public void StartHangfire()
-        //{
-        //    RecurringJob.AddOrUpdate(() => ScheduleSend(),Cron.Daily);
-        //}
+        public void StartHangfire()
+        {
+            RecurringJob.AddOrUpdate(() => ScheduleSend(), Cron.Daily);
+        }
         public void call()
         {
             string AccountSid = "ACc4455ec9d784ae580638ecac36ad7fea";

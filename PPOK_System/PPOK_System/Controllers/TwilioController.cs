@@ -13,10 +13,10 @@ namespace PPOK_System.Controllers
             TwilioManager.TwManager TW = new TwilioManager.TwManager();
             TW.ScheduleSend();
         }
-        //public void SchedulerStart()
-        //{
-        //    TwilioManager.TwManager TW = new TwilioManager.TwManager();
-        //    TW.StartHangfire();
-        //}
+        public void SchedulerStart()
+        {
+            TwilioManager.TwManager TW = new TwilioManager.TwManager();
+            TW.StartHangfire();
+        }
     }
 }
