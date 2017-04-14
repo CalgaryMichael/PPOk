@@ -1,5 +1,5 @@
 ﻿using PPOK_System.import;
-using PPOK_System.Models;
+using PPOK_System.Domain.Models;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
@@ -12,7 +12,7 @@ namespace PPOK_System.Controllers {
 		public ActionResult Index(HttpPostedFileBase file) {
 			var updateList = new List<Prescription>();
 			if (file.ContentLength > 0)
-				updateList = Import.HandleImport(file);
+				updateList = Import.HandleImport(file, User.Identity.Name.Split(',')[0]);
 
 			return PartialView(updateList);
 		}

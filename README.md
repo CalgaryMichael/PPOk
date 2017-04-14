@@ -31,14 +31,14 @@ There are three separate _test_ accounts that can be used to preview the separat
   
 ## Layout of Project
 ### Content
-The _Content_ folder is to hold all client-side code (js, css, Etc.)
-_Content > Vendor_ folder is to hold all third party code (jQuery, Boostrap, Datatables, Etc.)
-_Content > Modules_ folder is to hold all proprietary javascript code
+* The _Content_ folder is to hold all client-side code (js, css, Etc.)
+* _Content > Vendor_ folder is to hold all third party code (jQuery, Boostrap, Datatables, Etc.)
+* _Content > Modules_ folder is to hold all proprietary javascript code
 
 ### Data
-The _Data_ folder is to hold all the .csv files used for testing
-_scrubbed_data.csv_ is the file given to the class for test data
-_srubbed_data_alt.csv_ is a file with some updated information
+* The _Data_ folder is to hold all the .csv files used for testing
+* _scrubbed_data.csv_ is the file given to the class for test data
+* _srubbed_data_alt.csv_ is a file with some updated information
 
 ### Service
 The _Service_ folder is to hold all server-side code and logic (database, importing logic, Etc.)
