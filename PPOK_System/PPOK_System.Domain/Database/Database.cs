@@ -1,6 +1,7 @@
 ﻿using Dapper;
+using PPOK_System.Domain.Database.SQL;
 using PPOK_System.Domain.Models;
-using PPOK_System.Domain.Service.SQL;
+using PPOK_System.Domain.Service.Cryptography;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -482,7 +483,8 @@ namespace PPOK_System.Domain.Service {
 
 		// Update row in "person" table
 		public void Update(Person p) {
-			p.password = SHA1.Encode(p.password);
+			//p.password = SHA1.Encode(p.password);
+			p.password = Encrypt.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE person
 									SET person_id = @person_id, store_id = @store_id, first_name = @first_name,

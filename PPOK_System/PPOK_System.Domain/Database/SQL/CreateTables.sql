@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[person] (
 	[zip]				varchar(5)														,
 	[phone]				varchar(10)												NOT NULL,
 	[email]				varchar(30)														,
-	[password]			varchar(50)														,
+	[password]			varchar(100)														,
 	[date_of_birth]		date															,
 	[person_type]		varchar(10)												NOT NUll,
 	PRIMARY KEY([person_id])
