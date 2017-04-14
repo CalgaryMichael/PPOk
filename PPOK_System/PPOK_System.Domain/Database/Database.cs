@@ -59,7 +59,7 @@ namespace PPOK_System.Domain.Service {
 		// Create new row in "store" table
 		public void Create(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@address, @city, @state, @zip)";
+				string sqlQuery = "INSERT INTO store VALUES(@address, @name, @city, @state, @zip)";
 				db.Execute(sqlQuery, s);
 			}
 		}
@@ -474,7 +474,7 @@ namespace PPOK_System.Domain.Service {
 		public void Update(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE store
-									SET address = @address, city = @city, state = @state, zip = @zip
+									SET address = @address, name = @name, city = @city, state = @state, zip = @zip
 									WHERE store_id = @store_id";
 				db.Execute(sqlQuery, s);
 			}

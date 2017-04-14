@@ -1,6 +1,7 @@
 CREATE TABLE [dbo].[store] (
 	[store_id]			int				IDENTITY								NOT NULL,
 	[address]			varchar(100)													,
+	[name]				varchar(50)												NOT NULL,
 	[city]				varchar(30)														,
 	[state]				varchar(20)														,
 	[zip]				varchar(5)														,
@@ -16,7 +17,7 @@ CREATE TABLE [dbo].[person] (
 	[zip]				varchar(5)														,
 	[phone]				varchar(10)												NOT NULL,
 	[email]				varchar(30)														,
-	[password]			varchar(100)														,
+	[password]			varchar(100)													,
 	[date_of_birth]		date															,
 	[person_type]		varchar(10)												NOT NUll,
 	PRIMARY KEY([person_id])
