@@ -55,6 +55,7 @@
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Cryptography\SHA1.cs" />
+    <Compile Include="Service\Cryptography\Encrypt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\SQL\CreateDatabase.sql" />

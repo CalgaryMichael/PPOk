@@ -1,6 +1,7 @@
 ﻿using Dapper;
+using PPOK_System.Domain.Database.SQL;
 using PPOK_System.Domain.Models;
-using PPOK_System.Domain.Service.SQL;
+using PPOK_System.Domain.Service.Cryptography;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -58,7 +59,7 @@ namespace PPOK_System.Domain.Service {
 		// Create new row in "store" table
 		public void Create(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO store VALUES(@address, @city, @state, @zip)";
+				string sqlQuery = "INSERT INTO store VALUES(@address, @name, @city, @state, @zip)";
 				db.Execute(sqlQuery, s);
 			}
 		}
@@ -473,7 +474,7 @@ namespace PPOK_System.Domain.Service {
 		public void Update(Store s) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE store
-									SET address = @address, city = @city, state = @state, zip = @zip
+									SET address = @address, name = @name, city = @city, state = @state, zip = @zip
 									WHERE store_id = @store_id";
 				db.Execute(sqlQuery, s);
 			}
@@ -482,7 +483,8 @@ namespace PPOK_System.Domain.Service {
 
 		// Update row in "person" table
 		public void Update(Person p) {
-			p.password = SHA1.Encode(p.password);
+			//p.password = SHA1.Encode(p.password);
+			p.password = Encrypt.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE person
 									SET person_id = @person_id, store_id = @store_id, first_name = @first_name,
