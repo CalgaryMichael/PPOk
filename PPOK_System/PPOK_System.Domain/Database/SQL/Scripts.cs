@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace PPOK_System.Domain.Service.SQL {
+namespace PPOK_System.Domain.Database.SQL {
 	public class Scripts {
 		public static string SqlRoot { get; }
 

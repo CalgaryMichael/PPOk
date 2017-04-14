@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using PPOK_System.Domain.Models;
-using PPOK_System.Domain.Service.SQL;
+using PPOK_System.Domain.Database.SQL;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
