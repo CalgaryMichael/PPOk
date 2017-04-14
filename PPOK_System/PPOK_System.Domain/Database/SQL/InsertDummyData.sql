@@ -2,15 +2,15 @@ INSERT INTO [dbo].[store] VALUES
 	('123 street','Edmond','OK','73013');
 
 INSERT INTO [dbo].[person] VALUES 
-	(1,1,'Calgary','Michael','73013','1234567890','seth.michael@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','01/01/1900','admin'),
-	(2,1,'Rob','Thompson','73013','2364819238','r.thompson@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','09/08/1986','customer'),
-	(3,1,'Lane','Wheeler','73013','6283948263','lane.wheeler@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','03/05/1994','pharm'),
-	(4,1,'Weston','Vidaurri','73013','2385702834','weston.vidaurri@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','04/05/1996','admin'),
-	(5,1,'Weston','Buck','73013','7839231673','weston.buck@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','02/23/1995','customer'),
-	(6,1,'Colby','Dial','73013','3628429834','colby.dial@eagles.oc.edu','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','pharm'),
-	(7,1,'Test','Customer','73013','5554445555','customer@test.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','customer'),
-	(8,1,'Test','Pharmacist','73013','5554445555','pharmacist@test.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','pharm'),
-	(9,1,'Test','Admin','73013','5554445555','admin@test.com','7288edd0fc3ffcbe93a0cf06e3568e28521687bc','06/13/1997','admin');
+	(1,1,'Calgary','Michael','73013','1234567890','seth.michael@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','01/01/1900','admin'),
+	(2,1,'Rob','Thompson','73013','2364819238','r.thompson@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','09/08/1986','customer'),
+	(3,1,'Lane','Wheeler','73013','6283948263','lane.wheeler@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','03/05/1994','pharm'),
+	(4,1,'Weston','Vidaurri','73013','2385702834','weston.vidaurri@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','04/05/1996','admin'),
+	(5,1,'Weston','Buck','73013','7839231673','weston.buck@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','02/23/1995','customer'),
+	(6,1,'Colby','Dial','73013','3628429834','colby.dial@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','06/13/1997','pharm'),
+	(7,1,'Test','Customer','73013','5554445555','customer@test.com','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','06/13/1997','customer'),
+	(8,1,'Test','Pharmacist','73013','5554445555','pharmacist@test.com','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','06/13/1997','pharm'),
+	(9,1,'Test','Admin','73013','5554445555','admin@test.com','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','06/13/1997','admin');
 
 INSERT INTO [dbo].[contact_preference] VALUES
 	(1,'email','yes'),
