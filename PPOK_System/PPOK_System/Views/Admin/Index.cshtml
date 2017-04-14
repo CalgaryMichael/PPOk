@@ -1,4 +1,5 @@
 ﻿@model List<PPOK_System.Domain.Models.Store>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -14,17 +15,19 @@
                     <thead>
                         <tr>
                             <th>Pharmacy</th>
+                            <th>Address</th>
                             <th>Location</th>
                             <th colspan="2">Options</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                            @foreach (var p in Model)
+                            @foreach (var s in Model)
                             {
                                 <tr>
-                                    <td>p.address</td>
-                                    <td>p.City p.state</td>
+                                    <td>@s.name</td>
+                                    <td>@s.address</td>
+                                    <td>@s.city, @s.state</td>
                                     <td><p data-placement="left" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
                                     <td><p data-placement="left" data-toggle="tooltip" title="Deactivate"><button class="btn btn-danger btn-xs" data-title="Deactivate" data-toggle="modal" data-target="#Deactivate"><span class="glyphicon glyphicon-trash"></span></button></p></td>
                                 </tr>

@@ -1,5 +1,5 @@
 INSERT INTO [dbo].[store] VALUES
-	('123 street','Edmond','OK','73013');
+	('Store A','123 street','Edmond','OK','73013');
 
 INSERT INTO [dbo].[person] VALUES 
 	(1,1,'Calgary','Michael','73013','1234567890','seth.michael@eagles.oc.edu','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','01/01/1900','admin'),
