@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace PPOK_System.Controllers {
-    public class TwilioController : Controller {
+    public class TwilioController : BaseController {
         public void ScheduleNotification() {
             TwilioManager.TwManager TW = new TwilioManager.TwManager();
             TW.ScheduleSend();

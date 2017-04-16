@@ -197,6 +197,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\PharmacyController.cs" />
@@ -207,10 +208,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\SystemContext.cs" />
+    <Compile Include="Service\Authentication\AuthTicket.cs" />
+    <Compile Include="Service\Authentication\User\UserPrincipal.cs" />
     <Compile Include="Service\Authentication\Password.cs" />
+    <Compile Include="Service\Authentication\User\UserPrincipalSerialize.cs" />
     <Compile Include="Service\Import\Import.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Twilio\TwilioManager.cs" />
+    <Compile Include="Views\Base\BaseViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">

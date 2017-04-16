@@ -1,7 +1,7 @@
 CREATE TABLE [dbo].[store] (
 	[store_id]			int				IDENTITY								NOT NULL,
-	[address]			varchar(100)													,
 	[name]				varchar(50)												NOT NULL,
+	[address]			varchar(100)													,
 	[city]				varchar(30)														,
 	[state]				varchar(20)														,
 	[zip]				varchar(5)														,
