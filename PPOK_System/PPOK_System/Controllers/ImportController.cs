@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace PPOK_System.Controllers {
-    public class ImportController : Controller {
+    public class ImportController : BaseController {
 
 		// POST: Import
 		[HttpPost]

@@ -69,7 +69,7 @@ namespace PPOK_System.Domain.Service {
 		public void Create(Person p) {
 			if (!p.person_id.HasValue)
 				p.person_id = GenerateId<Person>();
-			p.password = SHA1.Encode(p.password);
+			p.password = Encrypt.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"INSERT INTO person VALUES(@person_id, @store_id, @first_name,
 																@last_name, @zip, @phone, @email,
