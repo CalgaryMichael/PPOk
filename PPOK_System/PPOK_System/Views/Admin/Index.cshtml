@@ -1,0 +1,139 @@
+﻿@model PPOK_System.Domain.Models.Person
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Manage Pharmacies</h4>
+            <div class="table-responsive">
+
+                <table id="mytable" class="table table-bordered table-striped">
+
+                    <thead>
+                        <tr>
+                            <th>Pharmacy</th>
+                            <th>Location</th>
+                            <th colspan="2">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>CVS</td>
+                            <td>Edmond, OK</td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Deactivate"><button class="btn btn-danger btn-xs" data-title="Deactivate" data-toggle="modal" data-target="#Deactivate"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                        </tr>
+
+                        <tr>
+                            <td>Walmart</td>
+                            <td>OKC, OK</td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Deactivate"><button class="btn btn-danger btn-xs" data-title="Deactivate" data-toggle="modal" data-target="#Deactivate"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Walgreens</td>
+                            <td>Norman, OK</td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Deactivate"><button class="btn btn-danger btn-xs" data-title="Deactivate" data-toggle="modal" data-target="#Deactivate"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                        </tr>
+
+
+
+                        <tr>
+                            <td>Ultimate Pharmacy</td>
+                            <td>Moore, OK</td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Deactivate"><button class="btn btn-danger btn-xs" data-title="Deactivate" data-toggle="modal" data-target="#Deactivate"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                        </tr>
+
+
+                        <tr>
+                            <td>One Stop Ma and Pa Shop</td>
+                            <td>Edmond, OK</td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+                            <td><p data-placement="left" data-toggle="tooltip" title="Deactivate"><button class="btn btn-danger btn-xs" data-title="Deactivate" data-toggle="modal" data-target="#Deactivate"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Edit Your Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control " type="text" placeholder="Pharmacy Name Here">
+                </div>
+                <div class="form-group">
+
+                    <input class="form-control " type="text" placeholder="Location Here">
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="Deactivate" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">Deactivate This Entry?</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to deactivate this record?</div>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+@section inlineScript {
+    <script type="text/javascript">
+        //pops a modal
+        $(document).ready(function () {
+            $("#mytable #checkall").click(function () {
+                if ($("#mytable #checkall").is(':checked')) {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", true);
+                    });
+
+                } else {
+                    $("#mytable input[type=checkbox]").each(function () {
+                        $(this).prop("checked", false);
+                    });
+                }
+            });
+
+            $("[data-toggle=tooltip]").tooltip();
+        });
+    </script>
+}
