@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 // Represents a user in the database (person_type determines admin, pharmacist, customer)
 namespace PPOK_System.Domain.Models {
@@ -16,6 +15,6 @@ namespace PPOK_System.Domain.Models {
 		public string person_type { get; set; }
 
 		public Store store { get; set; }
-		public List<ContactPreference> contact_preference { get; set; }
+		public ContactPreference contact_preference { get; set; }
 	}
 }

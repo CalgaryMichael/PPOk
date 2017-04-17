@@ -4,7 +4,7 @@ using PPOK_System.Domain.Service;
 using PPOK_System.Service.Authentication;
 using System.Web.Mvc;
 using System.Web.Security;
-using PPOK_System.Service.Authentication.User;
+using PPOK_System.Service.Models;
 
 namespace PPOK_System.Controllers {
     public class HomeController : BaseController {
