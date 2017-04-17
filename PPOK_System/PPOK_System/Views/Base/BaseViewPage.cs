@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using PPOK_System.Service.Authentication.User;
+using PPOK_System.Service.Models;
 
 namespace PPOK_System.Views.Base {
 	public abstract class BaseViewPage : WebViewPage {

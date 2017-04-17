@@ -51,7 +51,7 @@ namespace PPOK_System.import {
 				p.zip = values[4];
 				p.phone = values[5];
 				p.email = values[6];
-				p.person_type = "customer";
+				p.person_type = "Customer";
 				lineContent.customer = p;
 
 				// import Drug info
@@ -129,8 +129,7 @@ namespace PPOK_System.import {
 		private static void generateContact(Person p) {
 			var contact = new ContactPreference();
 			contact.person_id = p.person_id;
-			contact.contact_type = "phone";
-			contact.preference = "yes";
+			contact.contact_type = "Phone";
 			db.Create(contact);
 		}
 	}

@@ -26,9 +26,8 @@ CREATE TABLE [dbo].[person] (
 
 CREATE TABLE [dbo].[contact_preference] (
 	[preference_id]		int				IDENTITY								NOT NULL,
-	[person_id]			int				REFERENCES [dbo].[person]([person_id])			,
+	[person_id]			int				REFERENCES [dbo].[person]([person_id])	NOT NULL,
 	[contact_type]		varchar(20)												NOT NULL,
-	[preference]		varchar(20)												NOT NULL,
 	PRIMARY KEY([preference_id])
 );
 

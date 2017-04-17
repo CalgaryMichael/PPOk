@@ -1,4 +1,4 @@
-﻿using PPOK_System.Service.Authentication.User;
+﻿using PPOK_System.Service.Models;
 using System.Web.Mvc;
 
 namespace PPOK_System.Controllers {

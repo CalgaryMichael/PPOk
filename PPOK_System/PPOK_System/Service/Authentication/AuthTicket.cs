@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Security;
-using PPOK_System.Service.Authentication.User;
+using PPOK_System.Service.Models;
 
 namespace PPOK_System.Service.Authentication {
 	public static class AuthTicket {

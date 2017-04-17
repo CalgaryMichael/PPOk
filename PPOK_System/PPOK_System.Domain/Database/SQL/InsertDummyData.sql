@@ -13,16 +13,15 @@ INSERT INTO [dbo].[person] VALUES
 	(9,1,'Test','Admin','73013','5554445555','admin@test.com','ECD71870D1963316A97E3AC3408C9835AD8CF0F3C1BC703527C30265534F75AE','06/13/1997','Admin');
 
 INSERT INTO [dbo].[contact_preference] VALUES
-	(1,'email','yes'),
-	(1,'text','no'),
-	(2,'text','no'),
-	(3,'email','no'),
-	(4,'email','yes'),
-	(5,'text','no'),
-	(6,'text','yes'),
-	(7,'text','yes'),
-	(8,'text','yes'),
-	(9,'text','yes');
+	(1,'Email'),
+	(2,'Text'),
+	(3,'Email'),
+	(4,'Email'),
+	(5,'Text'),
+	(6,'Phone'),
+	(7,'Text'),
+	(8,'Text'),
+	(9,'None');
 
 INSERT INTO [dbo].[drug] VALUES
     ('60505006501','Omeprazole Cap Delayed Release 20 MG'),

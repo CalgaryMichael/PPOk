@@ -1,11 +1,11 @@
 ﻿using Dapper;
-using PPOK_System.Domain.Database.SQL;
-using PPOK_System.Domain.Models;
-using PPOK_System.Domain.Service.Cryptography;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using PPOK_System.Domain.Database.SQL;
+using PPOK_System.Domain.Models;
+using PPOK_System.Domain.Service.Cryptography;
 
 namespace PPOK_System.Domain.Service {
 	public class Database {
@@ -100,7 +100,7 @@ namespace PPOK_System.Domain.Service {
 		}
 
 
-		// Create new row in "message_history" table
+		// Create new row in "message" table
 		public void Create(Message m) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = "INSERT INTO message VALUES(@prescription_id, @response, @fill_date, @pick_up_date)";
@@ -112,7 +112,7 @@ namespace PPOK_System.Domain.Service {
 		// Create new row in "contact_preference" table
 		public void Create(ContactPreference c) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sqlQuery = "INSERT INTO contact_preference VALUES(@person_id, @contact_type, @preference)";
+				string sqlQuery = "INSERT INTO contact_preference VALUES(@person_id, @contact_type)";
 				db.Execute(sqlQuery, c);
 			}
 		}
@@ -364,7 +364,7 @@ namespace PPOK_System.Domain.Service {
 								FROM person AS p, store AS s, contact_preference AS c
 								WHERE p.person_id = c.person_id
 									AND s.store_id = p.store_id";
-				var result = db.Query<Person, Store, ContactPreference, ContactPreference>(sql,
+				var result = db.Query<Person, Store, ContactPreference, Person>(sql,
 					(p, s, c) => {
 						Person person;
 						if (!lookup.TryGetValue(p.person_id.Value, out person))
@@ -374,10 +374,9 @@ namespace PPOK_System.Domain.Service {
 							person.store = s;
 
 						if (person.contact_preference == null)
-							person.contact_preference = new List<ContactPreference>();
-						person.contact_preference.Add(c);
+							person.contact_preference = c;
 
-						return c;
+						return p;
 					},
 					splitOn: "person_id,store_id,preference_id").AsList();
 
@@ -388,61 +387,46 @@ namespace PPOK_System.Domain.Service {
 
 		// Populate Single Person with all Store and ContactPreferences tied to it
 		public Person ReadSinglePerson(int id) {
-			Person person = null;
-
-			using (IDbConnection db = new SqlConnection(connection)) {
-				string sql = @"SELECT p.*, s.*, c.*
-								FROM person AS p, store AS s, contact_preference AS c
-								WHERE p.person_id = c.person_id
-									AND s.store_id = p.store_id
-									AND p.person_id = @person_id";
-				var result = db.Query<Person, Store, ContactPreference, Person>(sql,
-					(p, s, c) => {
-						if (person == null) {
-							person = p;
-							person.store = s;
-						}
-
-						if (person.contact_preference == null)
-							person.contact_preference = new List<ContactPreference>();
-						person.contact_preference.Add(c);
-
-						return p;
-					}, new { person_id = id },
-					splitOn: "person_id,store_id,preference_id").FirstOrDefault();
-
-				return person;
-			}
+			string sql = @"SELECT p.*, s.*, c.*
+							FROM person AS p, store AS s, contact_preference AS c
+							WHERE p.person_id = c.person_id
+								AND s.store_id = p.store_id
+								AND p.person_id = @param";
+			return QueryPerson(sql, id.ToString());
 		}
 
 
 		// Populate Single Person with all Store and ContactPreferences tied to it
 		public Person ReadSinglePerson(string email) {
+			string sql = @"SELECT p.*, s.*, c.*
+							FROM person AS p, store AS s, contact_preference AS c
+							WHERE p.person_id = c.person_id
+								AND s.store_id = p.store_id
+								AND p.email = @param";
+			return QueryPerson(sql, email);
+		}
+
+
+		// Used to handle ReadSinglePerson by any paramater value
+		private Person QueryPerson(string sql, string param) {
 			Person person = null;
 
 			using (IDbConnection db = new SqlConnection(connection)) {
-				string sql = @"SELECT p.*, s.*, c.*
-								FROM person AS p, store AS s, contact_preference AS c
-								WHERE p.person_id = c.person_id
-									AND s.store_id = p.store_id
-									AND p.email = @email";
-				var result = db.Query<Person, Store, ContactPreference, Person>(sql,
-					(p, s, c) => {
-						if (person == null) {
-							person = p;
-							person.store = s;
-						}
+				var result = db.Query<Person, Store, ContactPreference, Person>(sql, (p, s, c) => {
+					if (person == null) {
+						person = p;
+						person.store = s;
+					}
 
-						if (person.contact_preference == null)
-							person.contact_preference = new List<ContactPreference>();
-						person.contact_preference.Add(c);
+					if (person.contact_preference == null)
+						person.contact_preference = c;
 
-						return p;
-					}, new { email = email },
-					splitOn: "person_id,store_id,preference_id").FirstOrDefault();
-
-				return person;
+					return p;
+				}, new { param = param },
+				splitOn: "person_id,store_id,preference_id").FirstOrDefault();
 			}
+
+			return person;
 		}
 
 
@@ -535,7 +519,7 @@ namespace PPOK_System.Domain.Service {
 		public void Update(ContactPreference c) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string sqlQuery = @"UPDATE contact_preference
-									SET person_id = @person_id, contact_type = @contact_type, prefenece = @preference
+									SET person_id = @person_id, contact_type = @contact_type
 									WHERE preference_id = @preference_id";
 				db.Execute(sqlQuery, c);
 			}
@@ -613,7 +597,7 @@ namespace PPOK_System.Domain.Service {
 		}
 
 
-		// See if T exsists in Database by int id
+		// See if T exists in Database by int id
 		public bool Exists<T>(int? id) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string name = typeof(T).Name.ToLower();
@@ -622,7 +606,7 @@ namespace PPOK_System.Domain.Service {
 		}
 
 
-		// See if T exsists in Database by string id
+		// See if T exists in Database by string id
 		public bool Exists<T>(string id) {
 			using (IDbConnection db = new SqlConnection(connection)) {
 				string name = typeof(T).Name.ToLower();
