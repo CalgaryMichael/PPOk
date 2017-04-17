@@ -1,6 +1,9 @@
 ﻿@model List<PPOK_System.Domain.Models.Message>
 @{
     ViewBag.Title = "Index";
+    PPOK_System.Domain.Service.Database db = new PPOK_System.Domain.Service.Database(PPOK_System.Models.SystemContext.DefaultConnectionString);
+    PPOK_System.Domain.Models.Person person;
+    int pid;
 }
 
 <div class="container">
@@ -41,13 +44,22 @@
 
                         <th>Name</th>
                         <th>Prescription</th>
-                        <th>Date</th>
                         <th> </th>
 
                         </thead>
                         <tbody>
+                            @foreach(var m in Model)
+                            {
+                                pid = m.prescription.person_id ?? default(int); @*Convert nullable int to only an int*@
+                                person = db.ReadSinglePerson(pid);   @* m.prescription.person_id*@
+                                <tr>
+                                    <td>@person.first_name @person.last_name</td>
+                                    <td>@m.prescription.drug.drug_name</td>
+                                    <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
+                                </tr>
+                            }
 
-                            <tr>
+                            @*<tr>
                                 <td>Colby Dial</td>
                                 <td>Tylenol</td>
                                 <td>03/11/17</td>
@@ -84,7 +96,7 @@
                                 <td>Q-Tips</td>
                                 <td>03/19/17</td>
                                 <td><p data-placement="left" data-toggle="tooltip"><button class="btn btn-primary" data-title="Edit" data-toggle="modal" data-target="#edit">Filled</button></p></td>
-                            </tr>
+                            </tr>*@
 
                         </tbody>
 
