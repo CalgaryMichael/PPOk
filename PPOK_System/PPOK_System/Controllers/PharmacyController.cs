@@ -21,7 +21,7 @@ namespace PPOK_System.Controllers {
         }
 
 
-		// POST: /Pharmacy/EditCustomer/{person}
+		// POST: /Pharmacy/EditPharmacy/{store}
 		[HttpPost]
 		public ActionResult EditCustomer(Person p) {
 			db.Update(p);

@@ -14,5 +14,18 @@ namespace PPOK_System.Controllers
             var s = db.ReadAllStore();
             return View(s);
         }
+
+        public ActionResult EditPharmacy(int id)
+        {
+            var s = db.ReadSingleStore(id);
+            return PartialView(s);
+        }
+
+        [HttpPost]
+        public ActionResult EditPharmacy(Store s)
+        {
+            db.Update(s);
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }
