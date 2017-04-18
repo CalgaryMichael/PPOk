@@ -22,6 +22,8 @@ namespace PPOK_System.Controllers
             return PartialView(s);
         }
 
+
+        //See why this isn't updating anymore
         [HttpPost]
         public ActionResult EditPharmacy(Store s)
         {
