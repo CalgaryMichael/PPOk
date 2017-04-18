@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using Twilio;
 using Twilio.AspNet.Common;
-using Twilio.AspNet.Mvc;
 
 namespace PPOK_System.Controllers {
     public class NotificationController : Controller {
@@ -21,7 +20,6 @@ namespace PPOK_System.Controllers {
         [HttpPost]
         public ActionResult replyTest(SmsRequest request)
         {
-           
             if (request.Body == "1")
             {
                 TW.SendResponse(request.From, "we will start your refill");
