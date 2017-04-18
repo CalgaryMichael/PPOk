@@ -2,7 +2,7 @@
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service;
 using System.Web.Mvc;
-
+using System.Collections.Generic;
 
 namespace PPOK_System.Controllers
 {
@@ -37,9 +37,12 @@ namespace PPOK_System.Controllers
         [HttpPost]
         public ActionResult AddPharmacy2(Store s)
         {
-            
+            List<PPOK_System.Domain.Models.Store> temp = new List<PPOK_System.Domain.Models.Store>();
             PPOK_System.Domain.Models.Person p = new PPOK_System.Domain.Models.Person();
-            int? storeID = s.store_id;
+            int? storeID;
+
+            temp = db.ReadAllStore();
+            storeID = temp.Count + 1;
             
             p.store_id = storeID;
             p.phone = "2222222222";
