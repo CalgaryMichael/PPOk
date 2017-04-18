@@ -12,7 +12,7 @@ namespace PPOK_System.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            var s = db.ReadAllStore();
+            var s = db.ReadAllStores();
             return View(s);
         }
 
@@ -44,7 +44,7 @@ namespace PPOK_System.Controllers
             PPOK_System.Domain.Models.Person p = new PPOK_System.Domain.Models.Person();
             int? storeID;
 
-            temp = db.ReadAllStore();
+            temp = db.ReadAllStores();
             storeID = temp.Count + 1;
             
             p.store_id = storeID;
