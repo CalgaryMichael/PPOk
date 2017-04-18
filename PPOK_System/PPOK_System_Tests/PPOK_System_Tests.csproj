@@ -54,6 +54,10 @@
     <Compile Include="tests\ImportTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PPOK_System.Domain\PPOK_System.Domain.csproj">
+      <Project>{2ddb2495-e5f5-403b-bdeb-9231755ceb22}</Project>
+      <Name>PPOK_System.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PPOK_System\PPOK_System.csproj">
       <Project>{c67d223b-afa2-4097-9882-7b90848a2cac}</Project>
       <Name>PPOK_System</Name>
