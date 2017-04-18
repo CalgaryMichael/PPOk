@@ -27,5 +27,17 @@ namespace PPOK_System.Controllers
             db.Update(s);
             return RedirectToAction("Index", "Admin");
         }
+
+        public ActionResult AddPharmacy()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult AddPharmacy2(Store s)
+        {
+            db.Create(s);
+            return RedirectToAction("Index", "Admin");
+        }
     }
 }
