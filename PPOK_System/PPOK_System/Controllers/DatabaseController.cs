@@ -4,7 +4,7 @@ using PPOK_System.TwilioManager;
 using PPOK_System.Models;
 
 namespace PPOK_System.Controllers {
-	public class DatabaseController : Controller {
+	public class DatabaseController : BaseController {
 		Database db = new Database(SystemContext.DefaultConnectionString, SystemContext.MasterConnectionString);
 		
 

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace PPOK_System.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         Database db = new Database(SystemContext.DefaultConnectionString);
         // GET: Admin

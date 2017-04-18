@@ -4,7 +4,7 @@ using PPOK_System.Domain.Service;
 using System.Web.Mvc;
 
 namespace PPOK_System.Controllers {
-    public class PharmacyController : Controller {
+    public class PharmacyController : BaseController {
 		Database db = new Database(SystemContext.DefaultConnectionString);
 
         // GET: Pharmacy
