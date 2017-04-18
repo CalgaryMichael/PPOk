@@ -34,6 +34,7 @@ namespace PPOK_System.Controllers
             return PartialView();
         }
 
+        //get count of all store, add 1 to get new store id, make a dummy person for the new store.
         [HttpPost]
         public ActionResult AddPharmacy2(Store s)
         {
