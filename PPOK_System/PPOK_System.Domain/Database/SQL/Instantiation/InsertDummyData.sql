@@ -40,7 +40,7 @@ INSERT INTO [dbo].[prescription] VALUES
 
 
 INSERT INTO [dbo].[message_history] VALUES
-	(1,'yes','20170308','20170309'),
-	(2,'no','20170308',null),
-	(3,'yes','20170308','20170309'),
-	(4, 'no', '20170308', null);
+	(1,'yes',null,null,0),
+	(2,'no',null,null,0),
+	(3,'yes','20170308','20170309',1),
+	(4, 'yes', '20170308', null,0);

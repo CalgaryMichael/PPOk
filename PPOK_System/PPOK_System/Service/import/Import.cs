@@ -91,7 +91,7 @@ namespace PPOK_System.import {
 				c.customer.store_id = store_id;
 				if (!db.Exists<Person>(c.customer.person_id)) {
 					db.Create(c.customer);
-					generateContact(c.customer);
+					//generateContact(c.customer);
 				}
 
 				if (!db.Exists<Drug>(c.drug.drug_id))
@@ -123,14 +123,6 @@ namespace PPOK_System.import {
 				db.Update(rx.drug);
 				db.Update(rx);
 			}
-		}
-
-
-		private static void generateContact(Person p) {
-			var contact = new ContactPreference();
-			contact.person_id = p.person_id;
-			contact.contact_type = "Phone";
-			db.Create(contact);
 		}
 	}
 }

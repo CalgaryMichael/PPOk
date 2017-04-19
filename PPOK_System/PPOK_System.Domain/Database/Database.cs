@@ -6,7 +6,6 @@ using System.Linq;
 using PPOK_System.Domain.Database.SQL;
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service.Cryptography;
-using System;
 
 namespace PPOK_System.Domain.Service {
 	public class Database {
@@ -72,6 +71,7 @@ namespace PPOK_System.Domain.Service {
 				p.password = Encrypt.Encode(p.password);
 			using (IDbConnection db = new SqlConnection(connection)) {
 				db.Execute(Scripts.Create["Person"], p);
+				GenerateContact(p.person_id);
 			}
 		}
 
@@ -501,6 +501,15 @@ namespace PPOK_System.Domain.Service {
 				string name = typeof(T).Name.ToLower();
 				return db.ExecuteScalar<bool>($"SELECT COUNT(1) FROM {name} WHERE {name}_id=@id", new { id });
 			}
+		}
+
+
+		private ContactPreference GenerateContact(int? id) {
+			var contact = new ContactPreference();
+			contact.person_id = id;
+			contact.contact_type = "Phone";
+			Create(contact);
+			return contact;
 		}
 
 		#endregion

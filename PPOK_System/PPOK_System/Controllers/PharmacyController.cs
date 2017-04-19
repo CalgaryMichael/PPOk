@@ -68,7 +68,7 @@ namespace PPOK_System.Controllers {
         {
 			p.store_id = User.Store.store_id;
             db.Create(p);
-            return RedirectToAction("Index", "Pharmacy");
+            return View("Index");
         }
     }
 }

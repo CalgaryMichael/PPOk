@@ -7,16 +7,17 @@
 }
 
 <div class="container">
-    <div class="col-md-4" id="importSelect">
-        <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="col-form-label" for="file">Import Patient Data:</label>
-                <label class="btn btn-primary" for="file" id="fakeButton">Select File</label>
-                <input style="visibility: hidden; display: none;" class="" type="file" name="file" id="file" accept=".csv" onchange="filepathChange()" />
-                <input class="btn btn-primary" id="import-submit" type="submit" />
-            </div>
+    <div class="row">
+        <div class="col-md-4" id="importSelect">
+            <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-form-label" for="file">Import Patient Data:</label>
+                    <label class="btn btn-primary" for="file" id="fakeButton">Select File</label>
+                    <input style="visibility: hidden; display: none;" class="" type="file" name="file" id="file" accept=".csv" onchange="filepathChange()" />
+                    <input class="btn btn-primary" id="import-submit" type="submit" />
+                </div>
             </form>
-            </div>
+        </div>
     </div>
     @*<div class="row">
         <div class="form-group">
@@ -31,7 +32,6 @@
         </div>
     </div>*@
 
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h4>Pending Refills</h4>
@@ -68,7 +68,6 @@
             </div>
         </div>
     </div>
-</div>
 <div id="spinner">
     <i class="fa fa-spinner fa-spin fa-2x fa-fw" aria-hidden="true"></i>
     <span class="sr-only">Loading...</span>
@@ -118,5 +117,4 @@
 @section includeModal {
     <div id="import-container" class="modal fade hidden-print" role="dialog" data-backdrop="false"></div>
     <div id="history-container" class="modal fade hidden-print" role="dialog" data-backdrop="false"></div>
-
 }

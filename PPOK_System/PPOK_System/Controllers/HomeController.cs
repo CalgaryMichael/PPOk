@@ -14,9 +14,9 @@ namespace PPOK_System.Controllers {
         // GET: Home
         public ActionResult Index() {
             //FormsAuthentication.SignOut();
-            TwManager tw = new TwManager();
+            //TwManager tw = new TwManager();
 
-            tw.StartHangfire();
+            //tw.StartHangfire();
             return RedirectToAction("Login");
         }
 
