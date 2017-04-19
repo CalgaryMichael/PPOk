@@ -2,6 +2,8 @@
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service;
 using System.Web.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace PPOK_System.Controllers {
     public class PharmacyController : Controller {
@@ -54,5 +56,26 @@ namespace PPOK_System.Controllers {
 			var msg = db.ReadAllMessagesForPerson(id);
 			return PartialView(msg);
 		}
-	}
+
+        public ActionResult AddPerson()
+        {
+            return PartialView();
+        }
+
+
+
+        [HttpPost]
+        public ActionResult AddPerson2(Person p)
+        {
+            List<Person> temp = new List<Person>();
+            int numOfPeople = 0;
+            PPOK_System.Domain.Service.Database db = new PPOK_System.Domain.Service.Database(PPOK_System.Models.SystemContext.DefaultConnectionString);
+
+            temp = db.ReadAllPersons();
+            numOfPeople = temp.Count;
+            p.person_id = numOfPeople + 1;
+            db.Create(p);
+            return RedirectToAction("Index", "Pharmacy");
+        }
+    }
 }
