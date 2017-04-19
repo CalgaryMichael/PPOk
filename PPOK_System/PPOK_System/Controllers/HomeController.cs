@@ -4,9 +4,10 @@ using PPOK_System.Domain.Service;
 using PPOK_System.Service.Authentication;
 using System.Web.Mvc;
 using System.Web.Security;
+using PPOK_System.Service.Models;
 
 namespace PPOK_System.Controllers {
-    public class HomeController : Controller {
+    public class HomeController : BaseController {
 		Database db = new Database(SystemContext.DefaultConnectionString);
 
         // GET: Home
@@ -19,15 +20,12 @@ namespace PPOK_System.Controllers {
 		// GET: Home/Login
 		[HttpGet]
 		public ActionResult Login() {
-			if (User.Identity.IsAuthenticated) {
-				var email = User.Identity.Name.Split(',')[0];
-				var person = db.ReadSinglePerson(email);
-
-				if (person.person_type == "admin") {
+			if (User != null) {
+				if (User.IsInRole("Admin")) {
 					return RedirectToAction("Index", "Admin");
-				} else if (person.person_type == "pharm") {
+				} else if (User.IsInRole("Pharmacist")) {
 					return RedirectToAction("Index", "Pharmacy");
-				} else if (person.person_type == "customer") {
+				} else {
 					return RedirectToAction("Index", "User");
 				}
 			}
@@ -41,13 +39,13 @@ namespace PPOK_System.Controllers {
 		public ActionResult Login(Person loginAttempt) {
 			var person = db.ReadSinglePerson(loginAttempt.email);
 
-			if (Password.Authenticate(loginAttempt.password, person.password)) {
-				string cookie = person.email + "," + person.person_type + ",";
-				FormsAuthentication.SetAuthCookie(cookie, false);
+			if (person != null && Password.Authenticate(loginAttempt.password, person.password)) {
+				UserPrincipalSerialize user = new UserPrincipalSerialize(person);
+				Response.Cookies.Add(AuthTicket.Make(user));
 
-				if (person.person_type == "admin") {
+				if (user.IsInRole("Admin")) {
 					return RedirectToAction("Index", "Admin");
-				} else if (person.person_type == "pharm") {
+				} else if (user.IsInRole("Pharmacist")) {
 					return RedirectToAction("Index", "Pharmacy");
 				} else {
 					return RedirectToAction("Index", "User");

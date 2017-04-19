@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 
 namespace PPOK_System.Controllers {
-    public class PharmacyController : Controller {
+    public class PharmacyController : BaseController {
 		Database db = new Database(SystemContext.DefaultConnectionString);
 
         // GET: Pharmacy

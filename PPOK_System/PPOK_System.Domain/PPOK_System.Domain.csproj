@@ -54,17 +54,51 @@
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Cryptography\SHA1.cs" />
     <Compile Include="Service\Cryptography\Encrypt.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database\SQL\CreateDatabase.sql" />
-    <Content Include="Database\SQL\CreateTables.sql" />
-    <Content Include="Database\SQL\InsertDummyData.sql" />
+    <Content Include="Database\SQL\Create\Drug.sql" />
+    <Content Include="Database\SQL\Create\ContactPreference.sql" />
+    <Content Include="Database\SQL\Create\Message.sql" />
+    <Content Include="Database\SQL\Create\Prescription.sql" />
+    <Content Include="Database\SQL\Create\Person.sql" />
+    <Content Include="Database\SQL\Create\Store.sql" />
+    <Content Include="Database\SQL\Delete\Drug.sql" />
+    <Content Include="Database\SQL\Delete\Message.sql" />
+    <Content Include="Database\SQL\Delete\ContactPreference.sql" />
+    <Content Include="Database\SQL\Delete\Prescription.sql" />
+    <Content Include="Database\SQL\Delete\Store.sql" />
+    <Content Include="Database\SQL\Delete\Person.sql" />
+    <Content Include="Database\SQL\Instantiation\CreateDatabase.sql" />
+    <Content Include="Database\SQL\Instantiation\CreateTables.sql" />
+    <Content Include="Database\SQL\Instantiation\InsertDummyData.sql" />
+    <Content Include="Database\SQL\Read\AllMessagesForPerson.sql" />
+    <Content Include="Database\SQL\Read\AllMessages.sql" />
+    <Content Include="Database\SQL\Read\AllPrescriptionsForPerson.sql" />
+    <Content Include="Database\SQL\Read\AllPrescriptions.sql" />
+    <Content Include="Database\SQL\Read\SingleDrug.sql" />
+    <Content Include="Database\SQL\Read\AllDrugs.sql" />
+    <Content Include="Database\SQL\Read\SinglePersonByPhone.sql" />
+    <Content Include="Database\SQL\Read\SinglePrescriptionById.sql" />
+    <Content Include="Database\SQL\Read\SingleStore.sql" />
+    <Content Include="Database\SQL\Read\SinglePrescriptionByDrug.sql" />
+    <Content Include="Database\SQL\Read\AllStores.sql" />
+    <Content Include="Database\SQL\Read\SingleMessage.sql" />
+    <Content Include="Database\SQL\Read\Schedules.sql" />
+    <Content Include="Database\SQL\Read\SinglePersonByEmail.sql" />
+    <Content Include="Database\SQL\Read\SinglePersonById.sql" />
+    <Content Include="Database\SQL\Read\AllPersons.sql" />
+    <Content Include="Database\SQL\Update\ContactPreference.sql" />
+    <Content Include="Database\SQL\Update\Message.sql" />
+    <Content Include="Database\SQL\Update\Drug.sql" />
+    <Content Include="Database\SQL\Update\Prescription.sql" />
+    <Content Include="Database\SQL\Update\Person.sql" />
+    <Content Include="Database\SQL\Update\Store.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
