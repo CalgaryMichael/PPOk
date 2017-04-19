@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Modules\MessageHistoryModule.js" />
+    <Content Include="Content\Modules\PendingRefills.js" />
     <Content Include="Content\Vendor\bootstrap\css\bootstrap.css" />
     <Content Include="Content\Vendor\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\Modules\ImportModule.js" />
