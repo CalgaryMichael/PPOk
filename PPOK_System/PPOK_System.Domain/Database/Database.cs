@@ -6,6 +6,7 @@ using System.Linq;
 using PPOK_System.Domain.Database.SQL;
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service.Cryptography;
+using System;
 
 namespace PPOK_System.Domain.Service {
 	public class Database {
@@ -107,15 +108,15 @@ namespace PPOK_System.Domain.Service {
 				db.Execute(Scripts.Create["ContactPreference"], c);
 			}
 		}
-		
-
-		#endregion
 
 
-		#region Read
+        #endregion
 
-		// Populate List<Store> with rows in the Db
-		public List<Store> ReadAllStores() {
+
+        #region Read
+
+        // Populate List<Store> with rows in the Db
+        public List<Store> ReadAllStores() {
 			var lookup = new Dictionary<int, Store>();
 
 			using (IDbConnection db = new SqlConnection(connection)) {
@@ -181,7 +182,6 @@ namespace PPOK_System.Domain.Service {
 			}
 		}
 
-
 		// Populate List<Prescriptions> with rows in the Db
 		public List<Prescription> ReadAllPrescriptions() {
 			return QueryPrescriptionList(Scripts.Read["AllPrescriptions"]);
@@ -243,7 +243,7 @@ namespace PPOK_System.Domain.Service {
 
 
 		// Populate List<Message> with rows in the Db
-		public List<Message> ReadAllMessagesForPerson(int id) {
+		public List<Message> ReadAllMessagesForPerson(int? id) {
 			return QueryAllMessages(Scripts.Read["AllMessagesForPerson"], id);
 		}
 
