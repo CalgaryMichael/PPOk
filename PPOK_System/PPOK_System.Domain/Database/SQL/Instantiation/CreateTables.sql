@@ -56,6 +56,7 @@ CREATE TABLE [dbo].[message_history] (
 	[response]			varchar(100)															,
 	[fill_time]			datetime																,
 	[pick_up_time]		datetime																,
+	[filled]			bit																		,
 	PRIMARY KEY([message_id])
 );
 

@@ -63,17 +63,10 @@ namespace PPOK_System.Controllers {
         }
 
 
-
         [HttpPost]
-        public ActionResult AddPerson2(Person p)
+        public ActionResult AddPerson(Person p)
         {
-            List<Person> temp = new List<Person>();
-            int numOfPeople = 0;
-            PPOK_System.Domain.Service.Database db = new PPOK_System.Domain.Service.Database(PPOK_System.Models.SystemContext.DefaultConnectionString);
-
-            temp = db.ReadAllPersons();
-            numOfPeople = temp.Count;
-            p.person_id = numOfPeople + 1;
+			p.store_id = User.Store.store_id;
             db.Create(p);
             return RedirectToAction("Index", "Pharmacy");
         }
