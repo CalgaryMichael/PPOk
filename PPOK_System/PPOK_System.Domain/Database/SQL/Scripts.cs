@@ -51,14 +51,14 @@ namespace PPOK_System.Domain.Database.SQL {
 
 		// Update Scripts
 		private static void PopulateUpdateScripts() {
-			string SqlRoot = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.FullName + "/PPOK_System.Domain/Database/SQL/Read";
+			string SqlRoot = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.FullName + "/PPOK_System.Domain/Database/SQL/Update";
 			Update = Directory.GetFiles(SqlRoot, "*.sql").ToDictionary(Path.GetFileNameWithoutExtension, File.ReadAllText, StringComparer.OrdinalIgnoreCase);
 		}
 
 
 		// Delete Scripts
 		private static void PopulateDeleteScripts() {
-			string SqlRoot = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.FullName + "/PPOK_System.Domain/Database/SQL/Read";
+			string SqlRoot = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory).Parent?.FullName + "/PPOK_System.Domain/Database/SQL/Delete";
 			Delete = Directory.GetFiles(SqlRoot, "*.sql").ToDictionary(Path.GetFileNameWithoutExtension, File.ReadAllText, StringComparer.OrdinalIgnoreCase);
 		}
 	}

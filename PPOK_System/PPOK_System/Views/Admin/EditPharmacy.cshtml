@@ -3,8 +3,7 @@
 @using (Html.BeginForm("EditPharmacy", "Admin", FormMethod.Post, new { id = "create-form" }))
 {
     @Html.AntiForgeryToken()
-    //@Html.HiddenFor(m => m.person_id)
-    //@Html.HiddenFor(m => m.password)
+    @Html.HiddenFor(m => m.store_id)
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
