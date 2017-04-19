@@ -8,6 +8,7 @@ namespace PPOK_System.Domain.Models {
 		public string response { get; set; }
 		public DateTime fill_date { get; set; }
 		public DateTime pick_up_time { get; set; }
+		public bool filled { get; set; }
 
 		public Prescription prescription { get; set; }
 	}

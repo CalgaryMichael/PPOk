@@ -1,13 +1,7 @@
 ﻿@model PPOK_System.Domain.Models.Person
-@using (Html.BeginForm("AddPerson2", "Pharmacy", FormMethod.Post, new { id = "create-form" }))
+@using (Html.BeginForm("AddPerson", "Pharmacy", FormMethod.Post, new { id = "create-form" }))
 {
     @Html.AntiForgeryToken()
-
-    
-
-
-    //@Html.HiddenFor(m => m.person_id)
-    //@Html.HiddenFor(m => m.password)
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

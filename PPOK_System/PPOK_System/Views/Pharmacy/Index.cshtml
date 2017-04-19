@@ -35,26 +35,21 @@
         <div class="row">
             <div class="col-md-12">
                 <h4>Pending Refills</h4>
-                <span title="Add New Person" data-toggle="tooltip">
-                   Add New Person: <button class="btn btn-primary" onclick="loadModule(ADD_PERSON_URL)">
-                        <i class="fa glyphicon-plus" aria-hidden="true"></i>
-                    </button>
-                </span>
                 <div class="table-responsive">
 
                     <table id="mytable" class="table table-bordred table-striped">
 
                         <thead>
-
-                        <th>Name</th>
-                        <th>Prescription</th>
-                        <th> </th>
-
+                            <tr>
+                                <th>Name</th>
+                                <th>Prescription</th>
+                                <th> </th>
+                            </tr>
                         </thead>
                         <tbody>
                             @foreach (var m in Model)
                             {
-                                if (m.response == "yes" && m.fill_date == null) //Customer wants a refill and the prescription has not been filled yet
+                                if (m.response.Contains("yes") && !m.filled) //Customer wants a refill and the prescription has not been filled yet
                                 {
                                     pid = m.prescription.person_id ?? default(int);
                                     person = db.ReadSinglePerson(pid);   
