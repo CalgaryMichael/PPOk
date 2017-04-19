@@ -18,7 +18,7 @@ namespace PPOK_System.Controllers {
         }
 
         [HttpPost]
-        public ActionResult replyTest(SmsRequest request)
+        public ActionResult PatientReply(SmsRequest request)
         {
             if (request.Body == "1")
             {
