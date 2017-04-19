@@ -1,4 +1,4 @@
-UPDATE message_hisory
+UPDATE message_history
 SET prescription_id = @prescription_id, response = @response,
-	fill_date = @fill_date, pick_up_date = @pick_up_date
+	fill_time = @fill_time, pick_up_time = @pick_up_time
 WHERE message_id = @message_id

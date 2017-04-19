@@ -37,6 +37,7 @@ var EDIT_CUSTOMER_URL = "/Pharmacy/EditCustomer/";
 var EDIT_PHARMACY_URL = "/Admin/EditPharmacy/";
 var ADD_PHARMACY_URL = "/Admin/AddPharmacy/";
 var ADD_PHARMACIST_URL = "/Admin/AddPharmacist/";
+var ADD_PERSON_URL = "/Pharmacy/AddPerson/";
 
 var loadModule = function (url, sendData, type) {
     // default param

@@ -7,7 +7,7 @@
 }
 
 <div class="container">
-    @*<div class="col-md-4" id="importSelect">
+    <div class="col-md-4" id="importSelect">
         <form id="import-form" action="/Import" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-form-label" for="file">Import Patient Data:</label>
@@ -17,8 +17,8 @@
             </div>
             </form>
             </div>
-    </div>*@
-    <div class="row">
+    </div>
+    @*<div class="row">
         <div class="form-group">
             <label class="col-md-3 control-label" for="searchInput"></label>
             <div class="col-md-3">
@@ -29,29 +29,30 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>*@
+
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h4>Pending Refills</h4>
                 <div class="table-responsive">
 
-                    <table id="mytable" class="table table-bordred table-striped">
+                    <table id="pendingRefills" class="table table-bordred table-striped">
 
                         <thead>
-
-                        <th>Name</th>
-                        <th>Prescription</th>
-                        <th> </th>
-
+                            <tr>
+                                <th>Name</th>
+                                <th>Prescription</th>
+                                <th> </th>
+                            </tr>
                         </thead>
                         <tbody>
                             @foreach (var m in Model)
                             {
-                                if (m.response == "yes" && m.fill_date == null) //Customer wants a refill and the prescription has not been filled yet
+                                if (m.response.Contains("yes") && !m.filled) //Customer wants a refill and the prescription has not been filled yet
                                 {
-                                    pid = m.prescription.person_id ?? default(int); @*Convert nullable int to only an int*@
-                                    person = db.ReadSinglePerson(pid);   @* m.prescription.person_id*@
+                                    pid = m.prescription.person_id ?? default(int);
+                                    person = db.ReadSinglePerson(pid);   
                                     <tr>
                                         <td>@person.first_name @person.last_name</td>
                                         <td>@m.prescription.drug.drug_name</td>
@@ -75,9 +76,9 @@
 
 
 @section inlineScript {
-    <script type="text/javascript">
+<script>
         $(document).ready(function () {
-            $("#mytable #checkall").click(function () {
+            $("#customer-table #checkall").click(function () {
                 if ($("#mytable #checkall").is(':checked')) {
                     $("#mytable input[type=checkbox]").each(function () {
                         $(this).prop("checked", true);
@@ -92,7 +93,8 @@
 
             $("[data-toggle=tooltip]").tooltip();
         });
-
+    </script>
+    <script>
         function filepathChange() {
             var fileSelected = document.getElementById('file').value;
             if (fileSelected != '')
@@ -100,13 +102,21 @@
             else
                 document.getElementById('fakeButton').innerHTML = 'Select File';
         }
-    </script>
+
+</script>
 }
 
 @section scriptsIncludes {
     <script type="text/javascript" src="~/Content/Modules/ImportModule.js"></script>
+    <script type="text/javascript" src="~/Content/Modules/ManageCustomersModule.js?Build=@Guid.NewGuid().ToString()"></script>
+    <script type="text/javascript" src="~/Content/Modules/PendingRefills.js?Build=@Guid.NewGuid().ToString()"></script>
+
 }
+
+
 
 @section includeModal {
     <div id="import-container" class="modal fade hidden-print" role="dialog" data-backdrop="false"></div>
+    <div id="history-container" class="modal fade hidden-print" role="dialog" data-backdrop="false"></div>
+
 }

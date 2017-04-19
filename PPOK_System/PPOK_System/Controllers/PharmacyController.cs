@@ -2,6 +2,8 @@
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service;
 using System.Web.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace PPOK_System.Controllers {
     public class PharmacyController : BaseController {
@@ -54,5 +56,19 @@ namespace PPOK_System.Controllers {
 			var msg = db.ReadAllMessagesForPerson(id);
 			return PartialView(msg);
 		}
-	}
+
+        public ActionResult AddPerson()
+        {
+            return PartialView();
+        }
+
+
+        [HttpPost]
+        public ActionResult AddPerson(Person p)
+        {
+			p.store_id = User.Store.store_id;
+            db.Create(p);
+            return RedirectToAction("Index", "Pharmacy");
+        }
+    }
 }
