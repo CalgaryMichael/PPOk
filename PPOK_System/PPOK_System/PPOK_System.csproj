@@ -233,6 +233,7 @@
     <Compile Include="Service\Import\Import.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Twilio\TwilioManager.cs" />
+    <Compile Include="Views\Base\BaseViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config">

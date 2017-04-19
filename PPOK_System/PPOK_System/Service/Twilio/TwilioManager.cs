@@ -58,7 +58,7 @@ namespace PPOK_System.TwilioManager
             {
                 Message msg = new Message();
                 msg.prescription_id = s.prescription_id;
-                msg.fill_date = DateTime.Now;
+                msg.fill_time = DateTime.Now;
                 db.Create(msg);
                 MessageResource.Create(
                     from: new PhoneNumber("405-400-0298"),
@@ -67,18 +67,21 @@ namespace PPOK_System.TwilioManager
                     body: $"{s.person.first_name}, " + "Would you like to refill your perscription? Send '1' for refill");
             }
         }
-        public void RefillRequest(string number)
+        public void RefillRequest(string num)
         {
+            string number = num.Substring(2);
             Message topMsg = new Message();
-            topMsg.fill_date = DateTime.MinValue;
+            DateTime lowTime = new DateTime(1753, 1, 1);
+            topMsg.fill_time = lowTime;
             Person person = db.ReadSinglePersonByPhone(number);
             List<Message> messages = db.ReadAllMessagesForPerson(person.person_id);
             foreach (Message m in messages)
             {
-                if (m.fill_date > topMsg.fill_date)
+                if (DateTime.Compare(topMsg.fill_time, m.fill_time) < 0)
                     topMsg = m;
             }
             topMsg.response = "yes";
+            topMsg.pick_up_time = null;
             db.Update(topMsg);
         }
         public void ScheduleSend()
