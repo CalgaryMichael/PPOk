@@ -111,13 +111,21 @@ namespace PPOK_System.Domain.Service {
 		}
 
 
-        #endregion
+		// Create new row in "contact_preference" table
+		public void Create(Schedule s) {
+			using (IDbConnection db = new SqlConnection(connection)) {
+				db.Execute(Scripts.Create["Schedule"], s);
+			}
+		}
 
 
-        #region Read
+		#endregion
 
-        // Populate List<Store> with rows in the Db
-        public List<Store> ReadAllStores() {
+
+		#region Read
+
+		// Populate List<Store> with rows in the Db
+		public List<Store> ReadAllStores() {
 			var lookup = new Dictionary<int, Store>();
 
 			using (IDbConnection db = new SqlConnection(connection)) {
@@ -197,13 +205,13 @@ namespace PPOK_System.Domain.Service {
 
 		// Populate single Prescriptions with row in the Db
 		public Prescription ReadSinglePrescription(int? id) {
-			return QueryPrescriptionSingle(Scripts.Read["SinglePresciptionById"], id);
+			return QueryPrescriptionSingle(Scripts.Read["SinglePrescriptionById"], id);
 		}
 
 
 		// Populate single Prescriptions with row in the Db
 		public Prescription ReadSinglePrescription(int? person_id, string drug_id) {
-			return QueryPrescriptionSingle(Scripts.Read["SinglePresciptionByDrug"], person_id, drug_id);
+			return QueryPrescriptionSingle(Scripts.Read["SinglePrescriptionByDrug"], person_id, drug_id);
 		}
 
 

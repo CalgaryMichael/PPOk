@@ -43,3 +43,14 @@ var submitUpload = function (data) {
         data: { updateList: data }
     });
 }
+
+
+var submitRecall = function (data) {
+    console.log(data);
+    $.ajax({
+        type: 'POST',
+        url: '/Import/Upload/',
+        dataType: 'json',
+        data: { updateList: data, isRecall: true}
+    });
+}

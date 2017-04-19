@@ -11,10 +11,7 @@ namespace PPOK_System.import {
 		private static Database db = new Database(SystemContext.DefaultConnectionString);
 
 		public static List<Prescription> Handle(HttpPostedFileBase file, int? store, bool isRecall=false) {
-			// TODO: maybe delete since it could be initialized in IsRecallFile?
 			StreamReader reader = new StreamReader(file.InputStream);
-			//var line = reader.ReadLine();       // initialize first row
-			//var values = line.Split(',');
 
 			if (!isRecall) {
 				var results = ImportCustomer.Csv(reader);

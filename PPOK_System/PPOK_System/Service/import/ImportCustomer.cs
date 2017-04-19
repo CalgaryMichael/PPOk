@@ -45,7 +45,7 @@ namespace PPOK_System.Service.Import {
 				p.zip = values[4];
 				p.phone = values[5];
 				p.email = values[6];
-				p.person_type = "customer";
+				p.person_type = "Customer";
 				lineContent.customer = p;
 
 				// import Drug info
@@ -84,7 +84,6 @@ namespace PPOK_System.Service.Import {
 				c.customer.store_id = store;
 				if (!db.Exists<Person>(c.customer.person_id)) {
 					db.Create(c.customer);
-					GenerateContact(c.customer);
 				}
 
 				if (!db.Exists<Drug>(c.drug.drug_id))
@@ -92,6 +91,7 @@ namespace PPOK_System.Service.Import {
 
 				if (!db.Exists<Prescription>(c.prescription_id))
 					db.Create(c);
+				GenerateTask(c);
 
 				try {
 					var dbContent = db.ReadSinglePrescription(c.customer.person_id, c.drug.drug_id);
@@ -119,11 +119,14 @@ namespace PPOK_System.Service.Import {
 		}
 
 
-		private static void GenerateContact(Person p) {
-			var contact = new ContactPreference();
-			contact.person_id = p.person_id;
-			contact.contact_type = "Phone";
-			db.Create(contact);
+		private static void GenerateTask(Prescription p) {
+			var sendDate = p.date_filled.AddDays((double)p.days_supply);
+			if (!(DateTime.Now > sendDate)) {
+				var task = new Schedule();
+				task.prescription_id = (int)p.prescription_id;
+				task.day_to_send = sendDate;
+				db.Create(task);
+			}
 		}
 	}
 }

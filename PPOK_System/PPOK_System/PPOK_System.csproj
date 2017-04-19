@@ -231,7 +231,6 @@
     <Compile Include="Models\UserPrincipalSerialize.cs" />
     <Compile Include="Service\Authentication\AuthTicket.cs" />
     <Compile Include="Service\Authentication\Password.cs" />
-    <Compile Include="Models\UserPrincipalSerialize.cs" />
     <Compile Include="Service\Import\ImportCustomer.cs" />
     <Compile Include="Service\Import\ImportHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

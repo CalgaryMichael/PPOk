@@ -62,6 +62,7 @@
     <Content Include="Database\SQL\Create\Message.sql" />
     <Content Include="Database\SQL\Create\Prescription.sql" />
     <Content Include="Database\SQL\Create\Person.sql" />
+    <Content Include="Database\SQL\Create\Schedule.sql" />
     <Content Include="Database\SQL\Create\Store.sql" />
     <Content Include="Database\SQL\Delete\Drug.sql" />
     <Content Include="Database\SQL\Delete\Message.sql" />
