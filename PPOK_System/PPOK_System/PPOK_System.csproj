@@ -259,6 +259,8 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Data\scrubbed_data_alt.csv" />
     <Content Include="Views\Pharmacy\PersonHistory.cshtml" />
+    <Content Include="Views\Admin\EditPharmacy.cshtml" />
+    <Content Include="Views\Admin\AddPharmacy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -34,6 +34,8 @@
 // consts
 var MESSAGE_HISTORY_URL = "/Pharmacy/PersonHistory/";
 var EDIT_CUSTOMER_URL = "/Pharmacy/EditCustomer/";
+var EDIT_PHARMACY_URL = "/Admin/EditPharmacy/";
+var ADD_PHARMACY_URL = "/Admin/AddPharmacy/";
 
 var loadModule = function (url, sendData, type) {
     // default param
