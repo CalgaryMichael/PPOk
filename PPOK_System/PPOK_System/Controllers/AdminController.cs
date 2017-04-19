@@ -8,6 +8,8 @@ namespace PPOK_System.Controllers
 {
     public class AdminController : BaseController
     {
+       // int? tempStoreID;
+
         Database db = new Database(SystemContext.DefaultConnectionString);
         // GET: Admin
         public ActionResult Index()
@@ -58,6 +60,23 @@ namespace PPOK_System.Controllers
             p.date_of_birth = System.DateTime.Now;
 
             db.Create(s);
+            db.Create(p);
+            return RedirectToAction("Index", "Admin");
+        }
+
+        public ActionResult AddPharmacist(int id)
+        {
+            //tempStoreID = id;
+            var p = new Person();
+            p.store_id = id;
+            p.person_type = "Pharmacist";
+            return PartialView(p);
+        }
+
+        [HttpPost]
+        public ActionResult AddPharmacist2(Person p)
+        {
+           // p.store_id = tempStoreID;
             db.Create(p);
             return RedirectToAction("Index", "Admin");
         }
