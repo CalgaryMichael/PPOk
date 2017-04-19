@@ -20,7 +20,6 @@
             @if (User != null) {
                 if (User.IsInRole("Admin")) {
                         <ul class="nav navbar-nav">
-                            <li><a href="/admin/index">Manage Pharmacist</a></li>
                             <li><a href="/admin/index">Manage Pharmacy</a></li>
                         </ul>
                 } else if (User.IsInRole("Pharmacist")) {

@@ -67,8 +67,9 @@ namespace PPOK_System.Controllers {
         public ActionResult AddPerson(Person p)
         {
 			p.store_id = User.Store.store_id;
+			p.person_type = "Customer";
             db.Create(p);
-            return View("Index");
+            return RedirectToAction("manageCustomer");
         }
     }
 }

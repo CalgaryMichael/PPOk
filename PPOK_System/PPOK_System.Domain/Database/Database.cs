@@ -444,7 +444,7 @@ namespace PPOK_System.Domain.Service {
 		// Update row in "contact_preference" table
 		public void Update(ContactPreference c) {
 			using (IDbConnection db = new SqlConnection(connection)) {
-				db.Execute(Scripts.Update["ContactPrefence"], c);
+				db.Execute(Scripts.Update["ContactPreference"], c);
 			}
 		}
 		
