@@ -9,9 +9,15 @@
         <div class="modal-body">
             <div class="container">
                 @if (Model.Count > 0) {
-                    <div class="row">
-                        @Model.Count rows will be updated. Are you sure you want to proceed?
-                    </div>
+                    if (!ViewBag.IsRecall) {
+                        <div class="row">
+                            @Model.Count rows will be updated. Are you sure you want to proceed?
+                        </div>
+                    } else {
+                        <div class="row">
+                            @Model.Count people will be contacted. Are you sure you want to proceed?
+                        </div>
+                    }
                 } else {
                     <div class="row">
                         All content uploaded!
@@ -21,7 +27,11 @@
         </div>
         <div class="modal-footer">
             <script>var jsonData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));</script>
-            <input id="submitImport" type="button" value="Submit" class="btn btn-default" onclick="submitUpload(jsonData)"  data-dismiss="modal" />
+            @if (!ViewBag.IsRecall) {
+                <input id="submitImport" type="button" value="Submit" class="btn btn-default" onclick="submitUpload(jsonData)"  data-dismiss="modal" />
+            } else {
+                <input id="submitImport" type="button" value="Submit" class="btn btn-default" onclick="submitUpload(jsonData)"  data-dismiss="modal" />
+            }
         </div>
     </div>
 </div>

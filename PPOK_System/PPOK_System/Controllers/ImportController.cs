@@ -11,8 +11,13 @@ namespace PPOK_System.Controllers {
 		[HttpPost]
 		public ActionResult Index(HttpPostedFileBase file) {
 			var updateList = new List<Prescription>();
-			if (file.ContentLength > 0)
-				updateList = Import.HandleImport(file, User.Identity.Name.Split(',')[0]);
+			if (file.ContentLength > 0) {
+				var isRecall = ImportHandler.IsRecallFile(file);
+				updateList = ImportHandler.Handle(file, User.Store.store_id, isRecall);
+				ViewBag.IsRecall = isRecall;
+			} else {
+				ViewBag.IsRecall = null;
+			}
 
 			return PartialView(updateList);
 		}
@@ -20,9 +25,9 @@ namespace PPOK_System.Controllers {
 
 		// POST: Import/Upload
 		[HttpPost]
-		public ActionResult Upload(List<Prescription> updateList) {
+		public ActionResult Upload(List<Prescription> updateList, bool isRecall=false) {
 			if (updateList != null)
-				Import.UpdateContent(updateList);
+				ImportHandler.Update(updateList, isRecall);
 			return Redirect("/Pharmacy");
 		}
 	}

@@ -6,6 +6,7 @@ using System.Linq;
 using PPOK_System.Domain.Database.SQL;
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service.Cryptography;
+using System;
 
 namespace PPOK_System.Domain.Service {
 	public class Database {
@@ -188,7 +189,7 @@ namespace PPOK_System.Domain.Service {
 		}
 
 
-		// Populate single Prescriptions with row in the Db
+		// Populate List<Prescriptions> with rows in the Db based off person_id
 		public List<Prescription> ReadAllPrescriptionsForPerson(int? id) {
 			return QueryPrescriptionList(Scripts.Read["AllPrescriptionsForPerson"], id);
 		}
@@ -230,6 +231,23 @@ namespace PPOK_System.Domain.Service {
 
 						return p1;
 					}, new { param = param },
+					splitOn: "prescription_id,person_id,drug_id").AsList();
+				return result;
+			}
+		}
+
+
+		// Populate List<Prescription> with row in the Db based off date(s)
+		public List<Prescription> ReadAllPrescriptionsForDates(string drug_id, DateTime begin, DateTime end) {
+			string sql = Scripts.Read["AllPrescriptionsForDates"];
+			using (IDbConnection db = new SqlConnection(connection)) {
+				var result = db.Query<Prescription, Person, Drug, Prescription>(sql,
+					(p1, p2, d) => {
+						p1.customer = p2;
+						p1.drug = d;
+
+						return p1;
+					}, new { param = drug_id, param2 = begin, param3 = end },
 					splitOn: "prescription_id,person_id,drug_id").AsList();
 				return result;
 			}
@@ -365,6 +383,8 @@ namespace PPOK_System.Domain.Service {
 				return result;
 			}
 		}
+
+
 
 
 		#endregion
