@@ -23,6 +23,7 @@ namespace PPOK_System.Controllers {
             if (request.Body == "1")
             {
                 TW.SendResponse(request.From, "we will start your refill");
+                TW.RefillRequest(request.From);
             }
             else if (request.Body == "2")
             {
