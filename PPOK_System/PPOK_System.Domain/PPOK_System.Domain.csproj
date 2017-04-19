@@ -74,6 +74,7 @@
     <Content Include="Database\SQL\Instantiation\InsertDummyData.sql" />
     <Content Include="Database\SQL\Read\AllMessagesForPerson.sql" />
     <Content Include="Database\SQL\Read\AllMessages.sql" />
+    <Content Include="Database\SQL\Read\AllPrescriptionsForDates.sql" />
     <Content Include="Database\SQL\Read\AllPrescriptionsForPerson.sql" />
     <Content Include="Database\SQL\Read\AllPrescriptions.sql" />
     <Content Include="Database\SQL\Read\SingleDrug.sql" />

@@ -1,1 +1,1 @@
-INSERT INTO store VALUES(@address, @name, @city, @state, @zip)
+INSERT INTO store VALUES(@name, @address, @city, @state, @zip)

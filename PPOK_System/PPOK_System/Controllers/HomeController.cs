@@ -34,7 +34,7 @@ namespace PPOK_System.Controllers {
 		}
 
 
-		// POST: Home/Login
+		// POST: Home/Login/{person}
 		[HttpPost]
 		public ActionResult Login(Person loginAttempt) {
 			var person = db.ReadSinglePerson(loginAttempt.email);
