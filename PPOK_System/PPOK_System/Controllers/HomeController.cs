@@ -2,6 +2,7 @@
 using PPOK_System.Domain.Models;
 using PPOK_System.Domain.Service;
 using PPOK_System.Service.Authentication;
+using PPOK_System.TwilioManager;
 using System.Web.Mvc;
 using System.Web.Security;
 using PPOK_System.Service.Models;
@@ -12,8 +13,11 @@ namespace PPOK_System.Controllers {
 
         // GET: Home
         public ActionResult Index() {
-			//FormsAuthentication.SignOut();
-			return RedirectToAction("Login");
+            //FormsAuthentication.SignOut();
+            TwManager tw = new TwManager();
+
+            tw.StartHangfire();
+            return RedirectToAction("Login");
         }
 
 
