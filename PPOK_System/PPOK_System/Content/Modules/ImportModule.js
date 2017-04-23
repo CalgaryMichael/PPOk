@@ -9,12 +9,12 @@
 
         // submit form
         $.ajax({
-            url: url,
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
             type: 'POST',
+            url: url,
+            contentType: false,
+            cache: false,
+            processData: false,
+            data: formData,
             beforeSend: function () {
                 $('#spinner').css('display', 'block');
             },
@@ -31,4 +31,26 @@
 var showModal = function (data) {
     $('#import-container').html(data);
     $('#import-container').modal('show');
+}
+
+// send response to server
+var submitUpload = function (data) {
+    console.log(data);
+    $.ajax({
+        type: 'POST',
+        url: '/Import/Upload/',
+        dataType: 'json',
+        data: { updateList: data }
+    });
+}
+
+
+var submitRecall = function (data) {
+    console.log(data);
+    $.ajax({
+        type: 'POST',
+        url: '/Import/Upload/',
+        dataType: 'json',
+        data: { updateList: data, isRecall: true}
+    });
 }

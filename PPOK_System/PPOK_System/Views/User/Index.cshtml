@@ -1,115 +1,57 @@
-﻿@model PPOK_System.Models.Person
-@{ 
-    //Make stuff
-    PPOK_System.Service.Database db = new PPOK_System.Service.Database();
-    PPOK_System.Models.Person person = new PPOK_System.Models.Person();
-    List<PPOK_System.Models.ContactPreference> conPref = new List<PPOK_System.Models.ContactPreference>();
-
-    //Do things - lori
-    //person = db.ReadSinglePerson(Model.person_id);
-    //get the contact preferences to display them
-    //conPref = person.contact_preference;
+﻿@model PPOK_System.Domain.Models.Person
+@{
+    ViewBag.Title = "Customer";
 }
-@*This is the header*@
-<form class="form" action="/User/CatchAll" method="post" onsubmit="return checkForm(this)">
 
-    @* This is the first set of Checkboxes  *@
+@*This is the header*@
+@using (Html.BeginForm("Index", "User", FormMethod.Post, new { id = "contact-form" })) {
+    @Html.HiddenFor(x => x.contact_preference.person_id)
+    @Html.HiddenFor(x => x.contact_preference.preference_id)
 
     <div class="col-md-6 col-md-offset-3" id="checkBoxes">
+        <label class="control-label">Prescription Refills</label>
+        <br />
         <div class="form-group">
-            <div class="col-md-6">
-                <label class="control-label" for="RefillCheckboxes">Prescription Refills</label>
-                <br />
-                <div>
-                    <div class="checkbox">
-                        <label for="refill1">
-                            <input type="checkbox" class="form-checkbox" name="phonecallrefill1" id="refill1" value="1">
-                            Phone Call
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label for="refill2">
-                            <input type="checkbox" class="form-checkbox" name="phonecallrefill2" id="refill2" value="2">
-                            Text Message
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label for="refill3">
-                            <input type="checkbox" class="form-checkbox" name="phonecallrefill3" id="refill3" value="3">
-                            Email
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <labdel for="refill4">
-                            <input type="checkbox" class="form-checkbox" name="phonecallrefill4" id="refill4" value="4">
-                            Don't Contact Me
-                        </labdel>
-                    </div>
-                </div>
+            <div class="radio">
+                @Html.RadioButtonFor(x => x.contact_preference.contact_type, "Phone", new { id = "Phone" })
+                @Html.Label("Phone", "Phone Call")
             </div>
-            @*</div>*@
-
-            @* This is the second set of Checkboxes  *@
-            @*<div class="form-group">*@
-            <label class="col-md-6 control-label" for="RefillCheckboxes">Prescription Recall</label>
-            <div class="col-md-6">
-                <div class="checkbox">
-                    <label for="recall1">
-                        <input type="checkbox" class="form-checkbox" name="prescriptionRecall1" id="recall1" value="1">
-                        Phone Call
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label for="recall2">
-                        <input type="checkbox" class="form-checkbox" name="prescriptionRecall2" id="recall2" value="2">
-                        Text Message
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label for="recall3">
-                        <input type="checkbox" class="form-checkbox" name="prescriptionRecall3" id="recall3" value="3">
-                        Email
-                    </label>
-                </div>
+            <div class="radio">
+                @Html.RadioButtonFor(x => x.contact_preference.contact_type, "Text", new { id = "Text" })
+                @Html.Label("Text", "Text Message")
+            </div>
+            <div class="radio">
+                @Html.RadioButtonFor(x => x.contact_preference.contact_type, "Email", new { id = "Email" })
+                @Html.Label("Email", "Email")
+            </div>
+            <div class="radio">
+                @Html.RadioButtonFor(x => x.contact_preference.contact_type, "None", new { id = "None" })
+                @Html.Label("None", "Do not contact me")
             </div>
         </div>
         <!-- Button -->
         <br />
         <div class="form-group">
-            <label class="col-md-12 control-label" for="Submit"></label>
             <div class="col-md-offset-4">
                 <button id="Submit" name="Submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
-</form>
+}
 
-@*This function checks to make sure at least one checkbox has been selected*@
-<script type="text/javascript">
-
-  function checkForm(form)
-  {
-    if (form.phonecallrefill1.checked || form.phonecallrefill2.checked || form.phonecallrefill3.checked || form.phonecallrefill4.checked)
-    {
-        if (form.prescriptionRecall1.checked || form.prescriptionRecall2.checked || form.prescriptionRecall3.checked)
-        {
-            
-            return true;
-        }
-        else 
-        {
-            alert("Please select one way for us to contact you about prescription recalls");
-            form.prescriptionRecall1.focus();
-            return false;
-        }
-    }
-    else
-    {
-        alert("Please select one way for us to contact you about prescription refills");
-        form.phonecallrefill1.focus();
-        return false;
-    }
-    
-  }
-
-</script>
+@section inlineScript {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Checks to make sure a radio button has been selected
+            let form = $('#contact-form');
+            form.submit(function (e) {
+                if (!$('input[name="contact_preference.contact_type"]:checked').val()) {
+                    e.preventDefault();
+                    alert("Please select one way for us to contact you about prescription refills");
+                    form.preference.focus();
+                    return false;
+                }
+            });
+        });
+    </script>
+}

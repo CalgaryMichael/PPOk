@@ -1,7 +1,9 @@
-﻿namespace PPOK_System.Service.Authentication {
-	public class Password {
+﻿using PPOK_System.Domain.Service.Cryptography;
+
+namespace PPOK_System.Service.Authentication {
+	public static class Password {
 		public static bool Authenticate(string attempt, string actual) {
-			var encoded = SHA1.Encode(attempt);
+			var encoded = Encrypt.Encode(attempt);
 			return encoded == actual ? true : false;
 		}
 	}

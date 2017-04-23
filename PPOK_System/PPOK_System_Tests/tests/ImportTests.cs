@@ -10,7 +10,7 @@ namespace PPOK_System_Tests.tests {
 			// test file
 			string fileName = "../../../../PPOK_System/PPOK_System/data/scrubbed_data.csv";
 			StreamReader reader = new StreamReader(fileName);
-			var result = Import.Csv(reader);
+			var result = ImportHandler.Csv(reader);
 
 			// check size of result
 			Assert.AreEqual(result.Count, 979);

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title PPOk app</title>
+    <title>@ViewBag.Title - PPOk app</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/Vendor/datatables/css/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -17,31 +17,20 @@
             <span class="nav navbar-brand" id="brand">
                 <i class="fa fa-medkit fa-5" aria-hidden="true"></i>
             </span>
-            @if (Request.IsAuthenticated) { 
-            string[] value = User.Identity.Name.Split(',');
-                    string person_name = value[0];
-                    string person_type = value[1];
-                    if (person_type == "admin") {
+            @if (User != null) {
+                if (User.IsInRole("Admin")) {
                         <ul class="nav navbar-nav">
-                            <li><a href="/admin/index">Manage Pharmacist</a></li>
                             <li><a href="/admin/index">Manage Pharmacy</a></li>
                         </ul>
-                    }
-                    else if (person_type == "pharm")
-                    {
+                } else if (User.IsInRole("Pharmacist")) {
                         <ul class="nav navbar-nav">
                             <li><a href="/pharmacy/index">Manage Refills</a></li>
                             <li><a href="/pharmacy/managecustomer">Manage Customer</a></li>
-                            <li><a href="/pharmacy/history">Response History</a></li>
                         </ul>
-                    }
-                    else if (person_type == "customer")
-                    {
-                        
-                    }
+                }
 
                     <div class="navbar-right" id="logout">
-                        @Html.Encode(person_name) &nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.Encode(User.getName()) &nbsp;&nbsp;&nbsp;&nbsp;
                         @Html.ActionLink("Log Out", "Logout", "Home")
                     </div>
                 } else {
@@ -62,5 +51,10 @@
 
     @RenderSection("scriptsIncludes", false)
     @RenderSection("inlineScript", false)
+
+
+    <footer>
+        @RenderSection("includeModal", false)
+    </footer>
 </body>
 </html>
